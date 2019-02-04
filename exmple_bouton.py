@@ -32,17 +32,18 @@ position_perso = perso.get_rect()
 position_perso = position_perso.move(100,100)
 fenetre.blit(perso, position_perso)
 
+#list de tout les truc as update
 arrayUpdate = [];
+
+#list de tout les truc qui attendre un clique , equivant as a event listner pour les boutton
 arrayClick = []
 
-
+#Creation du bouton
 
 b = Bouton("images/Bouton1.png",100,100,300,300)
-print(b.image)
-print(position_perso)
 fenetre.blit(b.image,b.rect)
-print(b.rect.x)
 
+#Afection de la fonction as mettre lorsque lon fait laction
 act = testButton
 b.setButtonAction(act)
 
@@ -51,10 +52,12 @@ pygame.display.flip()
 # BOUCLE INFINIE
 continuer = 1
 
+#Ajout de tout les truc as update
 arrayUpdate.append((fond,(0,0)))
 arrayUpdate.append((b.image,b.rect))
 arrayUpdate.append((perso,position_perso))
 
+#Ajout de tout les truc qui attende un event 
 arrayClick.append(b)
 
 
