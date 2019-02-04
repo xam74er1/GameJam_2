@@ -20,4 +20,4 @@ while continuer:
         if event.type == QUIT:
             continuer = 0
             pygame.quit()
-    continuer = int(input())
+    #continuer = int(input())
