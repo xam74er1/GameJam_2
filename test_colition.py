@@ -48,16 +48,16 @@ pygame.display.flip()
 continuer = 1
 
 
-perso = Character("images/perso.png",world,MAX_X/2,MAX_Y-100,40,40)
+perso = Character("images/perso.png",world,MAX_X/2,MAX_Y-100,32,32)
 fenetre.blit(perso.image,perso.rect)
 
 arrayUpdate.append((fond,(0,0)))
 
 #defintion des walls
 
-world.addWall(Walls((100,100),(30,30),(255,0,0)))
-world.addWall(Walls((130,130),(20,40),(0,255,0)))
-
+world.addWall(Walls((200,400),(200,30),(0,255,0)))
+world.addWall(Walls((400,400),(20,80),(255,0,0)))
+pygame.key.set_repeat(40,100)
 
 while continuer:
 
@@ -84,10 +84,11 @@ while continuer:
                 world.gravity=(-gravityForce,0)
 
     #Gravite
+    perso.move()
     perso.aplyAceleration(world.gravity[0],world.gravity[1])
 
 
-    perso.move()
+
 
 
     # Re-collage
@@ -100,7 +101,7 @@ while continuer:
     #fenetre.blit(perso, position_perso)
     # Rafraichissement
     pygame.display.flip()
-    pygame.key.set_repeat(40,30)
+
     pygame.time.Clock().tick(30)
 
 
