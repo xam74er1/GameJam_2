@@ -33,16 +33,16 @@ arrayClick = []
 
 #Creation du bouton
 
-jouer = Bouton("Rectangle_bleu_de_merde.png",275,250,200,50)
+jouer = Bouton("Rectangle_bleu_de_merde.png",275,275,200,50)
 fenetre.blit(jouer.image,jouer.rect)
 
-highscore = Bouton("Rectangle_bleu_de_merde.png",275,350,200,50)
+highscore = Bouton("Rectangle_bleu_de_merde.png",275,375,200,50)
 fenetre.blit(highscore.image,highscore.rect)
 
-credit = Bouton("Rectangle_bleu_de_merde.png",275,450,200,50)
+credit = Bouton("Rectangle_bleu_de_merde.png",275,475,200,50)
 fenetre.blit(credit.image,credit.rect)
 
-quitter = Bouton("Rectangle_bleu_de_merde.png",275,550,200,50)
+quitter = Bouton("Rectangle_bleu_de_merde.png",275,575,200,50)
 fenetre.blit(quitter.image,quitter.rect)
 
 #Afection de la fonction as mettre lorsque lon fait laction
@@ -97,7 +97,7 @@ while continuer:
 
     # Re-collage
     #fenetre.blit(fond, (0, 0))
-    fenetre.blit(titre, (200, 50))
+    fenetre.blit(titre, (200, 75))
     updateimage(fenetre,arrayUpdate)
     #fenetre.blit(perso, position_perso)
     # Rafraichissement
