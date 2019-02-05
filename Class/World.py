@@ -2,6 +2,8 @@ from Class.Walls import *
 import pygame
 import Class.Coin
 import Class.Level
+from Class.Level import *
+import env_var as env
 
 class World:
     def __init__(self, frame, maxX, maxY, gravity):
@@ -11,7 +13,7 @@ class World:
         self.gravity = gravity
         self.listWall = []
         self.toUpdate = []
-        self.level = 0
+        self.levels = []
 
     def addWall(self, wall):
         self.listWall.append(wall)
@@ -23,3 +25,7 @@ class World:
 
         for w in self.listWall:
             pygame.draw.rect(self.frame, w.color, w.rect)
+
+    def initLevels(self):
+        for i in range(0,env.max_levels):
+            self.levels[i] = Level(i+1)

@@ -1,6 +1,7 @@
 import pygame
 from pygame.locals import *
 from Class.Coin import *
+import env_var as env
 
 class Level:
 
@@ -8,6 +9,7 @@ class Level:
         self.struct = 0
         self.numlevel = numlevel
         self.coins = []
+        self.generate()
 
     def generate(self):
         with open('levels/'+self.numlevel+".lvl", "r") as lvlfile:
@@ -38,8 +40,8 @@ class Level:
         for line in self.struct:
             num_col = 0
             for sprite in line:
-                x = num_col*16
-                y = num_line*16
+                x = num_col*env.sprite_size
+                y = num_line*env.sprite_size
                 window.blit(pygame.image.load('sprites/' + sprite + ".png").convert_alpha(), (x, y))
             num_col += 1
         num_line += 1
