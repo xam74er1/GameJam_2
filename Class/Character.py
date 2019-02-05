@@ -150,16 +150,19 @@ class Character:
             0
 
         cToRemove=0
-        for c in self.world.level.coins:
-            if self.rect.colliderect(c):
-                print('collision coin')
-                c.visible=0
-                self.world.toUpdate.append(c)
-                cToRemove=c
-                break
+        try:
+            for c in self.world.level.coins:
+                if self.rect.colliderect(c):
+                    print('collision coin')
+                    c.visible=0
+                    self.world.toUpdate.append(c)
+                    cToRemove=c
+                    break
 
-        if cToRemove:
-            self.world.level.coins.remove(cToRemove)
+            if cToRemove:
+                self.world.level.coins.remove(cToRemove)
+        except:
+            0
 
         return self.rect
 

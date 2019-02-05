@@ -6,8 +6,8 @@ from Class.World import *
 from Class.Walls import *
 
 
-MAX_X =640
-MAX_Y =480
+MAX_X =750
+MAX_Y =750
 
 #list update
 
@@ -55,12 +55,17 @@ fenetre.blit(perso.image,perso.rect)
 
 #defintion des walls
 
-world.addWall(Walls((200,400),(200,30),(0,255,0)))
-world.addWall(Walls((400,400),(20,80),(255,0,0)))
-world.addWall(Walls((0,0),(20,750),(242,0,255)))
-world.addWall(Walls((0,0),(750,20),(242,0,255)))
-world.addWall(Walls((730,0),(20,750),(242,0,255)))
-world.addWall(Walls((0,730),(750,20),(242,0,255)))
+# world.addWall(Walls((200,400),(200,30),(0,255,0)))
+# world.addWall(Walls((400,400),(20,80),(255,0,0)))
+# world.addWall(Walls((0,0),(20,750),(242,0,255)))
+# world.addWall(Walls((0,0),(750,20),(242,0,255)))
+# world.addWall(Walls((730,0),(20,750),(242,0,255)))
+# world.addWall(Walls((0,730),(750,20),(242,0,255)))
+
+world.initLevels()
+world.levels[0].printLvl(fenetre)
+world.level = world.levels[0]
+
 pygame.key.set_repeat(40,100)
 
 while continuer:
@@ -71,13 +76,13 @@ while continuer:
         gravityForce = 0.5
         if event.type == KEYDOWN:
             if event.key == K_DOWN:
-                perso.aplyAceleration(0,4)
+                perso.applyAcceleration(0,4)
             if event.key == K_UP:
-                perso.aplyAceleration(0,-10)
+                perso.applyAcceleration(0,-10)
             if event.key == K_LEFT:
-                perso.aplyAceleration(-4, 0)
+                perso.applyAcceleration(-4, 0)
             if event.key == K_RIGHT:
-                perso.aplyAceleration(4, 0)
+                perso.applyAcceleration(4, 0)
             if event.key == K_F1:
                 world.gravity = (0,gravityForce)
             if event.key == K_F2:
@@ -89,7 +94,7 @@ while continuer:
 
     #Gravite
     perso.move()
-    perso.aplyAceleration(world.gravity[0],world.gravity[1])
+    perso.applyAcceleration(world.gravity[0],world.gravity[1])
 
 
 
