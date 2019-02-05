@@ -20,18 +20,23 @@ pygame.init()
 # Ouverture de la fenêtre Pygame
 fenetre = pygame.display.set_mode((750, 750))
 
-# Chargement et collage du fond
-#fond = pygame.image.load("images/background.jpg").convert()
-#fenetre.blit(fond, (0, 0))
-titre = pygame.transform.scale(pygame.image.load("Rectangle_bleu_de_merde.png"), (350, 150))
 
-#list de tout les truc as update
-arrayUpdate = []
 
-#list de tout les truc qui attendre un clique , equivant as a event listner pour les boutton
-arrayClick = []
+current_page = "menu"
 
-#Creation du bouton
+if current_page == "menu":
+    # Chargement et collage du fond
+    #fond = pygame.image.load("images/background.jpg").convert()
+    #fenetre.blit(fond, (0, 0))
+    titre = pygame.transform.scale(pygame.image.load("Rectangle_bleu_de_merde.png"), (350, 150))
+
+    #list de tout les truc as update
+    arrayUpdate = []
+
+    #list de tout les truc qui attendre un clique , equivant as a event listner pour les boutton
+    arrayClick = []
+
+    #Creation du bouton
 
 jouer = Bouton("Rectangle_bleu_de_merde.png",275,275,200,50)
 fenetre.blit(jouer.image,jouer.rect)
@@ -97,7 +102,7 @@ while continuer:
 
     # Re-collage
     #fenetre.blit(fond, (0, 0))
-    fenetre.blit(titre, (200, 75))
+    fenetre.blit(titre, (200, 50))
     updateimage(fenetre,arrayUpdate)
     #fenetre.blit(perso, position_perso)
     # Rafraichissement
