@@ -35,4 +35,3 @@ class Level:
             for sprite in line:
                 sprite='0'
         self.printlvl(self,window)
-#
