@@ -105,7 +105,6 @@ class Character:
         try:
             for w in self.world.level.walls:
                 if self.rect.colliderect(w):
-                   #si il est en haut
 
                     #defintion des centre
                     mcX = self.rect.x+(self.sizex/2)
@@ -114,12 +113,25 @@ class Character:
                     scX = w.rect.x+(w.rect.size[0]/2)
                     scY = w.rect.y+(w.rect.size[1]/2)
 
-                    maxX = w.rect
-                    maxY = mcY-mcY
+                    minX = w.rect.x
+                    minY = w.rect.y
+                    maxX = w.rect.x+(w.rect.size[0])
+                    maxY = w.rect.y+(w.rect.size[1])
 
-                    #Si la boule est dans les x
+                    if mcX>minX and mcX<maxX:
+                        self.ay*=-1
+                        if mcY>scY:
+                            self.setPostion(self.x,maxY)
+                        else:
+                            self.setPostion(self.x,minY-self.sizey)
+                    if mcY>minY and mcY<maxY:
+                        self.ax*=-1
+                        if mcX>scX:
+                            self.setPostion(maxX, self.y)
+                        else:
+                            self.setPostion(minX - self.sizex, self.y)
 
-                break
+                    break
         except:
             0
 
