@@ -51,7 +51,7 @@ continuer = 1
 perso = Character("sprites/perso.png",world,MAX_X/2,MAX_Y-100,32,32)
 fenetre.blit(perso.image,perso.rect)
 
-arrayUpdate.append((fond,(0,0)))
+#arrayUpdate.append((fond,(0,0)))
 
 #defintion des walls
 

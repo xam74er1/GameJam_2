@@ -102,106 +102,52 @@ class Character:
 
         #Check si il est en collistion
 
-        for w in self.world.level.walls:
-            if self.rect.colliderect(w):
-               # self.ax = 0
-                #self.ay = 0
-               #si il est en haut
+        try:
+            for w in self.world.level.walls:
+                if self.rect.colliderect(w):
+                   #si il est en haut
 
-                #defintion des centre
-                mcX = self.rect.x+(self.sizex/2)
-                mcY = self.rect.y+(self.sizey/2)
+                    #defintion des centre
+                    mcX = self.rect.x+(self.sizex/2)
+                    mcY = self.rect.y+(self.sizey/2)
 
-                scX = w.rect.x+(w.rect.size[0]/2)
-                scY = w.rect.y+(w.rect.size[1]/2)
+                    scX = w.rect.x+(w.rect.size[0]/2)
+                    scY = w.rect.y+(w.rect.size[1]/2)
 
-                rcX = mcX-scX
-                rcY = mcY-mcY
+                    rcX = mcX-scX
+                    rcY = mcY-mcY
 
-                #print("rcx = " + str(rcX) + "rcy = " + str(rcY))
-                #print("mcY : "+str(mcY)+" scY "+str(scY))
-                #print(" x : "+str(self.x)+" y : "+str(self.y)+" top :"+str(w.rect.top)+" bottom "+str(w.rect.bottom)+" mcX")
+                    #Si la boule est dans les x
+                    maj = False
+                    if ((self.x+self.sizex)>=(w.rect.x) and (self.x+self.sizex)<=(w.rect.x+w.rect.size[0])) or ((self.x)>=(w.rect.x) and (self.x)<=(w.rect.x+w.rect.size[0])):
+                      #pour evite de passe en bas
+                        if self.y>w.rect.y and self.y+self.sizey>w.rect.bottom:
+                            print("Z")
+                            self.ay =0
+                            self.setPostion(self.x,w.rect.top+self.sizey)
+                            maj = True
+                        #print("C1"+str(self.y > w.rect.y+w.size[1])+" C2"+str(self.y+self.sizey<w.rect.bottom))
+                        if self.y < w.rect.bottom and self.y+self.sizey<w.rect.bottom:
+                            print("Q2")
+                            self.ay =0
+                            self.setPostion(self.x,w.rect.top-w.size[1])
+                            maj = True
 
-               #--------------------------------------------
-               #V2 colition
-
-               # print("x=" + str(self.x) + "y = " + str(self.y) + " ax = " + str(self.ax) + " ay " + str(
-                #self.ay) + "rect x " + str(self.rect.x) + " rect y " + str(self.rect.y))
-                #Si la boule est dans les x
-                maj = False
-                if ((self.x+self.sizex)>=(w.rect.x) and (self.x+self.sizex)<=(w.rect.x+w.rect.size[0])) or ((self.x)>=(w.rect.x) and (self.x)<=(w.rect.x+w.rect.size[0])):
-                  #pour evite de passe en bas
-                    if self.y>w.rect.y and self.y+self.sizey>w.rect.bottom:
-                        print("Z")
-                        self.ay =0
-                        self.setPostion(self.x,w.rect.top+self.sizey)
-                        maj = True
-                    #print("C1"+str(self.y > w.rect.y+w.size[1])+" C2"+str(self.y+self.sizey<w.rect.bottom))
-                    if self.y < w.rect.bottom and self.y+self.sizey<w.rect.bottom:
-                        print("Q2")
-                        self.ay =0
-                        self.setPostion(self.x,w.rect.top-w.size[1])
-                        maj = True
-
-                if not maj and ((self.y + self.sizey) >= (w.rect.y) and (self.y + self.sizey) <= (w.rect.y + w.rect.size[1])) or (
-                        (self.y) >= (w.rect.y) and (self.y) <= (w.rect.y + w.rect.size[1])):
-                    # pour evite de passe en bas
-                    if self.x > w.rect.x and self.x + self.sizex > w.rect.left:
-                        print("D")
-                        self.ax = 0
-                        self.setPostion(w.rect.x + self.sizex,self.y)
-                    #print("C1"+str(self.x < w.rect.left)+" C2"+str(self.x + self.sizex > w.rect.left))
-                    if self.x < w.rect.left and self.x + self.sizex > w.rect.left:
-                        print("G")
-                        self.ax = 0
-                        self.setPostion(w.rect.x-self.sizex,self.y)
-
-
-
-
-
-
-                """
-                #((self.x+self.sizex)>=(w.rect.x) and (self.x+self.sizex)<=(w.rect.x+w.rect.size[0])) or ((self.x)>=(w.rect.x) and (self.x)<=(w.rect.x+w.rect.size[0])):
-                #Si le bas touche le haut
-               #& ((int(self.y)+self.sizey) < w.rect.y) & (self.x > w.rect.y)
-                if (mcY<scY) :
-                    print("Z")
-                   # print("new x " + str(self.x) + "new y " + str(self.y))
-                    #self.forceMove(0,self.y-w.rect.top)
-                    print("actual postion "+str(self.rect)+" possible : "+str(w.rect.x+self.sizex))
-                    self.setPostion(self.x,w.rect.x+self.sizex)
-                    print("actual postion " + str(self.rect) + " possible : " + str(w.rect.x + self.sizex))
-                    #self.ay = -self.ay*0.9
-                    self.ay=0
-                   #& (int(self.y+self.sizey) > w.rect.y+w.pos[1]) & (self.y < w.rect.y+w.pos[1])
-                if (mcY>scY)  :
-                    print("S")
-                    #self.setPostion(self.x,w.rect.bottom)
-                    self.forceMove(0, w.rect.bottom-self.y)
-                    #self.ay = -self.ay*0.9
-                    self.ay=0
-
-                   # print("new x " + str(self.x) + "new y " + str(self.y))
-                    #print("S")
-                if mcX<scX:
-
-                    print("D")
-                    self.forceMove((self.x+self.sizex)-w.rect.right,0)
-                    #self.ax = -self.ax*0.9
-                    self.ax = 0
-
-
-                if mcX>scX:
-                    print("Q")
-
-                    #self.forceMove(w.rect.right-self.x, 0)
-                    self.setPostion(w.rect.x+w.size[0],self.y)
-
-
-                    #self.ax = -self.ax*0.9
-                    self.ax=0"""
+                    if not maj and ((self.y + self.sizey) >= (w.rect.y) and (self.y + self.sizey) <= (w.rect.y + w.rect.size[1])) or (
+                            (self.y) >= (w.rect.y) and (self.y) <= (w.rect.y + w.rect.size[1])):
+                        # pour evite de passe en bas
+                        if self.x > w.rect.x and self.x + self.sizex > w.rect.left:
+                            print("D")
+                            self.ax = 0
+                            self.setPostion(w.rect.x + self.sizex,self.y)
+                        #print("C1"+str(self.x < w.rect.left)+" C2"+str(self.x + self.sizex > w.rect.left))
+                        if self.x < w.rect.left and self.x + self.sizex > w.rect.left:
+                            print("G")
+                            self.ax = 0
+                            self.setPostion(w.rect.x-self.sizex,self.y)
                 break
+        except:
+            0
 
         cToRemove=0
         for c in self.world.level.coins:
