@@ -55,8 +55,8 @@ arrayUpdate.append((fond,(0,0)))
 
 #defintion des walls
 
-world.addWall(Walls((100,100),(30,30),(255,0,0)))
-world.addWall(Walls((130,130),(20,40),(0,255,0)))
+world.addWall(Walls((400,400),(50,30),(255,0,0)))
+world.addWall(Walls((400,400),(20,80),(255,0,0)))
 
 
 while continuer:

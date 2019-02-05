@@ -22,7 +22,14 @@ class Character:
 
         self.world = world
 
+        self.tmp = False
+
     def forceMove(self,x,y):
+
+        #if(self.tmp):
+            #self.tmp = False
+            #print("new x " + str(x) + "new y " + str(y))
+
 
         self.rect = self.rect.move(x, y)
         self.x = self.rect.x
@@ -104,18 +111,33 @@ class Character:
 
 
                 #print("mcY : "+str(mcY)+" scY "+str(scY))
+                #print(" x : "+str(self.x)+" y : "+str(self.y)+" top :"+str(w.rect.top)+" bottom "+str(w.rect.bottom))
 
                 #Si le bas touche le haut
                 if mcY<scY :
 
-                    self.ay = -self.ay
+                   # print("new x " + str(self.x) + "new y " + str(self.y))
+                    self.forceMove(0,self.y-w.rect.top)
+                    self.ay = -self.ay*0.9
                 if mcY>scY :
-                    self.ay = -self.ay
-                if mcX<scX:
-                    self.ax = -self.ax
-                if mcX>scX:
-                    self.ax = -self.ax
 
+                    self.forceMove(0, w.rect.bottom-self.y)
+                    self.ay = -self.ay*0.9
+
+                   # print("new x " + str(self.x) + "new y " + str(self.y))
+                    #print("S")
+                if mcX<scX:
+
+
+                    self.forceMove((self.x+self.sizex)-w.rect.right,0)
+                    self.ax = -self.ax*0.9
+
+                if mcX>scX:
+
+
+                    self.forceMove(self.x-w.rect.left, 0)
+                    self.ax = -self.ax*0.9
+                break
 
 
        # print("x="+str(self.x)+"y = "+str(self.y)+" ax = "+str(self.ax)+" ay "+str(self.ay)+"rect x "+str(self.rect.x)+" rect y "+str(self.rect.y))
