@@ -3,7 +3,7 @@ import pygame
 class Character:
     def __init__(self, image_path,world, x=0, y=0, sizex=100, sizey=100):
         # charge limage
-        self.image = pygame.image.load(image_path).convert_alpha()
+        self.image = pygame.image.load(image_path).convert()
         # la redimentione
 
         self.image = pygame.transform.scale(self.image,(sizex,sizey))
@@ -91,7 +91,31 @@ class Character:
 
         for w in self.world.listWall:
             if self.rect.colliderect(w):
-                print("colistion")
+               # self.ax = 0
+                #self.ay = 0
+               #si il est en haut
+
+                #defintion des centre
+                mcX = self.rect.x+(self.sizex/2)
+                mcY = self.rect.y+(self.sizey/2)
+
+                scX = w.rect.x+(w.rect.size[0]/2)
+                scY = w.rect.y+(w.rect.size[1]/2)
+
+
+                #print("mcY : "+str(mcY)+" scY "+str(scY))
+
+                #Si le bas touche le haut
+                if mcY<scY :
+
+                    self.ay = -self.ay
+                if mcY>scY :
+                    self.ay = -self.ay
+                if mcX<scX:
+                    self.ax = -self.ax
+                if mcX>scX:
+                    self.ax = -self.ax
+
 
 
        # print("x="+str(self.x)+"y = "+str(self.y)+" ax = "+str(self.ax)+" ay "+str(self.ay)+"rect x "+str(self.rect.x)+" rect y "+str(self.rect.y))
