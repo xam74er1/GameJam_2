@@ -3,7 +3,6 @@ from Class.button import *
 from pygame.locals import *
 
 
-
 #list update
 
 def updateimage(frame,array):
@@ -19,33 +18,40 @@ def testButton():
 pygame.init()
 
 # Ouverture de la fenêtre Pygame
-fenetre = pygame.display.set_mode((640, 480))
+fenetre = pygame.display.set_mode((750, 750))
 
 # Chargement et collage du fond
-fond = pygame.image.load("images/background.jpg").convert()
-fenetre.blit(fond, (0, 0))
-
-# Chargement et collage du personnage
-perso = pygame.image.load("images/perso.png").convert_alpha()
-
-position_perso = perso.get_rect()
-position_perso = position_perso.move(100,100)
-fenetre.blit(perso, position_perso)
+#fond = pygame.image.load("images/background.jpg").convert()
+#fenetre.blit(fond, (0, 0))
+titre = pygame.transform.scale(pygame.image.load("Rectangle_bleu_de_merde.png"), (350, 150))
 
 #list de tout les truc as update
-arrayUpdate = [];
+arrayUpdate = []
 
 #list de tout les truc qui attendre un clique , equivant as a event listner pour les boutton
 arrayClick = []
 
 #Creation du bouton
 
-b = Bouton("sprites/Bouton1.png",100,100,300,300)
-fenetre.blit(b.image,b.rect)
+jouer = Bouton("Rectangle_bleu_de_merde.png",275,250,200,50)
+fenetre.blit(jouer.image,jouer.rect)
+
+highscore = Bouton("Rectangle_bleu_de_merde.png",275,350,200,50)
+fenetre.blit(highscore.image,highscore.rect)
+
+credit = Bouton("Rectangle_bleu_de_merde.png",275,450,200,50)
+fenetre.blit(credit.image,credit.rect)
+
+quitter = Bouton("Rectangle_bleu_de_merde.png",275,550,200,50)
+fenetre.blit(quitter.image,quitter.rect)
 
 #Afection de la fonction as mettre lorsque lon fait laction
 act = testButton
-b.setButtonAction(act)
+jouer.setButtonAction(act)
+highscore.setButtonAction(act)
+credit.setButtonAction(act)
+quitter.setButtonAction(act)
+
 
 # Rafraîchissement de l'écran
 pygame.display.flip()
@@ -53,12 +59,17 @@ pygame.display.flip()
 continuer = 1
 
 #Ajout de tout les truc as update
-arrayUpdate.append((fond,(0,0)))
-arrayUpdate.append((b.image,b.rect))
-arrayUpdate.append((perso,position_perso))
+#arrayUpdate.append((fond,(0,0)))
+arrayUpdate.append((jouer.image,jouer.rect))
+arrayUpdate.append((highscore.image,highscore.rect))
+arrayUpdate.append((credit.image,credit.rect))
+arrayUpdate.append((quitter.image,quitter.rect))
 
 #Ajout de tout les truc qui attende un event
-arrayClick.append(b)
+arrayClick.append(jouer)
+arrayClick.append(highscore)
+arrayClick.append(credit)
+arrayClick.append(quitter)
 
 
 while continuer:
@@ -66,7 +77,6 @@ while continuer:
     for event in pygame.event.get():  # Attente des événements
         if event.type == QUIT:
             continuer = 0
-
 
 
         if event.type == MOUSEBUTTONDOWN:
@@ -81,9 +91,13 @@ while continuer:
                         print("dans la zone")
                         bt.action()
 
+
+
+
+
     # Re-collage
     #fenetre.blit(fond, (0, 0))
-
+    fenetre.blit(titre, (200, 50))
     updateimage(fenetre,arrayUpdate)
     #fenetre.blit(perso, position_perso)
     # Rafraichissement
