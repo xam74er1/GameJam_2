@@ -22,11 +22,11 @@ pygame.init()
 fenetre = pygame.display.set_mode((640, 480))
 
 # Chargement et collage du fond
-fond = pygame.image.load("background.jpg").convert()
+fond = pygame.image.load("images/background.jpg").convert()
 fenetre.blit(fond, (0, 0))
 
 # Chargement et collage du personnage
-perso = pygame.image.load("perso.png").convert_alpha()
+perso = pygame.image.load("images/perso.png").convert_alpha()
 
 position_perso = perso.get_rect()
 position_perso = position_perso.move(100,100)
