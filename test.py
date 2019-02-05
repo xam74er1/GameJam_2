@@ -66,17 +66,7 @@ while continuer:
 
 
 
-        if event.type == MOUSEBUTTONDOWN:
 
-            if event.button == 1:  # Si clic gauche
-
-                for bt in arrayClick:
-
-                    val = bt.isInZone(event.pos[0],event.pos[1])
-
-                    if bt.isInZone(event.pos[0],event.pos[1]) :
-                        print("dans la zone")
-                        bt.action()
 
     # Re-collage
     #fenetre.blit(fond, (0, 0))
