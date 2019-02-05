@@ -2,6 +2,7 @@ import pygame
 from button import *
 from Character import *
 from pygame.locals import *
+from World import *
 
 
 MAX_X =640
@@ -34,9 +35,9 @@ fenetre.blit(fond, (0, 0))
 
 arrayUpdate = [];
 arrayClick = []
+gravity = (0,0.9)
 
-
-
+world = World(fenetre,MAX_X,MAX_Y,gravity)
 
 # Rafraîchissement de l'écran
 pygame.display.flip()
@@ -44,7 +45,7 @@ pygame.display.flip()
 continuer = 1
 
 
-perso = Character("perso.png",MAX_X/2,MAX_Y-100,40,40)
+perso = Character("perso.png",world,MAX_X/2,MAX_Y-100,40,40)
 fenetre.blit(perso.image,perso.rect)
 
 arrayUpdate.append((fond,(0,0)))
@@ -57,22 +58,31 @@ while continuer:
     for event in pygame.event.get():  # Attente des événements
         if event.type == QUIT:
             continuer = 0
-
+        gravityForce = 0.5
         if event.type == KEYDOWN:
             print("touche")
             if event.key == K_DOWN:
-                perso.aplyAceleration(0,0)
+                perso.aplyAceleration(0,4)
             if event.key == K_UP:
                 perso.aplyAceleration(0,-10)
             if event.key == K_LEFT:
                 perso.aplyAceleration(-4, 0)
             if event.key == K_RIGHT:
                 perso.aplyAceleration(4, 0)
+            if event.key == K_F1:
+                world.gravity = (0,gravityForce)
+            if event.key == K_F2:
+                world.gravity =(0,-gravityForce)
+            if event.key == K_F3:
+                world.gravity=(gravityForce,0)
+            if event.key == K_F4:
+                world.gravity=(-gravityForce,0)
+
     #Gravite
-    perso.aplyAceleration(0,0.9)
+    perso.aplyAceleration(world.gravity[0],world.gravity[1])
 
 
-    perso.move(MAX_X,MAX_Y)
+    perso.move()
 
 
     # Re-collage

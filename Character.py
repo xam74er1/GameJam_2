@@ -1,7 +1,7 @@
 import pygame
 
 class Character:
-    def __init__(self, image_path, x=0, y=0, sizex=100, sizey=100):
+    def __init__(self, image_path,world, x=0, y=0, sizex=100, sizey=100):
         # charge limage
         self.image = pygame.image.load(image_path).convert_alpha()
         # la redimentione
@@ -20,6 +20,8 @@ class Character:
         self.ax = 0
         self.ay = 0
 
+        self.world = world
+
     def forceMove(self,x,y):
 
         self.rect = self.rect.move(x, y)
@@ -37,13 +39,16 @@ class Character:
 
 #Verife que sa ne sort pas de la Zone
 
-    def move(self,maxX,maxY):
+    def move(self):
         self.forceMove(self.ax,self.ay)
         #Verifiaction rapide
 
+        maxX = self.world.maxX
+        maxY = self.world.maxY
+
         #le Max (sol )
         if(self.x+self.sizex>maxX):
-            print("Max x = " + str(maxX) + " x =" +  str(self.x) + " x ziez = " +  str(self.sizex) + " rect = " +  str(self.rect.x))
+            #print("Max x = " + str(maxX) + " x =" +  str(self.x) + " x ziez = " +  str(self.sizex) + " rect = " +  str(self.rect.x))
             self.forceMove(-1*(self.x+self.sizex-maxX),0)
 
             #rebon
