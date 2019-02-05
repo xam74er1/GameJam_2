@@ -57,7 +57,7 @@ arrayUpdate.append((fond,(0,0)))
 arrayUpdate.append((b.image,b.rect))
 arrayUpdate.append((perso,position_perso))
 
-#Ajout de tout les truc qui attende un event 
+#Ajout de tout les truc qui attende un event
 arrayClick.append(b)
 
 
