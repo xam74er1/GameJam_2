@@ -114,37 +114,11 @@ class Character:
                     scX = w.rect.x+(w.rect.size[0]/2)
                     scY = w.rect.y+(w.rect.size[1]/2)
 
-                    rcX = mcX-scX
-                    rcY = mcY-mcY
+                    maxX = w.rect
+                    maxY = mcY-mcY
 
                     #Si la boule est dans les x
-                    maj = False
-                    if ((self.x+self.sizex)>=(w.rect.x) and (self.x+self.sizex)<=(w.rect.x+w.rect.size[0])) or ((self.x)>=(w.rect.x) and (self.x)<=(w.rect.x+w.rect.size[0])):
-                      #pour evite de passe en bas
-                        if self.y>w.rect.y and self.y+self.sizey>w.rect.bottom:
-                            print("Z")
-                            self.ay =0
-                            self.setPostion(self.x,w.rect.top+self.sizey)
-                            maj = True
-                        #print("C1"+str(self.y > w.rect.y+w.size[1])+" C2"+str(self.y+self.sizey<w.rect.bottom))
-                        if self.y < w.rect.bottom and self.y+self.sizey<w.rect.bottom:
-                            print("Q2")
-                            self.ay =0
-                            self.setPostion(self.x,w.rect.top-w.size[1])
-                            maj = True
 
-                    if not maj and ((self.y + self.sizey) >= (w.rect.y) and (self.y + self.sizey) <= (w.rect.y + w.rect.size[1])) or (
-                            (self.y) >= (w.rect.y) and (self.y) <= (w.rect.y + w.rect.size[1])):
-                        # pour evite de passe en bas
-                        if self.x > w.rect.x and self.x + self.sizex > w.rect.left:
-                            print("D")
-                            self.ax = 0
-                            self.setPostion(w.rect.x + self.sizex,self.y)
-                        #print("C1"+str(self.x < w.rect.left)+" C2"+str(self.x + self.sizex > w.rect.left))
-                        if self.x < w.rect.left and self.x + self.sizex > w.rect.left:
-                            print("G")
-                            self.ax = 0
-                            self.setPostion(w.rect.x-self.sizex,self.y)
                 break
         except:
             0
