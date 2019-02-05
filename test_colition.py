@@ -3,6 +3,7 @@ from Class.button import *
 from Class.Character import *
 from pygame.locals import *
 from Class.World import *
+from Class.Walls import *
 
 
 MAX_X =640
@@ -16,6 +17,8 @@ def updateimage(frame,array):
 
 def testButton():
     print("ce test as marche ")
+
+
 
 
 #-----------Main -----------
@@ -50,7 +53,10 @@ fenetre.blit(perso.image,perso.rect)
 
 arrayUpdate.append((fond,(0,0)))
 
+#defintion des walls
 
+world.addWall(Walls((100,100),(30,30),(255,0,0)))
+world.addWall(Walls((130,130),(20,40),(0,255,0)))
 
 
 while continuer:
@@ -60,7 +66,6 @@ while continuer:
             continuer = 0
         gravityForce = 0.5
         if event.type == KEYDOWN:
-            print("touche")
             if event.key == K_DOWN:
                 perso.aplyAceleration(0,4)
             if event.key == K_UP:
@@ -89,6 +94,7 @@ while continuer:
     #fenetre.blit(fond, (0, 0))
 
     updateimage(fenetre,arrayUpdate)
+    world.draw()
     fenetre.blit(perso.image, perso.rect)
 
     #fenetre.blit(perso, position_perso)

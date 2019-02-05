@@ -87,6 +87,11 @@ class Character:
             elif self.ay > 0:
                 self.ay -= 0.1
 
+        #Check si il est en collistion
+
+        for w in self.world.listWall:
+            if self.rect.colliderect(w):
+                print("colistion")
 
 
        # print("x="+str(self.x)+"y = "+str(self.y)+" ax = "+str(self.ax)+" ay "+str(self.ay)+"rect x "+str(self.rect.x)+" rect y "+str(self.rect.y))
