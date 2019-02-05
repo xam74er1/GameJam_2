@@ -37,7 +37,7 @@ arrayClick = []
 
 
 
-b = Bouton("images/Bouton1.png",100,100,300,300)
+b = Bouton("sprites/Bouton1.png",100,100,300,300)
 print(b.image)
 print(position_perso)
 fenetre.blit(b.image,b.rect)

@@ -40,7 +40,7 @@ arrayClick = []
 
 #Creation du bouton
 
-b = Bouton("images/Bouton1.png",100,100,300,300)
+b = Bouton("sprites/Bouton1.png",100,100,300,300)
 fenetre.blit(b.image,b.rect)
 
 #Afection de la fonction as mettre lorsque lon fait laction

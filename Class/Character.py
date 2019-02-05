@@ -1,4 +1,5 @@
 import pygame
+import Class.Coin
 
 class Character:
     def __init__(self, image_path,world, x=0, y=0, sizex=100, sizey=100):
@@ -28,11 +29,11 @@ class Character:
         self.x = self.rect.x
         self.y = self.rect.y
 
-    def setAceleration(self,x,y):
+    def setAcceleration(self, x, y):
         self.ax = x
         self.ay =y
 
-    def aplyAceleration(self,x,y):
+    def applyAcceleration(self, x, y):
         self.ax += x
         self.ay += y
 
@@ -117,6 +118,18 @@ class Character:
                     self.ax = -self.ax
 
 
+        cToRemove=0
+        for c in self.world.level.coins:
+            if self.rect.colliderect(c):
+                print('collision coin')
+                c.visible=0
+                cToRemove=c
+                break
+
+        if cToRemove:
+            self.world.level.coins.remove(cToRemove)
+
+        return self.rect
 
        # print("x="+str(self.x)+"y = "+str(self.y)+" ax = "+str(self.ax)+" ay "+str(self.ay)+"rect x "+str(self.rect.x)+" rect y "+str(self.rect.y))
 

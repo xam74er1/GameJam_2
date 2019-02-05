@@ -28,7 +28,7 @@ fenetre = pygame.display.set_mode((MAX_X,MAX_Y ))
 
 
 # Chargement et collage du fond
-fond = pygame.image.load("images/background.jpg").convert()
+fond = pygame.image.load("sprites/background.jpg").convert()
 fenetre.blit(fond, (0, 0))
 
 
@@ -45,7 +45,7 @@ pygame.display.flip()
 continuer = 1
 
 
-perso = Character("images/perso.png",world,MAX_X/2,MAX_Y-100,40,40)
+perso = Character("sprites/perso.png",world,MAX_X/2,MAX_Y-100,40,40)
 fenetre.blit(perso.image,perso.rect)
 
 arrayUpdate.append((fond,(0,0)))
@@ -62,13 +62,13 @@ while continuer:
         if event.type == KEYDOWN:
             print("touche")
             if event.key == K_DOWN:
-                perso.aplyAceleration(0,4)
+                perso.applyAcceleration(0, 4)
             if event.key == K_UP:
-                perso.aplyAceleration(0,-10)
+                perso.applyAcceleration(0, -10)
             if event.key == K_LEFT:
-                perso.aplyAceleration(-4, 0)
+                perso.applyAcceleration(-4, 0)
             if event.key == K_RIGHT:
-                perso.aplyAceleration(4, 0)
+                perso.applyAcceleration(4, 0)
             if event.key == K_F1:
                 world.gravity = (0,gravityForce)
             if event.key == K_F2:
@@ -79,7 +79,7 @@ while continuer:
                 world.gravity=(-gravityForce,0)
 
     #Gravite
-    perso.aplyAceleration(world.gravity[0],world.gravity[1])
+    perso.applyAcceleration(world.gravity[0], world.gravity[1])
 
 
     perso.move()

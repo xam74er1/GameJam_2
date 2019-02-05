@@ -31,7 +31,7 @@ fenetre = pygame.display.set_mode((MAX_X,MAX_Y ))
 
 
 # Chargement et collage du fond
-fond = pygame.image.load("images/background.jpg").convert()
+fond = pygame.image.load("sprites/background.jpg").convert()
 fenetre.blit(fond, (0, 0))
 
 
@@ -48,7 +48,7 @@ pygame.display.flip()
 continuer = 1
 
 
-perso = Character("images/perso.png",world,MAX_X/2,MAX_Y-100,40,40)
+perso = Character("sprites/perso.png",world,MAX_X/2,MAX_Y-100,40,40)
 fenetre.blit(perso.image,perso.rect)
 
 arrayUpdate.append((fond,(0,0)))
