@@ -4,7 +4,7 @@ import Class.Coin
 class Character:
     def __init__(self, image_path,world, x=0, y=0, sizex=100, sizey=100):
         # charge limage
-        self.image = pygame.image.load(image_path).convert()
+        self.image = pygame.image.load(image_path).convert_alpha()
         # la redimentione
 
         self.image = pygame.transform.scale(self.image,(sizex,sizey))
@@ -102,7 +102,7 @@ class Character:
 
         #Check si il est en collistion
 
-        for w in self.world.listWall:
+        for w in self.world.level.walls:
             if self.rect.colliderect(w):
                # self.ax = 0
                 #self.ay = 0

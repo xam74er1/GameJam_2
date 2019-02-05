@@ -13,6 +13,7 @@ class World:
         self.gravity = gravity
         self.listWall = []
         self.toUpdate = []
+        self.level=0
         self.levels = []
 
     def addWall(self, wall):
@@ -27,5 +28,5 @@ class World:
             pygame.draw.rect(self.frame, w.color, w.rect)
 
     def initLevels(self):
-        for i in range(0,env.max_levels):
-            self.levels[i] = Level(i+1)
+        for i in range(0, env.max_levels):
+            self.levels.append(Level(i+1))
