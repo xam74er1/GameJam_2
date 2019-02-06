@@ -140,7 +140,7 @@ while partie:
                                 continuer = 0
 
             # Re-collage
-            fenetre.blit(fond, (0, 0))
+            fenetre.blit(fond.background, (0, 0))
             fenetre.blit(titre, (70, 50))
             updateimage(fenetre,arrayUpdate)
             #fenetre.blit(perso, position_perso)
