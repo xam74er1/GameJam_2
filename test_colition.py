@@ -76,13 +76,17 @@ while continuer:
         gravityForce = 0.5
         if event.type == KEYDOWN:
             if event.key == K_DOWN:
-                perso.applyAcceleration(0,4)
+                #perso.applyAcceleration(0,4)
+                perso.down(world)
             if event.key == K_UP:
-                perso.applyAcceleration(0,-10)
+                #perso.applyAcceleration(0,-10)
+                perso.up(world)
             if event.key == K_LEFT:
-                perso.applyAcceleration(-4, 0)
+                perso.left(world)
+                #perso.applyAcceleration(-4, 0)
             if event.key == K_RIGHT:
-                perso.applyAcceleration(4, 0)
+                perso.right(world)
+                #perso.applyAcceleration(4, 0)
             if event.key == K_F1:
                 world.gravity = (0,gravityForce)
             if event.key == K_F2:
@@ -91,6 +95,8 @@ while continuer:
                 world.gravity=(gravityForce,0)
             if event.key == K_F4:
                 world.gravity=(-gravityForce,0)
+            if event.key == K_F5:
+                perso.fly = not perso.fly
 
     #Gravite
 
