@@ -38,9 +38,8 @@ fenetre = pygame.display.set_mode((MAX_X,MAX_Y ))
 
 arrayUpdate = [];
 arrayClick = []
-gravity = (0,0.5)
 
-world = World(fenetre,MAX_X,MAX_Y,gravity)
+world = World(fenetre,MAX_X,MAX_Y)
 
 # Rafraîchissement de l'écran
 pygame.display.flip()
@@ -48,25 +47,17 @@ pygame.display.flip()
 continuer = 1
 
 
-perso = Character("sprites/perso.png",world,MAX_X/2,MAX_Y-100,32,32)
-fenetre.blit(perso.image,perso.rect)
+perso = Character("sprites/perso.png", world, MAX_X/2, MAX_Y-100, 32, 32)
+fenetre.blit(perso.image, perso.rect)
 
 #arrayUpdate.append((fond,(0,0)))
 
-#defintion des walls
-
-# world.addWall(Walls((200,400),(200,30),(0,255,0)))
-# world.addWall(Walls((400,400),(20,80),(255,0,0)))
-# world.addWall(Walls((0,0),(20,750),(242,0,255)))
-# world.addWall(Walls((0,0),(750,20),(242,0,255)))
-# world.addWall(Walls((730,0),(20,750),(242,0,255)))
-# world.addWall(Walls((0,730),(750,20),(242,0,255)))
-
 world.initLevels()
-world.levels[0].printLvl(fenetre)
 world.level = world.levels[0]
+world.level.printLvl(fenetre)
+world.gravity = world.level.gravity
 
-pygame.key.set_repeat(40,100)
+pygame.key.set_repeat(40, 100)
 
 while continuer:
 
@@ -99,25 +90,24 @@ while continuer:
                 perso.fly = not perso.fly
 
     #Gravite
-
     perso.move()
+    perso.applyAcceleration(world.gravity[0], world.gravity[1])
 
-    perso.applyAcceleration(world.gravity[0],world.gravity[1])
 
 
-    if world.levendIsFinsed() :
-        print("you win ")
 
 
     # Re-collage
     #fenetre.blit(fond, (0, 0))
     fenetre.fill((0, 0, 0))
-    updateimage(fenetre,arrayUpdate)
+    updateimage(fenetre, arrayUpdate)
     world.draw()
     fenetre.blit(perso.image, perso.rect)
+    if world.level.coins == []:
+        world.nextLevel()
+    world.level.printLvl(fenetre)
 
     #fenetre.blit(perso, position_perso)
-
     # Rafraichissement
     pygame.display.flip()
 
