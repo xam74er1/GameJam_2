@@ -62,9 +62,13 @@ while partie:
         arrayClick = []
 
         #Creation du bouton
+
         fenetre.blit(jouer.getImage(),jouer.rect)
+
         fenetre.blit(highscore.image,highscore.rect)
+
         fenetre.blit(credit.image,credit.rect)
+
         fenetre.blit(quitter.image,quitter.rect)
 
         #Afection de la fonction as mettre lorsque lon fait laction
@@ -120,11 +124,9 @@ while partie:
         perso = play(fenetre)
         score = perso.coins
         print("score = "+str(score))
+
         del perso
         current_page = "menu"
-
-
-
 
 
 
@@ -168,8 +170,6 @@ while partie:
             # Rafraichissement
             pygame.display.flip()
             pygame.key.set_repeat(40, 30)
-
-
 
 
 
