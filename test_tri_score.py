@@ -56,4 +56,4 @@ def afficheHighscore(tab):
 
 tableau = triScore()
 afficheHighscore(tableau)
-#ecrireScore(tableau, 2)
+#ecrireScore(tableau, 30)
