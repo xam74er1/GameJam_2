@@ -30,4 +30,6 @@ class World:
     def initLevels(self):
         for i in range(0, env.max_levels):
             self.levels.append(Level(i+1))
+    def levendIsFinsed(self):
 
+       return len(self.level.coins) ==0

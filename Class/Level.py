@@ -83,9 +83,9 @@ class Level:
         for wall in self.walls:
             pygame.draw.rect(window, wall.color, wall.rect)
     def printCoin(self,window):
-        print("----------")
+
         for coin in self.coins:
-            print(coin.y)
+
             window.blit(coin.image, (coin.x, coin.y))
 
 

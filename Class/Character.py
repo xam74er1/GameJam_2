@@ -45,8 +45,8 @@ class Character:
         self.ay =y
 
     def applyAcceleration(self, x, y):
-        self.ax += x
-        self.ay += y
+        self.ax = min(self.ax+x,10)
+        self.ay = min(self.ay+y,10)
     def setPostion(self,x,y):
         self.rect.x = x
         self.rect.y = y
@@ -88,7 +88,7 @@ class Character:
         #Reduire acelreation droite et gauche
 
 
-        gravitmode = 1
+        gravitmode = 0
 
         if gravitmode ==1:
             self.ax *= 0.95

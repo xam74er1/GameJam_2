@@ -13,26 +13,23 @@ def updateimage(frame,array):
 current_page = "menu"
 
 def loadMenu():
-    global current_page
-    current_page = "menu"
-    print("menu")
+    #print("menue")
+    return "menu"
+
 
 def loadJouer():
-    global current_page
-    current_page = "jouer"
-    print("jouer")
+    #print("jouer")
     return "jouer"
 
 def loadHighscore():
-    global current_page
-    current_page = "highscore"
-    print("highscore")
+
+    #print("highscore")
     return "highscore"
 
 def loadCredit():
-    global current_page
-    current_page = "credit"
-    print("credit")
+    #print("credit")
+    return "credit"
+
 
 def quitGame():
     pygame.display.quit()
@@ -115,7 +112,8 @@ while 1:
                             val = bt.isInZone(event.pos[0],event.pos[1])
 
                             if bt.isInZone(event.pos[0],event.pos[1]) :
-                                bt.action()
+                                current_page = bt.action()
+
 
             # Re-collage
             #fenetre.blit(fond, (0, 0))

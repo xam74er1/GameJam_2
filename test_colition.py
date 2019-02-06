@@ -99,17 +99,19 @@ while continuer:
     perso.applyAcceleration(world.gravity[0],world.gravity[1])
 
 
-
+    if world.levendIsFinsed() :
+        print("you win ")
 
 
     # Re-collage
     #fenetre.blit(fond, (0, 0))
-
+    fenetre.fill((0, 0, 0))
     updateimage(fenetre,arrayUpdate)
     world.draw()
     fenetre.blit(perso.image, perso.rect)
 
     #fenetre.blit(perso, position_perso)
+
     # Rafraichissement
     pygame.display.flip()
 
