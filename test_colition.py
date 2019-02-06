@@ -56,6 +56,8 @@ world.initLevels()
 world.level = world.levels[0]
 world.level.printLvl(fenetre)
 world.gravity = world.level.gravity
+background = world.level.background
+fenetre.blit(background, (0, 0))
 
 pygame.key.set_repeat(40, 100)
 
@@ -98,7 +100,7 @@ while continuer:
 
 
     # Re-collage
-    #fenetre.blit(fond, (0, 0))
+    fenetre.blit(background, (0, 0))
     fenetre.fill((0, 0, 0))
     updateimage(fenetre, arrayUpdate)
     fenetre.blit(perso.image, perso.rect)
