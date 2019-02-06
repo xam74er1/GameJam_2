@@ -137,7 +137,7 @@ def play(fenetre):
         pygame.time.Clock().tick(FPS)
 
 #---------------------------------------------------------
-    if env.with_music:
-        pygame.mixer.music.stop()
+    # if env.with_music:
+    #     pygame.mixer.music.stop()
 
     return perso
