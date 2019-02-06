@@ -14,8 +14,8 @@ from Class.Walls import *
 def play(fenetre):
     #-----------Main -----------
 
-
-
+    pygame.mixer.music.load("music/The_Final_Countdown.wav")
+    pygame.mixer.music.play()
 
     # Chargement et collage du fond
     #fond = pygame.image.load("images/background.jpg").convert()
@@ -99,7 +99,7 @@ def play(fenetre):
         if world.level.coins == []:
             continuer = world.nextLevel()
 
-        if world.timer ==0 :
+        if world.timer <=0 :
             continuer =0
 
         #-----------GESTION DE LIMAGE -------
@@ -140,5 +140,6 @@ def play(fenetre):
         pygame.time.Clock().tick(FPS)
 
 #---------------------------------------------------------
+    pygame.mixer.music.stop()
 
     return perso

@@ -16,12 +16,13 @@ class World:
         self.level = 0
         self.levels = []
         self.timer = 179
-        
+
 
     def addWall(self, wall):
         self.listWall.append(wall)
 
     def initLevels(self):
+
         for i in range(0, env.max_levels):
             self.levels.append(Level(i+1))
 
