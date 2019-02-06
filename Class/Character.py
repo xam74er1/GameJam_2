@@ -167,7 +167,7 @@ class Character:
                         else:
                             self.setPostion(minX - self.sizex, self.y)
 
-                    break
+                    #break
         except:
             0
 
