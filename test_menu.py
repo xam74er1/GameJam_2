@@ -35,17 +35,17 @@ current_page = "menu"
 
 # Ouverture de la fenêtre Pygame
 fenetre = pygame.display.set_mode((750, 750))
-jouer = Bouton("sprites/Button/Jouer.png", 255, 250, 240, 86)
-jouer.setImageOver("sprites/Button/AnimationJouer.png")
+jouer = Bouton("sprites/Butons/Jouer normal.png", 255, 250, 240, 86)
+jouer.setImageOver("sprites/Butons/Jouer animé.png")
 
-highscore = Bouton("sprites/Button/Highscore.png", 255, 350, 240, 86)
-highscore.setImageOver("sprites/Button/AnimationHighscore.png")
+highscore = Bouton("sprites/Butons/Highscore normal.png", 255, 350, 240, 86)
+highscore.setImageOver("sprites/Butons/Highscore animé.png")
 
-credit = Bouton("sprites/Button/Credits.png",255,450,240,86)
-credit.setImageOver("sprites/Button/AnimationCredits.png")
+credit = Bouton("sprites/Butons/Credits normal.png",255,450,240,86)
+credit.setImageOver("sprites/Butons/Credits animé.png")
 
-quitter = Bouton("sprites/Button/Quitter.png", 255, 550, 240, 86)
-quitter.setImageOver("sprites/Button/AnimationQuitter.png")
+quitter = Bouton("sprites/Butons/Quitter normal.png", 255, 550, 240, 86)
+quitter.setImageOver("sprites/Butons/Quitter animé.png")
 partie = 1
 
 while partie:
@@ -62,13 +62,9 @@ while partie:
         arrayClick = []
 
         #Creation du bouton
-
         fenetre.blit(jouer.getImage(),jouer.rect)
-
         fenetre.blit(highscore.image,highscore.rect)
-
         fenetre.blit(credit.image,credit.rect)
-
         fenetre.blit(quitter.image,quitter.rect)
 
         #Afection de la fonction as mettre lorsque lon fait laction
