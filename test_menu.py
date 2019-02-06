@@ -113,6 +113,9 @@ while partie:
         print("test")
 
 
+
+
+
     elif current_page == "highscore":
         titre = pygame.transform.scale(pygame.image.load("Rectangle_bleu_de_merde.png"), (350, 150))
         fenetre.blit(titre, (500, 500))
@@ -153,6 +156,8 @@ while partie:
             # Rafraichissement
             pygame.display.flip()
             pygame.key.set_repeat(40, 30)
+
+
 
 
 
