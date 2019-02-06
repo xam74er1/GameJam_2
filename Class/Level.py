@@ -63,6 +63,8 @@ class Level:
                     w.surface.fill(self.color)
             self.walls = lvlstruct
 
+    def rezieBacground(self,x,y):
+        self.background = pygame.transform.scale(self.background,(x,y))
 
     def printLvl(self, window):
         for wall in self.walls:

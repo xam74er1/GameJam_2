@@ -54,6 +54,7 @@ fenetre.blit(perso.image, perso.rect)
 
 world.initLevels()
 world.level = world.levels[0]
+world.level.rezieBacground(MAX_X,MAX_Y)
 world.level.printLvl(fenetre)
 world.gravity = world.level.gravity
 background = world.level.background
@@ -101,7 +102,7 @@ while continuer:
 
     # Re-collage
     fenetre.blit(background, (0, 0))
-    fenetre.fill((0, 0, 0))
+    #fenetre.fill((0, 0, 0))
     updateimage(fenetre, arrayUpdate)
     fenetre.blit(perso.image, perso.rect)
     if world.level.coins == []:
