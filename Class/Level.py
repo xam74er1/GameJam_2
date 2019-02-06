@@ -14,7 +14,10 @@ class Level:
         self.color = 0
         self.gravity = 0
         self.generate()
-        self.background = pygame.image.load("sprites/Niveau "+str(self.numlevel)+" background.png").convert_alpha()
+        try:
+            self.background = pygame.image.load("sprites/Niveau "+str(self.numlevel)+" background.png").convert_alpha()
+        except:
+            0
 
     def generate(self):
         with open("levels/"+str(self.numlevel)+".lvl", "r") as lvlfile:
@@ -51,7 +54,7 @@ class Level:
                         self.color = (int(line[:3]),int(line[4:7]),int(line[8:11]))
 
                     elif filezone == 'g':
-                        self.gravity = (float(line[:3]), float(line[4:7]))
+                        self.gravity = (float(line[:4]), float(line[5:9]))
 
 
             if self.color:

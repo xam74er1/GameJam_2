@@ -38,9 +38,7 @@ fenetre = pygame.display.set_mode((750, 750))
 partie = 1
 
 while partie:
-    print("test")
     if current_page == "menu":
-        print("page "+current_page)
         # Chargement et collage du fond
         #fond = pygame.image.load("images/background.jpg").convert()
         #fenetre.blit(fond, (0, 0))
@@ -53,7 +51,6 @@ while partie:
         arrayClick = []
 
         #Creation du bouton
-
         jouer = Bouton("Rectangle_bleu_de_merde.png",275,250,200,50)
         fenetre.blit(jouer.image,jouer.rect)
 
@@ -110,10 +107,7 @@ while partie:
 
                             if bt.isInZone(event.pos[0],event.pos[1]) :
                                 current_page = bt.action()
-                                print(current_page)
-                                break
-
-
+                                continuer = 0
 
 
             # Re-collage
@@ -129,20 +123,56 @@ while partie:
 
 
     elif current_page == "jouer":
-        print("page "+current_page)
+        print("test")
+
+
+    elif current_page == "highscore":
         titre = pygame.transform.scale(pygame.image.load("Rectangle_bleu_de_merde.png"), (350, 150))
         fenetre.blit(titre, (500, 500))
         pygame.display.flip()
 
+        # list de tout les truc as update
+        arrayUpdate = []
+        # list de tout les truc qui attendre un clique , equivant as a event listner pour les boutton
+        arrayClick = []
+        # Creation du bouton
+        menu = Bouton("Rectangle_bleu_de_merde.png", 275, 250, 600, 50)
+        fenetre.blit(menu.image, menu.rect)
+        # Afection de la fonction as mettre lorsque lon fait laction
+        menu.setButtonAction(loadMenu)
+        # Ajout de tout les truc as update
+        arrayUpdate.append((menu.image, menu.rect))
+        # Ajout de tout les truc qui attende un event
+        arrayClick.append(menu)
 
-    elif current_page == "highscore":
-        print("page "+current_page)
-        fond = pygame.image.load("images/background.jpg").convert()
-        fenetre.blit(fond, (0, 0))
+        while continuer:
+
+            for event in pygame.event.get():  # Attente des événements
+                if event.type == QUIT:
+                    continuer = 0
+                    quit()
+
+                if event.type == MOUSEBUTTONDOWN:
+
+                    if event.button == 1:  # Si clic gauche
+
+                        for bt in arrayClick:
+
+                            val = bt.isInZone(event.pos[0], event.pos[1])
+
+                            if bt.isInZone(event.pos[0], event.pos[1]):
+                                current_page = bt.action()
+                                continuer = 0
+            # Re-collage
+            fenetre.blit(titre, (200, 50))
+            updateimage(fenetre, arrayUpdate)
+            # fenetre.blit(perso, position_perso)
+            # Rafraichissement
+            pygame.display.flip()
+            pygame.key.set_repeat(40, 30)
 
 
 
     elif current_page == "credit":
-        print("page "+current_page)
         pygame.display.flip()
 
