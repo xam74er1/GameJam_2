@@ -50,7 +50,7 @@ def play(fenetre):
     #arrayUpdate.append((fond,(0,0)))
 
     world.initLevels()
-    world.level = world.levels[0]
+    world.level = world.levels[env.lvl_start]
     world.level.rezieBacground(MAX_X,MAX_Y)
     world.level.printLvl(fenetre)
     world.gravity = world.level.gravity
