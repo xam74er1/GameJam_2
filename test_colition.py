@@ -39,7 +39,6 @@ fenetre = pygame.display.set_mode((MAX_X,MAX_Y ))
 arrayUpdate = [];
 arrayClick = []
 
-
 world = World(fenetre,MAX_X,MAX_Y)
 
 # Rafraîchissement de l'écran
@@ -57,6 +56,7 @@ world.initLevels()
 world.level = world.levels[0]
 world.level.printLvl(fenetre)
 world.gravity = world.level.gravity
+
 pygame.key.set_repeat(40, 100)
 
 while continuer:
@@ -93,7 +93,7 @@ while continuer:
 
     # Re-collage
     #fenetre.blit(fond, (0, 0))
-
+    fenetre.fill((0, 0, 0))
     updateimage(fenetre, arrayUpdate)
     world.draw()
     fenetre.blit(perso.image, perso.rect)

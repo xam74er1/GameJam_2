@@ -21,11 +21,10 @@ class World:
 
     def draw(self):
         self.printWall()
+        self.level.printCoin(self.frame)
 
     def printWall(self):
-
-        for w in self.listWall:
-            pygame.draw.rect(self.frame, w.color, w.rect)
+        self.level.printWall(self.frame)
 
     def initLevels(self):
         for i in range(0, env.max_levels):

@@ -29,7 +29,7 @@ class Bouton:
     def setButtonAction(self,action):
         self.action = action
 
-    def action(self):
+    def actionB(self):
 
         if self.action()!=0:
              self.action()
