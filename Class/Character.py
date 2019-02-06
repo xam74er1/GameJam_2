@@ -173,9 +173,11 @@ class Character:
 
         cToRemove=0
         try:
+            #Recuperation des coins
             for c in self.world.level.coins:
                 if self.rect.colliderect(c):
                     c.visible=0
+                    self.world.sonCoin.play()
                     self.world.toUpdate.append(c)
                     cToRemove=c
                     break

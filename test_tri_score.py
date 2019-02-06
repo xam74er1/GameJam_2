@@ -2,7 +2,6 @@ import pygame
 
 def triScore():
     fichier = open("test-score.txt", "r")
-    tableau = []
 
     NumberOfLine = 0
     for line in fichier:

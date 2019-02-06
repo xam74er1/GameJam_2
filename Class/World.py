@@ -17,10 +17,16 @@ class World:
         self.levels = []
         self.timer = 179
 
+        #load des sound
+
+        self.sonCoin = pygame.mixer.Sound("Sounds/Coin.wav")
+
+        self.sonNextLeve = pygame.mixer.Sound("Sounds/Nextlevel.wav")
     def addWall(self, wall):
         self.listWall.append(wall)
 
     def initLevels(self):
+
         for i in range(0, env.max_levels):
             self.levels.append(Level(i+1))
 
@@ -28,6 +34,7 @@ class World:
     def nextLevel(self):
         self.level.rezieBacground(self.maxX,self.maxY)
         if self.level.numlevel < env.max_levels:
+            self.sonNextLeve.play()
             self.level = self.levels[self.level.numlevel]
             self.gravity = self.level.gravity
             return True

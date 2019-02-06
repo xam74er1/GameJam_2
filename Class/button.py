@@ -25,6 +25,8 @@ class Bouton:
 
         self.action = 0
 
+        self.sound = pygame.mixer.Sound("Sounds/Buttonsound.wav")
+
     def isInZone(self,x,y):
         return (self.rect.x<=x & x<=(self.rect.x+self.sizex)) & (self.rect.y<=y & y<=(self.rect.y+self.sizey))
 
