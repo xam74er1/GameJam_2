@@ -15,4 +15,7 @@
 06|O|
 00|P|
 01|Q|
-03|R[
+03|R|
+67|Blobchon annonime|
+98|Blobchon annonime|
+85|Test|
