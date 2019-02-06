@@ -31,5 +31,6 @@ class World:
             self.levels.append(Level(i+1))
 
     def nextLevel(self):
-        self.level=self.levels[self.level]
+        self.level = self.levels[self.level.numlevel]
+        self.gravity = self.level.gravity
 

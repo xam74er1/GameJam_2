@@ -45,14 +45,15 @@ class Character:
         self.ay =y
 
     def applyAcceleration(self, x, y):
+        maxi = 15.0
         if self.ax>0:
-            self.ax = min(self.ax+x,10)
+            self.ax = min(self.ax+x,maxi)
         else:
-            self.ax = max(self.ax + x, -10)
+            self.ax = max(self.ax + x, -1*maxi)
         if self.ay > 0:
-            self.ay = min(self.ay + y, 10)
+            self.ay = min(self.ay + y, maxi)
         else:
-            self.ay= max(self.ay + y, -10)
+            self.ay= max(self.ay + y, -1*maxi)
     def setPostion(self,x,y):
         self.rect.x = x
         self.rect.y = y
@@ -62,7 +63,7 @@ class Character:
 #Verife que sa ne sort pas de la Zone
 
     def move(self):
-        print(" Debut ax " + str(self.ax) + " ay " + str(self.ay))
+        #print(" Debut ax " + str(self.ax) + " ay " + str(self.ay))
         self.forceMove(self.ax,self.ay)
         #Verifiaction rapide
 
@@ -130,13 +131,13 @@ class Character:
                     maxY = w.rect.y+(w.rect.size[1])
 
                     if mcX>minX and mcX<maxX:
-                        self.ay*=-1
+                        self.ay*=-1.1
                         if mcY>scY:
                             self.setPostion(self.x,maxY)
                         else:
                             self.setPostion(self.x,minY-self.sizey)
                     if mcY>minY and mcY<maxY:
-                        self.ax*=-1
+                        self.ax*=-1.1
                         if mcX>scX:
                             self.setPostion(maxX, self.y)
                         else:
@@ -161,8 +162,8 @@ class Character:
                 self.world.level.coins.remove(cToRemove)
         except:
             0
-        print("Fin ax " + str(self.ax) + " ay " + str(self.ay))
-        print("------------------------------------------")
+       # print("Fin ax " + str(self.ax) + " ay " + str(self.ay))
+        #print("------------------------------------------")
         return self.rect
 
        # print("x="+str(self.x)+"y = "+str(self.y)+" ax = "+str(self.ax)+" ay "+str(self.ay)+"rect x "+str(self.rect.x)+" rect y "+str(self.rect.y))
