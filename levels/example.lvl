@@ -1,0 +1,26 @@
+#Exemple de Level file
+#Les commentaires commencent par #
+
+#Murs du level (sauf murs exterieurs, generes automatiquement)
+#x  y   sx  sy
+Level:
+000 000 200 500
+#Mur place en 0,0 large de 200px et haut de 500 px
+
+#Couleur generale du level
+#r  g   b
+Color:
+255 000 255
+#Mur rose/violet
+
+#Sens de gravite du level
+#dx dy
+Gravity:
+0.0 0.9
+#Gravite vers le bas
+
+#Pieces dans le level
+#x  y
+Coins:
+100 100
+#Piece en 100,100
