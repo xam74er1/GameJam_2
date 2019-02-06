@@ -43,7 +43,7 @@ arrayUpdate = [];
 arrayClick = []
 
 count = 0
-bigText = pygame.font.SysFont(pygame.font.get_fonts()[7], 50)
+bigText = pygame.font.SysFont(pygame.font.get_fonts()[7], 80)
 textColor = (255,255,255)
 
 
@@ -100,6 +100,8 @@ while continuer:
                 world.gravity=(-gravityForce,0)
             if event.key == K_F5:
                 perso.fly = not perso.fly
+            if event.key == K_F6:
+                world.timer -= 30
 
     #Gravite
     perso.move()
@@ -116,14 +118,13 @@ while continuer:
 
 
 
-    title_text = bigText.render(str(world.timer), True,textColor )
+    title_text = bigText.render(str(world.getTimeFormated()), True,textColor )
     textpos = title_text.get_rect()
     textpos.centerx = fenetre.get_rect().centerx
     textpos.centery = fenetre.get_rect().centery
-
-
-
     fenetre.blit(title_text, textpos)
+
+
 
 
 
@@ -142,7 +143,7 @@ while continuer:
     if(count>FPS):
         count = 0
         world.aplyTime()
-        print(world.timer)
+
 
 
 

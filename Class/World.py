@@ -15,7 +15,7 @@ class World:
         self.toUpdate = []
         self.level = 0
         self.levels = []
-        self.timer = 0
+        self.timer = 179
 
     def addWall(self, wall):
         self.listWall.append(wall)
@@ -36,4 +36,11 @@ class World:
             self.gravity = self.level.gravity
 
     def aplyTime(self):
-        self.timer +=1
+        self.timer -=1
+    def getTimeFormated(self):
+        min = int(self.timer/60)
+        sec = self.timer%60
+        if(sec>9):
+            return str(min)+":"+str(sec)
+        else:
+            return str(min) + ":0" + str(sec)
