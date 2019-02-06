@@ -70,20 +70,20 @@ class Character:
 
     def up(self,world):
         for w in world.level.walls:
-            if self.canMouve(w):
+            if self.world.gravity[1]==0 or self.canMouve(w):
                 self.applyAcceleration(0,-8)
     def down(self,world):
         for w in world.level.walls:
             for w in world.level.walls:
-                if self.canMouve(w):
+                if self.world.gravity[1]==0 or self.canMouve(w):
                     self.applyAcceleration(0, 8)
     def left(self,world):
         for w in world.level.walls:
-            if self.canMouve(w):
+            if self.world.gravity[0]==0 or self.canMouve(w):
                 self.applyAcceleration(-8, 0)
     def right(self,world):
         for w in world.level.walls:
-            if self.canMouve(w):
+            if self.world.gravity[0]==0 or self.canMouve(w):
                 self.applyAcceleration(8, 0)
 
     def move(self):
