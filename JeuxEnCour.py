@@ -14,7 +14,7 @@ from Class.Walls import *
 def play(fenetre):
     #-----------Main -----------
 
-    pygame.mixer.music.load("music/The_Final_Countdown.wav")
+    pygame.mixer.music.load("music/Song_JellyBall.ogg")
     pygame.mixer.music.play()
 
     # Chargement et collage du fond
@@ -89,6 +89,10 @@ def play(fenetre):
                     perso.fly = not perso.fly
                 if event.key == K_F6:
                     world.timer -= 30
+                if event.key == K_F7:
+                    world.timer += 30
+                if event.key == K_ESCAPE:
+                    continuer = 0
 
         #Gravite
         perso.move()
@@ -133,6 +137,11 @@ def play(fenetre):
         if(count>FPS):
             count = 0
             world.aplyTime()
+
+
+        #if count%8==0:
+            #perso.animation()
+
 
 
 
