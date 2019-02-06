@@ -8,6 +8,7 @@ from Class.Walls import *
 
 MAX_X =750
 MAX_Y =750
+FPS = 30
 
 #list update
 
@@ -23,6 +24,7 @@ def testButton():
 
 #-----------Main -----------
 
+
 pygame.init()
 
 # Ouverture de la fenêtre Pygame
@@ -36,8 +38,16 @@ fenetre = pygame.display.set_mode((MAX_X,MAX_Y ))
 
 
 
+
 arrayUpdate = [];
 arrayClick = []
+
+count = 0
+bigText = pygame.font.SysFont(pygame.font.get_fonts()[7], 80)
+textColor = (255,255,255)
+
+
+pygame.mouse.set_cursor(*pygame.cursors.diamond)
 
 world = World(fenetre,MAX_X,MAX_Y)
 
@@ -90,6 +100,8 @@ while continuer:
                 world.gravity=(-gravityForce,0)
             if event.key == K_F5:
                 perso.fly = not perso.fly
+            if event.key == K_F6:
+                world.timer -= 30
 
     #Gravite
     perso.move()
@@ -100,9 +112,22 @@ while continuer:
     if world.level.coins == []:
         world.nextLevel()
 
-    # Re-collage
+    #-----------GESTION DE LIMAGE -------
+    # bacgound
     fenetre.blit(world.level.background, (0, 0))
-    #fenetre.fill((0, 0, 0))
+
+
+
+    title_text = bigText.render(str(world.getTimeFormated()), True,textColor )
+    textpos = title_text.get_rect()
+    textpos.centerx = fenetre.get_rect().centerx
+    textpos.centery = fenetre.get_rect().centery
+    fenetre.blit(title_text, textpos)
+
+
+
+
+
     updateimage(fenetre, arrayUpdate)
     fenetre.blit(perso.image, perso.rect)
 
@@ -112,6 +137,16 @@ while continuer:
     # Rafraichissement
     pygame.display.flip()
 
-    pygame.time.Clock().tick(30)
+
+#-----------Gestion du temp---------
+    count += 1
+    if(count>FPS):
+        count = 0
+        world.aplyTime()
+
+
+
+
+    pygame.time.Clock().tick(FPS)
 
 
