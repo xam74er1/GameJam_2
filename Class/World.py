@@ -23,8 +23,9 @@ class World:
         for i in range(0, env.max_levels):
             self.levels.append(Level(i+1))
 
-    def nextLevel(self):
 
+    def nextLevel(self):
+        self.level.rezieBacground(self.maxX,self.maxY)
         if len(self.levels) >= self.level.numlevel+1 :
             self.level = self.levels[self.level.numlevel]
         else:
