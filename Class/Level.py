@@ -16,6 +16,7 @@ class Level:
         self.generate()
         self.alpha=0
         try:
+            print("sprites/Background/Niveau "+str(self.numlevel)+".png")
             self.background = pygame.image.load("sprites/Background/Niveau "+str(self.numlevel)+".png").convert_alpha()
         except:
             self.background = pygame.image.load("sprites/Background/Niveau 1.png").convert_alpha()
