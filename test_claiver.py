@@ -29,20 +29,15 @@ def main():
             if event.type == pg.KEYDOWN:
                 if active:
                     if event.key == pg.K_RETURN:
-                        print(text)
-
-
                         # ecrire dans un fichier
-                        fichier = open("data.txt", "w")  # w ecrase l'ancien fichier, a ecrie a la fin du fichier
-                        fichier.write(text)
+                        fichier = open("data.txt", "a")  # w ecrase l'ancien fichier, a ecrie a la fin du fichier
+                        fichier.write(text+"\n")
                         fichier.close()
 
                         # lire dans un fichier
                         fichier = open("data.txt", "r")
                         print(fichier.read())
                         fichier.close()
-
-
                         text = ''
                     elif event.key == pg.K_BACKSPACE:
                         text = text[:-1]
