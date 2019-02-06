@@ -81,11 +81,13 @@ menu = Bouton("sprites/Boutons/Jouer normal.png", 255, 650, 240, 86)
 menu.setImageOver("sprites/Boutons/Jouer animé.png")
 
 partie = 1
-
+fond = Level('m')
 while partie:
     if current_page == "menu":
         # Chargement et collage du fond
-        fond = pygame.image.load("sprites/Background/Background_Accueil.png").convert()
+        fenetre.blit(fond.background,(0,0))
+        fond.printLvl(fenetre)
+        #fenetre.blit(fond, (0, 0))
         titre = pygame.transform.scale(pygame.image.load("sprites/Title/Logo.png"), (610, 130))
 
         # list de tout les truc as update
@@ -138,7 +140,7 @@ while partie:
                                 continuer = 0
 
             # Re-collage
-            fenetre.blit(fond, (0, 0))
+            fond.printLvl(fenetre)
             fenetre.blit(titre, (70, 50))
             updateimage(fenetre,arrayUpdate)
             #fenetre.blit(perso, position_perso)
