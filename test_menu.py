@@ -105,6 +105,7 @@ while partie:
                         for bt in arrayClick:
                             val = bt.isInZone(event.pos[0],event.pos[1])
                             if bt.isInZone(event.pos[0],event.pos[1]) :
+                                bt.sound.play()
                                 current_page = bt.action()
                                 continuer = 0
 
