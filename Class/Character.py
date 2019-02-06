@@ -175,7 +175,6 @@ class Character:
         try:
             for c in self.world.level.coins:
                 if self.rect.colliderect(c):
-                    print('collision coin')
                     c.visible=0
                     self.world.toUpdate.append(c)
                     cToRemove=c

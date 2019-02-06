@@ -128,7 +128,7 @@ while continuer:
 
 
 
-    updateimage(fenetre, arrayUpdate)
+  #  updateimage(fenetre, arrayUpdate)
     fenetre.blit(perso.image, perso.rect)
 
     world.level.printLvl(fenetre)
