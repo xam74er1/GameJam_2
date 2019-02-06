@@ -2,10 +2,10 @@ import pygame
 from Class.button import *
 from pygame.locals import *
 from JeuxEnCour import *
+from pygame import font
 
 
-#list update
-
+# list update
 def updateimage(frame,array):
     for it in array:
         frame.blit(it.getImage(),it.rect)
@@ -18,7 +18,7 @@ def loadJouer():
     return "jouer"
 
 def loadHighscore():
-    return "hoghscore"
+    return "highscore"
 
 def loadCredit():
     return "credit"
@@ -26,6 +26,35 @@ def loadCredit():
 def quitGame():
     pygame.display.quit()
     quit()
+
+# Trie les score du plus grand au plus petit
+def triScore():
+    fichier = open("test-score.txt", "r")
+    tableau = []
+
+    NumberOfLine = 0
+    for line in fichier:
+        NumberOfLine += 1
+
+    fichier.close()
+
+    fichier = open("test-score.txt", "r")
+    tableau = []
+
+    i = 0
+    while i < NumberOfLine:
+        tableau.append(fichier.readline().split('|'))
+        i += 1
+    fichier.close()
+
+    tableau.sort(reverse=True)
+    return tableau
+
+# affiche les 10 meilleurs socres
+def afficheHighscore(tab, nb):
+    font = pygame.font.Font("Font/JELLYBELLY.TTF", 40)
+    return font.render(str(nb + 1) + " - " + tab[nb][0] + "  -  " + tab[nb][1], 1, (255, 255, 255))
+
 
 #-----------Main -----------
 
@@ -35,6 +64,7 @@ current_page = "menu"
 
 # Ouverture de la fenêtre Pygame
 fenetre = pygame.display.set_mode((750, 750))
+
 jouer = Bouton("sprites/Boutons/Jouer normal.png", 255, 250, 240, 86)
 jouer.setImageOver("sprites/Boutons/Jouer animé.png")
 
@@ -46,28 +76,31 @@ credit.setImageOver("sprites/Boutons/Credits animé.png")
 
 quitter = Bouton("sprites/Boutons/Quitter normal.png", 255, 550, 240, 86)
 quitter.setImageOver("sprites/Boutons/Quitter animé.png")
+
+menu = Bouton("sprites/Boutons/Jouer normal.png", 255, 650, 240, 86)
+menu.setImageOver("sprites/Boutons/Jouer animé.png")
+
 partie = 1
 
 while partie:
     if current_page == "menu":
         # Chargement et collage du fond
         fond = pygame.image.load("sprites/Background/Background_Accueil.png").convert()
-        #fenetre.blit(fond, (0, 0))
         titre = pygame.transform.scale(pygame.image.load("sprites/Title/Logo.png"), (610, 130))
 
-        #list de tout les truc as update
+        # list de tout les truc as update
         arrayUpdate = []
 
-        #list de tout les truc qui attendre un clique , equivant as a event listner pour les boutton
+        # list de tout les truc qui attendre un clique , equivant as a event listner pour les boutton
         arrayClick = []
 
-        #Creation du bouton
+        # Creation du bouton
         fenetre.blit(jouer.getImage(),jouer.rect)
         fenetre.blit(highscore.image,highscore.rect)
         fenetre.blit(credit.image,credit.rect)
         fenetre.blit(quitter.image,quitter.rect)
 
-        #Afection de la fonction as mettre lorsque lon fait laction
+        # Affection de la fonction as mettre lorsque l'on fait l'action
         jouer.setButtonAction(loadJouer)
         highscore.setButtonAction(loadHighscore)
         credit.setButtonAction(loadCredit)
@@ -78,13 +111,13 @@ while partie:
         # BOUCLE INFINIE
         continuer = 1
 
-        #Ajout de tout les truc as update
+        # Ajout de tout les trucs as update
         arrayUpdate.append(jouer)
         arrayUpdate.append(highscore)
         arrayUpdate.append(credit)
         arrayUpdate.append(quitter)
 
-        #Ajout de tout les truc qui attende un event
+        # Ajout de tout les trucs qui attendent un event
         arrayClick.append(jouer)
         arrayClick.append(highscore)
         arrayClick.append(credit)
@@ -94,7 +127,7 @@ while partie:
             for event in pygame.event.get():  # Attente des événements
                 if event.type == QUIT:
                     continuer = 0
-                    quit()
+                    quitGame()
 
                 if event.type == MOUSEBUTTONDOWN:
                     if event.button == 1:  # Si clic gauche
@@ -126,32 +159,64 @@ while partie:
 
 
 
-
-
     elif current_page == "highscore":
-        titre = pygame.transform.scale(pygame.image.load("Rectangle_bleu_de_merde.png"), (350, 150))
-        fenetre.blit(titre, (500, 500))
-        pygame.display.flip()
+        # Chargement et collage du fond
+        fond = pygame.image.load("sprites/Background/Background_Accueil.png").convert()
+        fenetre.blit(fond, (0, 0))
+        titre = pygame.transform.scale(pygame.image.load("sprites/Title/Logo.png"), (610, 130))
+        fenetre.blit(fond, (0, 0))
 
-        # list de tout les truc as update
+        # liste de tout les trucs a update
         arrayUpdate = []
-        # list de tout les truc qui attendre un clique , equivant as a event listner pour les boutton
+
+        # liste de tout les trucs qui attendent un clique , equivalent as a event listner pour les boutons
         arrayClick = []
+
         # Creation du bouton
-        menu = Bouton("Rectangle_bleu_de_merde.png", 275, 250, 600, 50)
         fenetre.blit(menu.image, menu.rect)
-        # Afection de la fonction as mettre lorsque lon fait laction
+
+        # Affection de la fonction a mettre lorsque l'on fait l'action
         menu.setButtonAction(loadMenu)
-        # Ajout de tout les truc as update
-        arrayUpdate.append((menu.image, menu.rect))
-        # Ajout de tout les truc qui attende un event
+
+        # Rafraîchissement de l'écran
+        pygame.display.flip()
+        # BOUCLE INFINIE
+        continuer = 1
+
+        # Ajout de tout les trucs a update
+        arrayUpdate.append((menu))
+
+        # Ajout de tout les truc qui attendent un event
         arrayClick.append(menu)
+
+        # appel le trie et l'affichage des meilleurs scores
+        tableau = triScore()
+
+        font = pygame.font.Font("Font/JELLYBELLY.TTF", 60)
+        texte0 = font.render("Rang    Score    Pseudo", 1, (255, 255, 255))
+        font = pygame.font.Font("Font/JELLYBELLY.TTF", 30)
+        texte1 = afficheHighscore(tableau, 0)
+        texte1
+        texte2 = afficheHighscore(tableau, 1)
+        texte3 = afficheHighscore(tableau, 2)
+        texte4 = afficheHighscore(tableau, 3)
+        texte5 = afficheHighscore(tableau, 4)
+        texte6 = afficheHighscore(tableau, 5)
+        texte7 = afficheHighscore(tableau, 6)
+        texte8 = afficheHighscore(tableau, 7)
+        texte9 = afficheHighscore(tableau, 8)
+        texte10 = afficheHighscore(tableau, 9)
+
+        print(texte0)
+        print(texte1)
+        print(texte2)
+        print(texte3)
 
         while continuer:
             for event in pygame.event.get():  # Attente des événements
                 if event.type == QUIT:
                     continuer = 0
-                    quit()
+                    quitGame()
 
                 if event.type == MOUSEBUTTONDOWN:
                     if event.button == 1:  # Si clic gauche
@@ -162,7 +227,19 @@ while partie:
                                 continuer = 0
 
             # Re-collage
-            fenetre.blit(titre, (200, 50))
+            fenetre.blit(fond, (0, 0))
+            fenetre.blit(titre, (70, 50))
+            fenetre.blit(texte0, (90, 170))
+            fenetre.blit(texte1, (130, 250))
+            fenetre.blit(texte2, (130, 300))
+            fenetre.blit(texte3, (130, 350))
+            fenetre.blit(texte1, (130, 400))
+            fenetre.blit(texte2, (130, 450))
+            fenetre.blit(texte3, (130, 500))
+            fenetre.blit(texte1, (130, 550))
+            fenetre.blit(texte2, (130, 600))
+            fenetre.blit(texte3, (130, 650))
+            fenetre.blit(texte3, (130, 700))
             updateimage(fenetre, arrayUpdate)
             # fenetre.blit(perso, position_perso)
             # Rafraichissement
