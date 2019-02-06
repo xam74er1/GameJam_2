@@ -5,18 +5,12 @@ from pygame.locals import *
 from Class.World import *
 from Class.Walls import *
 
-
-
-
-
-
-
 def play(fenetre):
     #-----------Main -----------
 
     if env.with_music:
-        pygame.mixer.music.load("music/The_Final_Countdown.wav")
-        pygame.mixer.music.play()
+        pygame.mixer.music.load(env.music_path)
+
 
     # Chargement et collage du fond
     #fond = pygame.image.load("images/background.jpg").convert()
@@ -30,7 +24,7 @@ def play(fenetre):
     arrayUpdate = [];
     arrayClick = []
 
-    count = 0
+    count = 0.0
     bigText = pygame.font.SysFont(pygame.font.get_fonts()[7], 80)
     textColor = (255,255,255)
 
@@ -45,19 +39,21 @@ def play(fenetre):
     continuer = 1
 
 
-    perso = Character(world, MAX_X/2, MAX_Y-100, 32, 32)
+    perso = Character(world, 50, 700, 32, 32)
     fenetre.blit(perso.image, perso.rect)
 
     #arrayUpdate.append((fond,(0,0)))
+    pygame.key.set_repeat(40, 100)
 
     world.initLevels()
     world.level = world.levels[env.lvl_start]
     world.level.rezieBacground(MAX_X,MAX_Y)
-    world.level.printLvl(fenetre)
     world.gravity = world.level.gravity
-    fenetre.blit(world.level.background, (0, 0))
 
-    pygame.key.set_repeat(40, 100)
+    if env.with_music:
+        pygame.mixer.music.play()
+    world.level.printLvl(fenetre)
+    fenetre.blit(world.level.background, (0, 0))
 
     while continuer:
 
@@ -130,9 +126,9 @@ def play(fenetre):
 
 
     #-----------Gestion du temp---------
-        count += 1
-        if(count>FPS):
-            count = 0
+        count += 1.0
+        if(count>env.FPS):
+            count -= env.FPS
             world.aplyTime()
 
 
