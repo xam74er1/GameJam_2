@@ -14,10 +14,11 @@ class Level:
         self.color = 0
         self.gravity = 0
         self.generate()
+        self.alpha=0
         try:
-            self.background = pygame.image.load("sprites/Niveau "+str(self.numlevel)+" background.png").convert_alpha()
+            self.background = pygame.image.load("sprites/Background/Niveau "+str(self.numlevel)+".png").convert_alpha()
         except:
-            self.background = pygame.image.load("sprites/Niveau 1 background.png").convert_alpha()
+            self.background = pygame.image.load("sprites/Background/Niveau 1.png").convert_alpha()
 
     def generate(self):
         with open("levels/"+str(self.numlevel)+".lvl", "r") as lvlfile:
@@ -52,15 +53,17 @@ class Level:
                         self.coins.append(Coin(coinX, coinY))
                     elif filezone == 'c':
                         self.color = (int(line[:3]),int(line[4:7]),int(line[8:11]))
+                        self.alpha = int(line[12:15])
 
                     elif filezone == 'g':
                         self.gravity = (float(line[:4]), float(line[5:9]))
 
 
-            if self.color:
+            if self.color and self.alpha:
                 for w in lvlstruct:
                     w.color = self.color
                     w.surface.fill(self.color)
+                    w.surface.set_alpha(self.alpha)
             self.walls = lvlstruct
 
     def rezieBacground(self,x,y):
