@@ -15,6 +15,7 @@ class World:
         self.toUpdate = []
         self.level = 0
         self.levels = []
+        self.timer = 0
 
     def addWall(self, wall):
         self.listWall.append(wall)
@@ -33,3 +34,6 @@ class World:
             self.initLevels()
             self.level = self.levels[0]
             self.gravity = self.level.gravity
+
+    def aplyTime(self):
+        self.timer +=1

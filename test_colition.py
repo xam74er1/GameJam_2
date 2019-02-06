@@ -8,6 +8,7 @@ from Class.Walls import *
 
 MAX_X =750
 MAX_Y =750
+FPS = 30
 
 #list update
 
@@ -22,6 +23,7 @@ def testButton():
 
 
 #-----------Main -----------
+
 
 pygame.init()
 
@@ -38,6 +40,8 @@ fenetre = pygame.display.set_mode((MAX_X,MAX_Y ))
 
 arrayUpdate = [];
 arrayClick = []
+
+count = 0
 
 world = World(fenetre,MAX_X,MAX_Y)
 
@@ -112,6 +116,13 @@ while continuer:
     # Rafraichissement
     pygame.display.flip()
 
-    pygame.time.Clock().tick(30)
+
+#Gestion du temp
+    count += 1
+    if(count>FPS):
+        count = 0
+        world.aplyTime()
+        print(world.timer)
+    pygame.time.Clock().tick(FPS)
 
 
