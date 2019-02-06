@@ -27,13 +27,12 @@ class World:
 
     def nextLevel(self):
         self.level.rezieBacground(self.maxX,self.maxY)
-        if self.level.numlevel <= env.max_levels:
+        if self.level.numlevel < env.max_levels:
             self.level = self.levels[self.level.numlevel]
             self.gravity = self.level.gravity
+            return True
         else:
-            self.initLevels()
-            self.level = self.levels[0]
-            self.gravity = self.level.gravity
+           return False
 
     def aplyTime(self):
         self.timer -=1

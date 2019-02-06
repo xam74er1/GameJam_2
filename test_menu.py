@@ -1,13 +1,14 @@
 import pygame
 from Class.button import *
 from pygame.locals import *
+from JeuxEnCour import *
 
 
 #list update
 
 def updateimage(frame,array):
     for it in array:
-        frame.blit(it[0],it[1])
+        frame.blit(it.getImage(),it.rect)
 
 # Changement page
 def loadMenu():
@@ -34,7 +35,17 @@ current_page = "menu"
 
 # Ouverture de la fenêtre Pygame
 fenetre = pygame.display.set_mode((750, 750))
+jouer = Bouton("sprites/Button/Jouer.png", 255, 250, 240, 86)
+jouer.setImageOver("sprites/Button/AnimationJouer.png")
 
+highscore = Bouton("sprites/Button/Highscore.png", 255, 350, 240, 86)
+highscore.setImageOver("sprites/Button/AnimationHighscore.png")
+
+credit = Bouton("sprites/Button/Credits.png",255,450,240,86)
+credit.setImageOver("sprites/Button/AnimationCredits.png")
+
+quitter = Bouton("sprites/Button/Quitter.png", 255, 550, 240, 86)
+quitter.setImageOver("sprites/Button/AnimationQuitter.png")
 partie = 1
 
 while partie:
@@ -51,13 +62,13 @@ while partie:
         arrayClick = []
 
         #Creation du bouton
-        jouer = Bouton("sprites/Button/Jouer.png",255,250,240,86)
-        fenetre.blit(jouer.image,jouer.rect)
-        highscore = Bouton("sprites/Button/Highscore.png",255,350,240,86)
+
+        fenetre.blit(jouer.getImage(),jouer.rect)
+
         fenetre.blit(highscore.image,highscore.rect)
-        credit = Bouton("sprites/Button/Credits.png",255,450,240,86)
+
         fenetre.blit(credit.image,credit.rect)
-        quitter = Bouton("sprites/Button/Quitter.png",255,550,240,86)
+
         fenetre.blit(quitter.image,quitter.rect)
 
         #Afection de la fonction as mettre lorsque lon fait laction
@@ -72,10 +83,10 @@ while partie:
         continuer = 1
 
         #Ajout de tout les truc as update
-        arrayUpdate.append((jouer.image,jouer.rect))
-        arrayUpdate.append((highscore.image,highscore.rect))
-        arrayUpdate.append((credit.image,credit.rect))
-        arrayUpdate.append((quitter.image,quitter.rect))
+        arrayUpdate.append(jouer)
+        arrayUpdate.append(highscore)
+        arrayUpdate.append(credit)
+        arrayUpdate.append(quitter)
 
         #Ajout de tout les truc qui attende un event
         arrayClick.append(jouer)
@@ -110,7 +121,13 @@ while partie:
 
 
     elif current_page == "jouer":
-        print("test")
+        perso = play(fenetre)
+        score = perso.coins
+        print("score = "+str(score))
+
+        del perso
+        current_page = "menu"
+
 
 
 

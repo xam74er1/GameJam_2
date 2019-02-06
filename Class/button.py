@@ -18,6 +18,9 @@ class Bouton:
         self.sizex = sizex
         self.sizey = sizey
 
+        #si une image est dessu
+        self.imageOver = 0
+
         #definir une actin as null
 
         self.action = 0
@@ -37,3 +40,14 @@ class Bouton:
             print("aucune action defini")
 
 
+    def setImageOver(self,path):
+        print(self.sizey)
+        self.imageOver = pygame.image.load(path).convert_alpha()
+        self.imageOver =pygame.transform.scale(self.imageOver,(self.sizex,self.sizey+20))
+
+
+    def getImage(self):
+        if self.imageOver and self.rect.collidepoint( pygame.mouse.get_pos() ):
+            return self.imageOver
+        else:
+            return self.image
