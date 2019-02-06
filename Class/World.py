@@ -16,6 +16,7 @@ class World:
         self.level = 0
         self.levels = []
         self.timer = 179
+        
 
     def addWall(self, wall):
         self.listWall.append(wall)
