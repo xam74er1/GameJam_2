@@ -47,7 +47,7 @@ class Level:
                         lvlstruct.append(wall)
                     elif filezone == 'p':
                         coinX = int(line[:3])
-                        coinY = int(line[-4:])
+                        coinY = int(line[4:7])
 
                         self.coins.append(Coin(coinX, coinY))
                     elif filezone == 'c':
