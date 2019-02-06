@@ -38,10 +38,16 @@ fenetre = pygame.display.set_mode((MAX_X,MAX_Y ))
 
 
 
+
 arrayUpdate = [];
 arrayClick = []
 
 count = 0
+bigText = pygame.font.SysFont(pygame.font.get_fonts()[7], 50)
+textColor = (255,255,255)
+
+
+pygame.mouse.set_cursor(*pygame.cursors.diamond)
 
 world = World(fenetre,MAX_X,MAX_Y)
 
@@ -104,9 +110,23 @@ while continuer:
     if world.level.coins == []:
         world.nextLevel()
 
-    # Re-collage
+    #-----------GESTION DE LIMAGE -------
+    # bacgound
     fenetre.blit(world.level.background, (0, 0))
-    #fenetre.fill((0, 0, 0))
+
+
+
+    title_text = bigText.render(str(world.timer), True,textColor )
+    textpos = title_text.get_rect()
+    textpos.centerx = fenetre.get_rect().centerx
+    textpos.centery = fenetre.get_rect().centery
+
+
+
+    fenetre.blit(title_text, textpos)
+
+
+
     updateimage(fenetre, arrayUpdate)
     fenetre.blit(perso.image, perso.rect)
 
@@ -117,12 +137,15 @@ while continuer:
     pygame.display.flip()
 
 
-#Gestion du temp
+#-----------Gestion du temp---------
     count += 1
     if(count>FPS):
         count = 0
         world.aplyTime()
         print(world.timer)
+
+
+
     pygame.time.Clock().tick(FPS)
 
 
