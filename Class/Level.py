@@ -21,7 +21,7 @@ class Level:
             lvlstruct.append(Walls((0, 730), (750, 20), (242, 0, 255)))
             filezone=''
             for line in lvlfile:
-                if line != '\n' and line != '':
+                if line != '\n' and line != '' and line[0]!='#':
                     if line[:6] == 'Level:':
                         filezone='l'
                     elif line[:6] == 'Coins:':
