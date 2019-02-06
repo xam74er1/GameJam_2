@@ -47,15 +47,18 @@ pygame.display.flip()
 continuer = 1
 
 
-perso = Character("sprites/perso.png", world, MAX_X/2, MAX_Y-100, 32, 32)
+perso = Character(world, MAX_X/2, MAX_Y-100, 32, 32)
 fenetre.blit(perso.image, perso.rect)
 
 #arrayUpdate.append((fond,(0,0)))
 
 world.initLevels()
 world.level = world.levels[0]
+world.level.rezieBacground(MAX_X,MAX_Y)
 world.level.printLvl(fenetre)
 world.gravity = world.level.gravity
+background = world.level.background
+fenetre.blit(background, (0, 0))
 
 pygame.key.set_repeat(40, 100)
 
@@ -98,10 +101,9 @@ while continuer:
 
 
     # Re-collage
-    #fenetre.blit(fond, (0, 0))
-    fenetre.fill((0, 0, 0))
+    fenetre.blit(background, (0, 0))
+    #fenetre.fill((0, 0, 0))
     updateimage(fenetre, arrayUpdate)
-    world.draw()
     fenetre.blit(perso.image, perso.rect)
     if world.level.coins == []:
         world.nextLevel()

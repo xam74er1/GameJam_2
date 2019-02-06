@@ -14,14 +14,15 @@ class Level:
         self.color = 0
         self.gravity = 0
         self.generate()
+        self.background = pygame.image.load("sprites/Niveau "+str(self.numlevel)+" background.png").convert_alpha()
 
     def generate(self):
         with open("levels/"+str(self.numlevel)+".lvl", "r") as lvlfile:
             lvlstruct = []
             lvlstruct.append(Walls((0, 0), (20, 750)))
-            lvlstruct.append(Walls((0, 0), (750, 20)))
-            lvlstruct.append(Walls((730, 0), (20, 750)))
-            lvlstruct.append(Walls((0, 730), (750, 20)))
+            lvlstruct.append(Walls((20, 0), (730, 20)))
+            lvlstruct.append(Walls((730, 20), (20, 730)))
+            lvlstruct.append(Walls((20, 730), (710, 20)))
             filezone=''
             for line in lvlfile:
                 if line != '\n' and line != '' and line[0]!='#':
@@ -55,43 +56,18 @@ class Level:
 
             if self.color:
                 for w in lvlstruct:
-                    w.color=self.color
+                    w.color = self.color
+                    w.surface.fill(self.color)
             self.walls = lvlstruct
 
+    def rezieBacground(self,x,y):
+        self.background = pygame.transform.scale(self.background,(x,y))
 
     def printLvl(self, window):
-        """
-        num_line = 0
-        for line in self.struct:
-            num_col = 0
-            for sprite in line:
-                x = num_col*env.sprite_size
-                y = num_line*env.sprite_size
-                window.blit(pygame.image.load('sprites/' + sprite + "_flat.png").convert_alpha(), (x, y))
-                num_col += 1
-            num_line += 1
-        for coin in self.coins:
-            window.blit(coin.img, (coin.x, coin.y))
-        """
-        """for rect in self.struct:
-            pygame.draw.rect(window, (0, 0, 255), rect)"""
         for wall in self.walls:
-            pygame.draw.rect(window, wall.color, wall.rect)
-
-
-    def printWall(self,window):
-        for wall in self.walls:
-            pygame.draw.rect(window, wall.color, wall.rect)
-    def printCoin(self,window):
-
+            window.blit(wall.surface, wall.pos)
         for coin in self.coins:
-
             window.blit(coin.image, (coin.x, coin.y))
-
-
-
-
-
 
     def resetLvl(self, window):
         if self.struct:

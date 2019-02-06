@@ -28,6 +28,7 @@ i=0
 while i in tab:
     if val > tab[i][0]:
         print("oui")
+        i += 1
     else:
         print("non")
     i+=1

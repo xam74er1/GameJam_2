@@ -19,18 +19,17 @@ class World:
     def addWall(self, wall):
         self.listWall.append(wall)
 
-    def draw(self):
-        self.printWall()
-        self.level.printCoin(self.frame)
-
-    def printWall(self):
-        self.level.printWall(self.frame)
-
     def initLevels(self):
         for i in range(0, env.max_levels):
             self.levels.append(Level(i+1))
 
+
     def nextLevel(self):
-        self.level = self.levels[self.level.numlevel]
-        self.gravity = self.level.gravity
+        self.level.rezieBacground(self.maxX,self.maxY)
+        if len(self.levels) >= self.level.numlevel+1 :
+            self.level = self.levels[self.level.numlevel]
+        else:
+            self.initLevels()
+            self.level = self.levels[0]
+            self.gravity = self.level.gravity
 
