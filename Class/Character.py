@@ -23,7 +23,11 @@ class Character:
 
         self.world = world
 
+        self.coins = 0
+
         self.tmp = False
+    def addCoin(self):
+        self.coins+=1
 
     def forceMove(self,x,y):
 
@@ -134,6 +138,7 @@ class Character:
                     break
 
             if cToRemove:
+                self.addCoin()
                 self.world.level.coins.remove(cToRemove)
         except:
             0

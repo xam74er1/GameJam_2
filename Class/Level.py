@@ -28,6 +28,7 @@ class Level:
                         filezone='c'
                     elif filezone == 'l':
                         x = int(line[:3])
+
                         y = int(line[4:7])
                         size_x = int(line[8:11])
                         size_y = int(line[12:15])
@@ -36,7 +37,8 @@ class Level:
 
                     elif filezone == 'c':
                         coinX = int(line[:3])
-                        coinY = int(line[-3:])
+                        coinY = int(line[-4:])
+
                         self.coins.append(Coin(coinX, coinY))
 
             self.walls = lvlstruct
@@ -60,6 +62,21 @@ class Level:
             pygame.draw.rect(window, (0, 0, 255), rect)"""
         for wall in self.walls:
             pygame.draw.rect(window, wall.color, wall.rect)
+
+
+    def printWall(self,window):
+        for wall in self.walls:
+            pygame.draw.rect(window, wall.color, wall.rect)
+    def printCoin(self,window):
+        print("----------")
+        for coin in self.coins:
+            print(coin.y)
+            window.blit(coin.image, (coin.x, coin.y))
+
+
+
+
+
 
     def resetLvl(self, window):
         if self.struct:

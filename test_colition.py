@@ -93,7 +93,9 @@ while continuer:
                 world.gravity=(-gravityForce,0)
 
     #Gravite
+
     perso.move()
+
     perso.applyAcceleration(world.gravity[0],world.gravity[1])
 
 
