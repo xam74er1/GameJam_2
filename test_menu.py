@@ -53,7 +53,7 @@ def triScore():
 # affiche les 10 meilleurs socres
 def afficheHighscore(tab, nb):
     font = pygame.font.Font("Font/JELLYBELLY.TTF", 40)
-    return font.render(str(nb + 1) + " - " + tab[nb][0] + "  -  " + tab[nb][1], 1, (255, 255, 255))
+    return font.render(str(nb + 1) + "         " + tab[nb][0] + "        " + tab[nb][1], 1, (255, 255, 255))
 
 
 #-----------Main -----------
@@ -193,10 +193,9 @@ while partie:
         tableau = triScore()
 
         font = pygame.font.Font("Font/JELLYBELLY.TTF", 60)
-        texte0 = font.render("Rang    Score    Pseudo", 1, (255, 255, 255))
+        texte0 = font.render("Rang   Score    Pseudo", 1, (255, 255, 255))
         font = pygame.font.Font("Font/JELLYBELLY.TTF", 30)
         texte1 = afficheHighscore(tableau, 0)
-        texte1
         texte2 = afficheHighscore(tableau, 1)
         texte3 = afficheHighscore(tableau, 2)
         texte4 = afficheHighscore(tableau, 3)
@@ -207,10 +206,6 @@ while partie:
         texte9 = afficheHighscore(tableau, 8)
         texte10 = afficheHighscore(tableau, 9)
 
-        print(texte0)
-        print(texte1)
-        print(texte2)
-        print(texte3)
 
         while continuer:
             for event in pygame.event.get():  # Attente des événements
@@ -229,17 +224,17 @@ while partie:
             # Re-collage
             fenetre.blit(fond, (0, 0))
             fenetre.blit(titre, (70, 50))
-            fenetre.blit(texte0, (90, 170))
+            fenetre.blit(texte0, (100, 170))
             fenetre.blit(texte1, (130, 250))
-            fenetre.blit(texte2, (130, 300))
-            fenetre.blit(texte3, (130, 350))
-            fenetre.blit(texte1, (130, 400))
-            fenetre.blit(texte2, (130, 450))
-            fenetre.blit(texte3, (130, 500))
-            fenetre.blit(texte1, (130, 550))
-            fenetre.blit(texte2, (130, 600))
-            fenetre.blit(texte3, (130, 650))
-            fenetre.blit(texte3, (130, 700))
+            fenetre.blit(texte2, (130, 290))
+            fenetre.blit(texte3, (130, 330))
+            fenetre.blit(texte4, (130, 370))
+            fenetre.blit(texte5, (130, 410))
+            fenetre.blit(texte6, (130, 450))
+            fenetre.blit(texte7, (130, 490))
+            fenetre.blit(texte8, (130, 530))
+            fenetre.blit(texte9, (130, 570))
+            fenetre.blit(texte10, (130, 610))
             updateimage(fenetre, arrayUpdate)
             # fenetre.blit(perso, position_perso)
             # Rafraichissement
@@ -253,3 +248,86 @@ while partie:
     elif current_page == "credit":
         pygame.display.flip()
 
+
+
+
+    elif current_page == "fin_de_partie":
+        # Chargement et collage du fond
+        fond = pygame.image.load("sprites/Background/Background_Accueil.png").convert()
+        fenetre.blit(fond, (0, 0))
+        titre = pygame.transform.scale(pygame.image.load("sprites/Title/Logo.png"), (610, 130))
+        fenetre.blit(fond, (0, 0))
+
+        # liste de tout les trucs a update
+        arrayUpdate = []
+
+        # liste de tout les trucs qui attendent un clique , equivalent as a event listner pour les boutons
+        arrayClick = []
+
+        # Creation du bouton
+        fenetre.blit(menu.image, menu.rect)
+
+        # Affection de la fonction a mettre lorsque l'on fait l'action
+        menu.setButtonAction(loadMenu)
+
+        # Rafraîchissement de l'écran
+        pygame.display.flip()
+        # BOUCLE INFINIE
+        continuer = 1
+
+        # Ajout de tout les trucs a update
+        arrayUpdate.append((menu))
+
+        # Ajout de tout les truc qui attendent un event
+        arrayClick.append(menu)
+
+        # appel le trie et l'affichage des meilleurs scores
+        tableau = triScore()
+
+        font = pygame.font.Font("Font/JELLYBELLY.TTF", 60)
+        texte0 = font.render("Rang   Score    Pseudo", 1, (255, 255, 255))
+        font = pygame.font.Font("Font/JELLYBELLY.TTF", 30)
+        texte1 = afficheHighscore(tableau, 0)
+        texte2 = afficheHighscore(tableau, 1)
+        texte3 = afficheHighscore(tableau, 2)
+        texte4 = afficheHighscore(tableau, 3)
+        texte5 = afficheHighscore(tableau, 4)
+        texte6 = afficheHighscore(tableau, 5)
+        texte7 = afficheHighscore(tableau, 6)
+        texte8 = afficheHighscore(tableau, 7)
+        texte9 = afficheHighscore(tableau, 8)
+        texte10 = afficheHighscore(tableau, 9)
+
+        while continuer:
+            for event in pygame.event.get():  # Attente des événements
+                if event.type == QUIT:
+                    continuer = 0
+                    quitGame()
+
+                if event.type == MOUSEBUTTONDOWN:
+                    if event.button == 1:  # Si clic gauche
+                        for bt in arrayClick:
+                            val = bt.isInZone(event.pos[0], event.pos[1])
+                            if bt.isInZone(event.pos[0], event.pos[1]):
+                                current_page = bt.action()
+                                continuer = 0
+
+            # Re-collage
+            fenetre.blit(fond, (0, 0))
+            fenetre.blit(titre, (70, 50))
+            fenetre.blit(texte0, (100, 170))
+            fenetre.blit(texte1, (130, 250))
+            fenetre.blit(texte2, (130, 290))
+            fenetre.blit(texte3, (130, 330))
+            fenetre.blit(texte4, (130, 370))
+            fenetre.blit(texte5, (130, 410))
+            fenetre.blit(texte6, (130, 450))
+            fenetre.blit(texte7, (130, 490))
+            fenetre.blit(texte8, (130, 530))
+            fenetre.blit(texte9, (130, 570))
+            fenetre.blit(texte10, (130, 610))
+            updateimage(fenetre, arrayUpdate)
+            # fenetre.blit(perso, position_perso)
+            # Rafraichissement
+            pygame.display.flip()
+            pygame.key.set_repeat(40, 30)
