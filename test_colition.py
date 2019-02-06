@@ -47,7 +47,7 @@ pygame.display.flip()
 continuer = 1
 
 
-perso = Character("sprites/perso.png", world, MAX_X/2, MAX_Y-100, 32, 32)
+perso = Character(world, MAX_X/2, MAX_Y-100, 32, 32)
 fenetre.blit(perso.image, perso.rect)
 
 #arrayUpdate.append((fond,(0,0)))
@@ -95,7 +95,6 @@ while continuer:
     #fenetre.blit(fond, (0, 0))
     fenetre.fill((0, 0, 0))
     updateimage(fenetre, arrayUpdate)
-    world.draw()
     fenetre.blit(perso.image, perso.rect)
     if world.level.coins == []:
         world.nextLevel()

@@ -1,10 +1,11 @@
 import pygame
 import Class.Coin
+import env_var as env
 
 class Character:
-    def __init__(self, image_path,world, x=0, y=0, sizex=100, sizey=100):
+    def __init__(self,world, x=0, y=0, sizex=100, sizey=100):
         # charge limage
-        self.image = pygame.image.load(image_path).convert_alpha()
+        self.image = pygame.image.load(env.perso).convert_alpha()
         # la redimentione
 
         self.image = pygame.transform.scale(self.image,(sizex,sizey))
