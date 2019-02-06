@@ -11,16 +11,17 @@ class Level:
         self.numlevel = numlevel
         self.coins = []
         self.generate()
-        self.color=0
-        self.gravity=0
+        self.color = 0
+        self.gravity = 0
+        self.generate()
 
     def generate(self):
         with open("levels/"+str(self.numlevel)+".lvl", "r") as lvlfile:
             lvlstruct = []
-            lvlstruct.append(Walls((0, 0), (20, 750), (242, 0, 255)))
-            lvlstruct.append(Walls((0, 0), (750, 20), (242, 0, 255)))
-            lvlstruct.append(Walls((730, 0), (20, 750), (242, 0, 255)))
-            lvlstruct.append(Walls((0, 730), (750, 20), (242, 0, 255)))
+            lvlstruct.append(Walls((0, 0), (20, 750)))
+            lvlstruct.append(Walls((0, 0), (750, 20)))
+            lvlstruct.append(Walls((730, 0), (20, 750)))
+            lvlstruct.append(Walls((0, 730), (750, 20)))
             filezone=''
             for line in lvlfile:
                 if line != '\n' and line != '' and line[0]!='#':
@@ -45,10 +46,9 @@ class Level:
                         self.coins.append(Coin(coinX, coinY))
                     elif filezone == 'c':
                         self.color = (int(line[:3]),int(line[4:7]),int(line[8:11]))
-                        print(self.color)
+
                     elif filezone == 'g':
                         self.gravity = (float(line[:3]), float(line[4:7]))
-                        print(self.gravity)
 
 
             if self.color:
