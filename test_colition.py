@@ -38,7 +38,7 @@ fenetre = pygame.display.set_mode((MAX_X,MAX_Y ))
 
 arrayUpdate = [];
 arrayClick = []
-gravity = (0,0.9)
+gravity = (0,0.5)
 
 world = World(fenetre,MAX_X,MAX_Y,gravity)
 
