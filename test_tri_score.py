@@ -1,6 +1,6 @@
 import pygame
 
-val = 0
+val = 6
 
 def triScore():
     fichier = open("test-score.txt", "r")
@@ -24,7 +24,7 @@ if int(tab[9][0]) > val:
     while i < len(tab):
         if i < 10:
             print(str(i + 1) + " - " + tab[i][0] + "  -  " + tab[i][1])
-        elif int(tab[i][0]) <= val and nom == False:
+        elif val <= int(tab[i][0]) and nom == False:
             print("")
             print(str(i + 1) + " - " + tab[i][0] + "  -  " + "taper votre nom ...")
             nom = True
