@@ -57,8 +57,7 @@ world.level = world.levels[0]
 world.level.rezieBacground(MAX_X,MAX_Y)
 world.level.printLvl(fenetre)
 world.gravity = world.level.gravity
-background = world.level.background
-fenetre.blit(background, (0, 0))
+fenetre.blit(world.level.background, (0, 0))
 
 pygame.key.set_repeat(40, 100)
 
@@ -98,15 +97,15 @@ while continuer:
 
 
 
-
+    if world.level.coins == []:
+        world.nextLevel()
 
     # Re-collage
-    fenetre.blit(background, (0, 0))
+    fenetre.blit(world.level.background, (0, 0))
     #fenetre.fill((0, 0, 0))
     updateimage(fenetre, arrayUpdate)
     fenetre.blit(perso.image, perso.rect)
-    if world.level.coins == []:
-        world.nextLevel()
+
     world.level.printLvl(fenetre)
 
     #fenetre.blit(perso, position_perso)
