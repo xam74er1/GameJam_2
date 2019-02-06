@@ -45,8 +45,14 @@ class Character:
         self.ay =y
 
     def applyAcceleration(self, x, y):
-        self.ax = min(self.ax+x,10)
-        self.ay = min(self.ay+y,10)
+        if self.ax>0:
+            self.ax = min(self.ax+x,10)
+        else:
+            self.ax = max(self.ax + x, -10)
+        if self.ay > 0:
+            self.ay = min(self.ay + y, 10)
+        else:
+            self.ay= max(self.ay + y, -10)
     def setPostion(self,x,y):
         self.rect.x = x
         self.rect.y = y
@@ -56,6 +62,7 @@ class Character:
 #Verife que sa ne sort pas de la Zone
 
     def move(self):
+        print(" Debut ax " + str(self.ax) + " ay " + str(self.ay))
         self.forceMove(self.ax,self.ay)
         #Verifiaction rapide
 
@@ -88,11 +95,11 @@ class Character:
         #Reduire acelreation droite et gauche
 
 
-        gravitmode = 0
+        gravitmode = 1
 
         if gravitmode ==1:
-            self.ax *= 0.95
-            self.ay *= 0.95
+            self.ax *= 0.99
+            self.ay *= 0.99
         else:
             if(self.ax<0):
                 self.ax+=0.1
@@ -154,7 +161,8 @@ class Character:
                 self.world.level.coins.remove(cToRemove)
         except:
             0
-
+        print("Fin ax " + str(self.ax) + " ay " + str(self.ay))
+        print("------------------------------------------")
         return self.rect
 
        # print("x="+str(self.x)+"y = "+str(self.y)+" ax = "+str(self.ax)+" ay "+str(self.ay)+"rect x "+str(self.rect.x)+" rect y "+str(self.rect.y))
