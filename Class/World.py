@@ -17,6 +17,9 @@ class World:
         self.levels = []
         self.timer = 179
 
+        #load des sound
+
+        self.sonCoin = pygame.mixer.Sound("Sounds/Coin.wav")
 
     def addWall(self, wall):
         self.listWall.append(wall)
