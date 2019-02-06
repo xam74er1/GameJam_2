@@ -26,6 +26,9 @@ class Character:
 
         self.coins = 0
 
+        #pour les test
+        self.fly = False
+
         self.tmp = False
     def addCoin(self):
         self.coins+=1
@@ -61,7 +64,27 @@ class Character:
         self.x = self.rect.x
         self.y = self.rect.y
 
-#Verife que sa ne sort pas de la Zone
+    def canMouve(self,w):
+        nb = 5
+        return self.fly or ((self.rect.left+nb > w.rect.right and self.rect.left < w.rect.right+nb))or (self.rect.right+nb > w.rect.left and self.rect.right < w.rect.left+nb) or ((self.rect.bottom+10 > w.rect.top and self.rect.bottom < w.rect.top+nb)or(self.rect.top +nb > w.rect.bottom and self.rect.top < w.rect.bottom + nb))
+
+    def up(self,world):
+        for w in world.level.walls:
+            if self.canMouve(w):
+                self.applyAcceleration(0,-8)
+    def down(self,world):
+        for w in world.level.walls:
+            for w in world.level.walls:
+                if self.canMouve(w):
+                    self.applyAcceleration(0, 8)
+    def left(self,world):
+        for w in world.level.walls:
+            if self.canMouve(w):
+                self.applyAcceleration(-8, 0)
+    def right(self,world):
+        for w in world.level.walls:
+            if self.canMouve(w):
+                self.applyAcceleration(8, 0)
 
     def move(self):
         #print(" Debut ax " + str(self.ax) + " ay " + str(self.ay))
@@ -132,13 +155,13 @@ class Character:
                     maxY = w.rect.y+(w.rect.size[1])
 
                     if mcX>minX and mcX<maxX:
-                        self.ay*=-1.1
+                        self.ay*=-1
                         if mcY>scY:
                             self.setPostion(self.x,maxY)
                         else:
                             self.setPostion(self.x,minY-self.sizey)
                     if mcY>minY and mcY<maxY:
-                        self.ax*=-1.1
+                        self.ax*=-1
                         if mcX>scX:
                             self.setPostion(maxX, self.y)
                         else:
