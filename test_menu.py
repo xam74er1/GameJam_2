@@ -40,9 +40,9 @@ partie = 1
 while partie:
     if current_page == "menu":
         # Chargement et collage du fond
-        #fond = pygame.image.load("images/background.jpg").convert()
+        fond = pygame.image.load("sprites/Background/Background_Accueil.png").convert()
         #fenetre.blit(fond, (0, 0))
-        titre = pygame.transform.scale(pygame.image.load("Rectangle_bleu_de_merde.png"), (350, 150))
+        titre = pygame.transform.scale(pygame.image.load("sprites/Title/Logo.png"), (610, 130))
 
         #list de tout les truc as update
         arrayUpdate = []
@@ -51,21 +51,16 @@ while partie:
         arrayClick = []
 
         #Creation du bouton
-        jouer = Bouton("sprites/Button/Jouer.png",275,250,200,50)
+        jouer = Bouton("sprites/Button/Jouer.png",255,250,240,86)
         fenetre.blit(jouer.image,jouer.rect)
-
-
-        highscore = Bouton("sprites/Button/Highscore.png",275,350,200,50)
+        highscore = Bouton("sprites/Button/Highscore.png",255,350,240,86)
         fenetre.blit(highscore.image,highscore.rect)
-
-        credit = Bouton("sprites/Button/Credits.png",275,450,200,50)
+        credit = Bouton("sprites/Button/Credits.png",255,450,240,86)
         fenetre.blit(credit.image,credit.rect)
-
-        quitter = Bouton("sprites/Button/Quitter.png",275,550,200,50)
+        quitter = Bouton("sprites/Button/Quitter.png",255,550,240,86)
         fenetre.blit(quitter.image,quitter.rect)
 
         #Afection de la fonction as mettre lorsque lon fait laction
-
         jouer.setButtonAction(loadJouer)
         highscore.setButtonAction(loadHighscore)
         credit.setButtonAction(loadCredit)
@@ -77,7 +72,6 @@ while partie:
         continuer = 1
 
         #Ajout de tout les truc as update
-        #arrayUpdate.append((fond,(0,0)))
         arrayUpdate.append((jouer.image,jouer.rect))
         arrayUpdate.append((highscore.image,highscore.rect))
         arrayUpdate.append((credit.image,credit.rect))
@@ -89,30 +83,23 @@ while partie:
         arrayClick.append(credit)
         arrayClick.append(quitter)
 
-
         while continuer:
-
             for event in pygame.event.get():  # Attente des événements
                 if event.type == QUIT:
                     continuer = 0
                     quit()
 
                 if event.type == MOUSEBUTTONDOWN:
-
                     if event.button == 1:  # Si clic gauche
-
                         for bt in arrayClick:
-
                             val = bt.isInZone(event.pos[0],event.pos[1])
-
                             if bt.isInZone(event.pos[0],event.pos[1]) :
                                 current_page = bt.action()
                                 continuer = 0
 
-
             # Re-collage
-            #fenetre.blit(fond, (0, 0))
-            fenetre.blit(titre, (200, 50))
+            fenetre.blit(fond, (0, 0))
+            fenetre.blit(titre, (70, 50))
             updateimage(fenetre,arrayUpdate)
             #fenetre.blit(perso, position_perso)
             # Rafraichissement
@@ -146,23 +133,19 @@ while partie:
         arrayClick.append(menu)
 
         while continuer:
-
             for event in pygame.event.get():  # Attente des événements
                 if event.type == QUIT:
                     continuer = 0
                     quit()
 
                 if event.type == MOUSEBUTTONDOWN:
-
                     if event.button == 1:  # Si clic gauche
-
                         for bt in arrayClick:
-
                             val = bt.isInZone(event.pos[0], event.pos[1])
-
                             if bt.isInZone(event.pos[0], event.pos[1]):
                                 current_page = bt.action()
                                 continuer = 0
+
             # Re-collage
             fenetre.blit(titre, (200, 50))
             updateimage(fenetre, arrayUpdate)
