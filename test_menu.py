@@ -35,17 +35,17 @@ current_page = "menu"
 
 # Ouverture de la fenêtre Pygame
 fenetre = pygame.display.set_mode((750, 750))
-jouer = Bouton("sprites/Butons/Jouer normal.png", 255, 250, 240, 86)
-jouer.setImageOver("sprites/Butons/Jouer animé.png")
+jouer = Bouton("sprites/Boutons/Jouer normal.png", 255, 250, 240, 86)
+jouer.setImageOver("sprites/Boutons/Jouer animé.png")
 
-highscore = Bouton("sprites/Butons/Highscore normal.png", 255, 350, 240, 86)
-highscore.setImageOver("sprites/Butons/Highscore animé.png")
+highscore = Bouton("sprites/Boutons/Highscore normal.png", 255, 350, 240, 86)
+highscore.setImageOver("sprites/Boutons/Highscore animé.png")
 
-credit = Bouton("sprites/Butons/Credits normal.png",255,450,240,86)
-credit.setImageOver("sprites/Butons/Credits animé.png")
+credit = Bouton("sprites/Boutons/Credits normal.png",255,450,240,86)
+credit.setImageOver("sprites/Boutons/Credits animé.png")
 
-quitter = Bouton("sprites/Butons/Quitter normal.png", 255, 550, 240, 86)
-quitter.setImageOver("sprites/Butons/Quitter animé.png")
+quitter = Bouton("sprites/Boutons/Quitter normal.png", 255, 550, 240, 86)
+quitter.setImageOver("sprites/Boutons/Quitter animé.png")
 partie = 1
 
 while partie:
@@ -120,7 +120,6 @@ while partie:
         perso = play(fenetre)
         score = perso.coins
         print("score = "+str(score))
-
         del perso
         current_page = "menu"
 
