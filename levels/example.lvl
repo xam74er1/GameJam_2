@@ -14,9 +14,9 @@ Color:
 #Mur rose/violet
 
 #Sens de gravite du level
-#dx dy
+#dx  dy
 Gravity:
-+0.0 +0.9
+00.0 00.9
 #Gravite vers le bas
 
 #Pieces dans le level
