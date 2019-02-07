@@ -43,6 +43,12 @@ def selection(fenetre):
     perso3 = Bouton("sprites/Blob/Ramblob.png",100, 450,150, 150)
     perso3.setImageOver("sprites/Blob/Ramblob animé.png")
 
+    nom1 = Bouton("sprites/Title/Herve Blobchon.png", 300, 195, 407, 87)
+
+    nom2 = Bouton("sprites/Title/Blobette.png", 300, 340, 407, 87)
+
+    nom3 = Bouton("sprites/Title/Ramblob.png", 300, 500, 407, 87)
+
 
 
     #quitter = Bouton("sprites/Boutons/Jouer normal.png", 255, 640, 240, 86)
@@ -70,20 +76,17 @@ def selection(fenetre):
             fenetre.blit(perso1.getImage(),perso1.rect)
             fenetre.blit(perso2.image,perso2.rect)
             fenetre.blit(perso3.image,perso3.rect)
+            fenetre.blit(nom1.image, nom1.rect)
+            fenetre.blit(nom2.image, nom2.rect)
+            fenetre.blit(nom3.image, nom3.rect)
             #fenetre.blit(quitter.image,quitter.rect)
 
             # Affection de la fonction as mettre lorsque l'on fait l'action
             perso1.setButtonAction(loadPerso1)
-            font = pygame.font.Font("Font/JELLYBELLY.TTF", 100)
-            texte0 = font.render("Blopchon", 1, (255, 102, 255))
 
             perso2.setButtonAction(loadPerso2)
-            font = pygame.font.Font("Font/JELLYBELLY.TTF", 100)
-            texte1 = font.render("A définir", 1, (255, 102, 255))
 
             perso3.setButtonAction(loadPerso3)
-            font = pygame.font.Font("Font/JELLYBELLY.TTF", 100)
-            texte2 = font.render("A définir", 1, (255, 102, 255))
 
             #quitter.setButtonAction(quitGame)
 
@@ -96,6 +99,9 @@ def selection(fenetre):
             arrayUpdate.append(perso1)
             arrayUpdate.append(perso2)
             arrayUpdate.append(perso3)
+            arrayUpdate.append(nom1)
+            arrayUpdate.append(nom2)
+            arrayUpdate.append(nom3)
             #arrayUpdate.append(quitter)
 
             # Ajout de tout les trucs qui attendent un event
@@ -126,9 +132,6 @@ def selection(fenetre):
                 # Re-collage
                 fenetre.blit(fond.background, (0, 0))
                 fenetre.blit(titre, (70, 40))
-                fenetre.blit(texte0, (375, 200))
-                fenetre.blit(texte1, (375, 350))
-                fenetre.blit(texte2, (375, 500))
                 updateimage(fenetre,arrayUpdate)
                 #fenetre.blit(perso, position_perso)
                 # Rafraichissement

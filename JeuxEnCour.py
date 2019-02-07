@@ -58,12 +58,13 @@ def play(fenetre):
     world.level.printLvl(fenetre)
     world.gravity = world.level.gravity
 
+    pygame.key.set_repeat(40, 100)
+
+    world.startTimer()
     if env.with_music:
         pygame.mixer.music.play()
     world.level.printLvl(fenetre)
     fenetre.blit(world.level.background, (0, 0))
-
-    pygame.key.set_repeat(40, 100)
 
     while continuer:
 
