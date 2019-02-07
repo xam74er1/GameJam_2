@@ -7,8 +7,11 @@ class Character:
         # charge limage
         self.image = pygame.image.load(env.perso).convert_alpha()
         # la redimentione
-
         self.image = pygame.transform.scale(self.image,(sizex,sizey))
+        self.imageNormal = self.image
+
+        self.imageAnime = pygame.image.load(env.perso_animer).convert_alpha()
+        self.imageAnime = pygame.transform.scale(self.imageAnime, (sizex, sizey))
 
         self.rect = self.image.get_rect()
         # on le place
@@ -67,11 +70,13 @@ class Character:
 
             if self.ecrase :
                 if self.anmationCount==0:
-                 print("animation")
+                 self.image = self.imageAnime
+
                 self.anmationCount += 1
-                if self.anmationCount > 50:
+                if self.anmationCount > 5:
                     self.anmationCount = 0
                     self.ecrase = False
+                    self.image = self.imageNormal
 
 
            # self.image = self.listAnimation[self.anmationCount]
@@ -214,10 +219,10 @@ class Character:
                         self.ax*=-1
                         if mcX>scX:
                             self.setPostion(maxX, self.y)
-                            impact = "left"
+                            impact = "right"
                         else:
                             self.setPostion(minX - self.sizex, self.y)
-                            impact = "right"
+                            impact = "left"
 
                     #break
         except:
