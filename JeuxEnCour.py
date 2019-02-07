@@ -11,6 +11,7 @@ from Class.Walls import *
 
 
 
+
 def play(fenetre):
     #-----------Main -----------
 
@@ -94,9 +95,9 @@ def play(fenetre):
                 if event.key == K_F5:
                     perso.fly = not perso.fly
                 if event.key == K_F6:
-                    world.timer -= 30
+                    world.timeMax -= 30
                 if event.key == K_F7:
-                    world.timer += 30
+                    world.timeMax += 30
                 if event.key == K_ESCAPE:
                     continuer = 0
 
@@ -117,6 +118,7 @@ def play(fenetre):
         fenetre.blit(world.level.background, (0, 0))
 
 
+        world.aplyTime()
 
         title_text = bigText.render(str(world.getTimeFormated()), True,textColor )
         textpos = title_text.get_rect()
@@ -149,11 +151,11 @@ def play(fenetre):
         count += 1.0
         if(count>env.FPS):
             count -= env.FPS
-            world.aplyTime()
+            #world.aplyTime()
 
 
-        #if count%8==0:
-            #perso.animation()
+        if count%8==0:
+            perso.animation()
 
 
 
