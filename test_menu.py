@@ -333,7 +333,7 @@ while partie:
 
             # Re-collage
             fenetre.blit(fondCredit, (0, 0))
-            
+
 
            # for i in range(0,len(listCredis)):
                # fenetre.blit(listCredis[i], (100, dy+i*50))
