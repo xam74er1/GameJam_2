@@ -49,7 +49,7 @@ class Level:
                     elif filezone == 'p':
                         coinX = int(line[:3])
                         coinY = int(line[4:7])
-
+                       #ajout des coin en double
                         self.coins.append(Coin(coinX, coinY))
                     elif filezone == 'c':
                         self.color = (int(line[:3]),int(line[4:7]),int(line[8:11]))

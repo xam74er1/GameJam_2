@@ -124,6 +124,13 @@ def play(fenetre):
         textpos.centery = fenetre.get_rect().centery
         fenetre.blit(title_text, textpos)
 
+        title_text = bigText.render(str(perso.coins), True, textColor)
+        textpos = title_text.get_rect()
+        textpos.x = 0
+        textpos.y = 0
+        fenetre.blit(title_text, textpos)
+
+
 
 
 
@@ -156,6 +163,6 @@ def play(fenetre):
 
 #---------------------------------------------------------
     # if env.with_music:
-    #     pygame.mixer.music.stop()
+    pygame.mixer.music.stop()
 
     return perso

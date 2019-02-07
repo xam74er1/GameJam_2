@@ -208,6 +208,7 @@ class Character:
                     break
 
             if cToRemove:
+                #print(len(self.world.level.coins))
                 self.addCoin()
                 self.world.level.coins.remove(cToRemove)
         except:
