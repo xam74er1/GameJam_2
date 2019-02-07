@@ -154,8 +154,8 @@ def play(fenetre):
             #world.aplyTime()
 
 
-        if count%8==0:
-            perso.animation()
+        #if count%8==0:
+            #perso.animation()
 
 
 
