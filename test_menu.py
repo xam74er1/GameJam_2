@@ -2,7 +2,7 @@ import pygame
 from Class.button import *
 from pygame.locals import *
 from JeuxEnCour import *
-from test_selection import *
+from Selection import *
 from pygame import font
 
 
@@ -63,7 +63,7 @@ def posiScore(tab, val):
         if val >= int(tab[i][0]):
             return int(i)
         i += 1
-
+    return len(tab)
 
 # permet d'ecrire son pseudo en face du score qu'on vien de faire
 def ecrireScore(place, score, nom):
@@ -333,6 +333,7 @@ while partie:
             # Re-collage
             fenetre.blit(fondCredit, (0, 0))
 
+
            # for i in range(0,len(listCredis)):
             # fenetre.blit(listCredis[i], (100, dy+i*50))
 
@@ -383,6 +384,7 @@ while partie:
         font = pygame.font.Font("Font/JELLYBELLY.TTF", 30)
 
         position = posiScore(tableau, score)
+        print(" pos "+str(position))
 
         # déclaration pour l'ecriture du nom
         text = "  ... "
@@ -430,8 +432,6 @@ while partie:
             fenetre.blit(titre, (70, 50))
             fenetre.blit(texte0, (100, 170))
             i = 0
-            print("score " + str(score))
-            print("tableau " + str(tableau))
             if position > 9:
                 while i < 9:
                     fenetre.blit(afficheHighscore(tableau, i), (130, 250+(i*40)))

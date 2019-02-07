@@ -5,14 +5,25 @@ import env_var as env
 class Character:
     def __init__(self,world, x=0, y=0, sizex=100, sizey=100):
         # charge limage
+
+
+
         self.image = pygame.image.load(env.perso).convert_alpha()
         # la redimentione
 
-        self.image = pygame.transform.scale(self.image,(sizex,sizey))
+        self.image = pygame.transform.scale(self.image, (sizex, sizey))
+
+        self.gravitySens = 0
+
+        self.imageNormal = self.image
+
+
 
         self.rect = self.image.get_rect()
         # on le place
         self.rect = self.rect.move(x, y)
+
+        self.image = env.lib_perso[0][0]
 
         self.x = x
         self.y = y
@@ -33,9 +44,11 @@ class Character:
 
         self.listAnimation = []
         self.anmationCount = 0
-        self.generateAnimtation()
 
-    def generateAnimtation(self):
+
+        self.ecrase = False
+
+    def generateAnimtation2(self):
         self.listAnimation.append(self.image)
         for i in range(1,4):
 
@@ -48,12 +61,35 @@ class Character:
             img = pygame.transform.scale(img, (self.sizex, self.sizey))
             self.listAnimation.append(img)
 
-    def animation(self):
+    def animation(self,impact):
 
-            self.image = self.listAnimation[self.anmationCount]
-            self.anmationCount+=1
-            if self.anmationCount>3:
-                self.anmationCount=0
+
+            gx = self.world.gravity[0]
+            gy = self.world.gravity[1]
+            if not self.ecrase  :
+                if impact =="down" and gy >0 and abs(self.ay)>5:
+                    self.ecrase = True
+                elif impact =="up" and gy <0 and abs(self.ay)>5:
+                    self.ecrase = True
+                elif impact == "left" and gx > 0 and abs(self.ax)>5:
+                    self.ecrase = True
+                elif impact == "right" and gx < 0 and abs(self.ax)>5:
+                    self.ecrase = True
+
+            if self.ecrase :
+                if self.anmationCount==0:
+                 self.image = env.lib_perso[self.gravitySens][1]
+
+                self.anmationCount += 1
+                if self.anmationCount > 5:
+                    self.anmationCount = 0
+                    self.ecrase = False
+                    self.image = env.lib_perso[self.gravitySens][0]
+
+
+           # self.image = self.listAnimation[self.anmationCount]
+
+
 
     def addCoin(self):
         self.coins+=1
@@ -119,7 +155,7 @@ class Character:
         maxX = self.world.maxX
         maxY = self.world.maxY
 
-
+        impact = "none"
         #le Max (sol )
         if(self.x+self.sizex>maxX):
             #print("Max x = " + str(maxX) + " x =" +  str(self.x) + " x ziez = " +  str(self.sizex) + " rect = " +  str(self.rect.x))
@@ -183,14 +219,18 @@ class Character:
                         self.ay*=-1
                         if mcY>scY:
                             self.setPostion(self.x,maxY)
+                            impact = "up"
                         else:
                             self.setPostion(self.x,minY-self.sizey)
+                            impact = "down"
                     if mcY>minY and mcY<maxY:
                         self.ax*=-1
                         if mcX>scX:
                             self.setPostion(maxX, self.y)
+                            impact = "right"
                         else:
                             self.setPostion(minX - self.sizex, self.y)
+                            impact = "left"
 
                     #break
         except:
@@ -213,6 +253,8 @@ class Character:
                 self.world.level.coins.remove(cToRemove)
         except:
             0
+
+        self.animation(impact)
        # print("Fin ax " + str(self.ax) + " ay " + str(self.ay))
         #print("------------------------------------------")
         return self.rect
