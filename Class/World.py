@@ -23,6 +23,16 @@ class World:
         self.sonCoin = pygame.mixer.Sound("Sounds/Coin.wav")
         self.sonNextLeve = pygame.mixer.Sound("Sounds/Nextlevel.wav")
 
+        self.listCoinImage = [pygame.transform.scale(pygame.image.load('sprites/Coins/Coin.png').convert_alpha(), (40, 40)),
+                         pygame.transform.scale(pygame.image.load('sprites/Coins/Coin 1.png').convert_alpha(),
+                                                (40, 40)),
+                         pygame.transform.scale(pygame.image.load('sprites/Coins/Coin 2.png').convert_alpha(),
+                                                (40, 40)),
+                         pygame.transform.scale(pygame.image.load('sprites/Coins/Coin 3.png').convert_alpha(),
+                                                (40, 40)),
+                         pygame.transform.scale(pygame.image.load('sprites/Coins/Coin 4.png').convert_alpha(),
+                                                (40, 40))]
+
     def addWall(self, wall):
         self.listWall.append(wall)
 
