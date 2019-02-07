@@ -120,8 +120,8 @@ credit.setImageOver("sprites/Boutons/Credits animé.png")
 quitter = Bouton("sprites/Boutons/Quitter normal.png", 255, 550, 240, 86)
 quitter.setImageOver("sprites/Boutons/Quitter animé.png")
 
-menu = Bouton("sprites/Boutons/Jouer normal.png", 255, 650, 240, 86)
-menu.setImageOver("sprites/Boutons/Jouer animé.png")
+menu = Bouton("sprites/Boutons/Menu normal.png", 255, 650, 240, 86)
+menu.setImageOver("sprites/Boutons/Menu animé.png")
 
 partie = 1
 fond = Level('m')
@@ -438,43 +438,22 @@ while partie:
             fenetre.blit(texte0, (100, 170))
             i = 0
 
-            if nb >= 9:
-                if position > 9:
-                    while i < 9:
-                        fenetre.blit(afficheHighscore(tableau, i), (130, 250+(i*40)))
-                        i += 1
-                    fenetre.blit(ecrireScore(position, score, text), (130, 250 + (i * 40)))
 
-                else:
-                    while i < position:
-                        fenetre.blit(afficheHighscore(tableau, i), (130, 250 + (i * 40)))
-                        i += 1
-                    fenetre.blit(ecrireScore(position, score, text), (130, 250 + (i * 40)))
-                    i = position + 1
-                    while i < 10:
-                        fenetre.blit(afficheHighscore(tableau, i), (130, 250 + (i * 40)))
-                        i += 1
+            if position > 9:
+                while i < 9:
+                    fenetre.blit(afficheHighscore(tableau, i), (130, 250+(i * 40)))
+                    i += 1
+                fenetre.blit(ecrireScore(position, score, text), (130, 250 + (i * 40)))
 
             else:
-                if position > nb:
-                    while i < nb:
-                        fenetre.blit(afficheHighscore(tableau, i), (130, 250 + (i * 40)))
-                        i += 1
-                    fenetre.blit(ecrireScore(position, score, text), (130, 250 + (i * 40)))
-
-                else:
-                    while i < position:
-                        fenetre.blit(afficheHighscore(tableau, i), (130, 250 + (i * 40)))
-                        i += 1
-                    fenetre.blit(ecrireScore(position, score, text), (130, 250 + (i * 40)))
+                while i < position:
+                    fenetre.blit(afficheHighscore(tableau, i), (130, 250 + (i * 40)))
                     i += 1
-                    print("posi "+str(position))
-                    print("nb "+str(nb))
-                    print("i "+str(i))
-                    if nb > i:
-                        while i < nb:
-                            fenetre.blit(afficheHighscore(tableau, i), (130, 250 + (i * 40)))
-                            i += 1
+                fenetre.blit(ecrireScore(position, score, text), (130, 250 + (i * 40)))
+                i = position + 1
+                while i < 10:
+                    fenetre.blit(afficheHighscore(tableau, i), (130, 250 + (i * 40)))
+                    i += 1
 
             updateimage(fenetre, arrayUpdate)
             # fenetre.blit(perso, position_perso)
