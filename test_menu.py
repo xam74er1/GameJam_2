@@ -2,7 +2,7 @@ import pygame
 from Class.button import *
 from pygame.locals import *
 from JeuxEnCour import *
-from test_selection import *
+from Selection import *
 from pygame import font
 
 

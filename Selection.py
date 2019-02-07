@@ -3,6 +3,7 @@ from Class.button import *
 from pygame.locals import *
 from JeuxEnCour import *
 from pygame import font
+import env_var as env
 
 # Changement page
 def loadPerso1():
@@ -21,6 +22,27 @@ def quitGame():
 def updateimage(frame,array):
     for it in array:
         frame.blit(it.getImage(),it.rect)
+
+def createLibPerso():
+    perso = env.perso
+
+    img = pygame.image.load(env.perso)
+    img2 = pygame.transform.rotate(img, 90)
+    img3 = pygame.transform.rotate(img, 180)
+    img4 = pygame.transform.rotate(img, 270)
+    img_flat = pygame.image.load(env.perso[:-4]+' animé.png')
+    img_flat2 = pygame.transform.rotate(img_flat, 90)
+    img_flat3 = pygame.transform.rotate(img_flat, 180)
+    img_flat4 = pygame.transform.rotate(img_flat, 270)
+    bottom=[img, img_flat]
+    left=[img2, img_flat2]
+    top = [img3, img_flat3]
+    right = [img4, img_flat4]
+
+    env.lib_perso.append(bottom)
+    env.lib_perso.append(left)
+    env.lib_perso.append(top)
+    env.lib_perso.append(right)
 
 
 #-----------Main -----------
@@ -114,6 +136,8 @@ def selection(fenetre):
                 for event in pygame.event.get():  # Attente des événements
                     if event.type == QUIT:
                         partie = False
+                        pygame.display.quit()
+                        quit()
 
                     if event.type == MOUSEBUTTONDOWN:
                         if event.button == 1:  # Si clic gauche
@@ -144,3 +168,5 @@ def selection(fenetre):
         env.perso ="sprites/Blob/Blobette.png"
     elif newPerso=="perso3":
         env.perso ="sprites/Blob/Ramblob.png"
+
+    createLibPerso()
