@@ -19,7 +19,7 @@ def loadJouer():
     return "jouer"
 
 def loadHighscore():
-    return "fin_de_partie"
+    return "highscore"
 
 def loadCredit():
     return "credit"
@@ -102,6 +102,7 @@ def ecrireNoms(tab, nb):
 pygame.init()
 
 current_page = "menu"
+score = 0
 
 # Ouverture de la fenêtre Pygame
 fenetre = pygame.display.set_mode((750, 750))
@@ -124,6 +125,7 @@ menu.setImageOver("sprites/Boutons/Menu animé.png")
 partie = 1
 fond = Level('m')
 while partie:
+    #score = 0
     if current_page == "menu":
         # Chargement et collage du fond
         fenetre.blit(fond.background,(0,0))
@@ -196,9 +198,8 @@ while partie:
         selection(fenetre)
         perso = play(fenetre)
         score = perso.coins
-       # print("score = "+str(score))
         del perso
-        current_page = "menu"
+        current_page = "fin_de_partie"
 
 
 
@@ -384,7 +385,6 @@ while partie:
         texte0 = font.render("Rang   Score    Pseudo", 1, (93, 103, 119))
         font = pygame.font.Font("Font/JELLYBELLY.TTF", 30)
 
-        score = 50
         position = posiScore(tableau, score)
 
         # déclaration pour l'ecriture du nom
