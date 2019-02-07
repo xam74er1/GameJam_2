@@ -21,39 +21,54 @@ def loadHighscore():
     return "highscore"
 
 def loadCredit():
-    return "credit"
+    return "fin_de_partie"
 
 def quitGame():
     pygame.display.quit()
     quit()
 
+
 # Trie les score du plus grand au plus petit
 def triScore():
     fichier = open("test-score.txt", "r")
-    tableau = []
-
     NumberOfLine = 0
     for line in fichier:
         NumberOfLine += 1
 
     fichier.close()
-
     fichier = open("test-score.txt", "r")
     tableau = []
-
     i = 0
     while i < NumberOfLine:
         tableau.append(fichier.readline().split('|'))
         i += 1
-    fichier.close()
 
+    fichier.close()
     tableau.sort(reverse=True)
     return tableau
 
+
 # affiche les 10 meilleurs socres
-def afficheHighscore(tab, nb):
+def afficheHighscore(tab, val):
     font = pygame.font.Font("Font/JELLYBELLY.TTF", 40)
-    return font.render(str(nb + 1) + "         " + tab[nb][0] + "        " + tab[nb][1], 1, (255, 255, 255))
+    return font.render(str(val + 1) + "         " + tab[val][0] + "        " + tab[val][1], 1, (255, 255, 255))
+
+
+
+# return le rang en fonction du score effectuer
+def posiScore(tab, val):
+    i = 0
+    while i < len(tab):
+        if val >= int(tab[i][0]):
+            return i
+        i += 1
+
+
+# permet d'ecrire son pseudo en face du score qu'on vien de faire
+def ecrireScore(place, score, nom):
+    font = pygame.font.Font("Font/JELLYBELLY.TTF", 40)
+    return font.render(str(place + 1) + "         " + str(score) + "        " + str(nom), 1, (100, 255, 255))
+
 
 
 #-----------Main -----------
@@ -163,9 +178,9 @@ while partie:
 
     elif current_page == "highscore":
         # Chargement et collage du fond
-        fond = pygame.image.load("sprites/Background/Background_Accueil.png").convert()
+        fond = pygame.image.load("sprites/Background/Niveau m.png").convert()
         fenetre.blit(fond, (0, 0))
-        titre = pygame.transform.scale(pygame.image.load("sprites/Title/Logo.png"), (610, 130))
+        titre = pygame.transform.scale(pygame.image.load("sprites/Title/Highscore logo.png"), (610, 130))
         fenetre.blit(fond, (0, 0))
 
         # liste de tout les trucs a update
@@ -197,16 +212,6 @@ while partie:
         font = pygame.font.Font("Font/JELLYBELLY.TTF", 60)
         texte0 = font.render("Rang   Score    Pseudo", 1, (255, 255, 255))
         font = pygame.font.Font("Font/JELLYBELLY.TTF", 30)
-        texte1 = afficheHighscore(tableau, 0)
-        texte2 = afficheHighscore(tableau, 1)
-        texte3 = afficheHighscore(tableau, 2)
-        texte4 = afficheHighscore(tableau, 3)
-        texte5 = afficheHighscore(tableau, 4)
-        texte6 = afficheHighscore(tableau, 5)
-        texte7 = afficheHighscore(tableau, 6)
-        texte8 = afficheHighscore(tableau, 7)
-        texte9 = afficheHighscore(tableau, 8)
-        texte10 = afficheHighscore(tableau, 9)
 
 
         while continuer:
@@ -227,16 +232,11 @@ while partie:
             fenetre.blit(fond, (0, 0))
             fenetre.blit(titre, (70, 50))
             fenetre.blit(texte0, (100, 170))
-            fenetre.blit(texte1, (130, 250))
-            fenetre.blit(texte2, (130, 290))
-            fenetre.blit(texte3, (130, 330))
-            fenetre.blit(texte4, (130, 370))
-            fenetre.blit(texte5, (130, 410))
-            fenetre.blit(texte6, (130, 450))
-            fenetre.blit(texte7, (130, 490))
-            fenetre.blit(texte8, (130, 530))
-            fenetre.blit(texte9, (130, 570))
-            fenetre.blit(texte10, (130, 610))
+            i = 0
+            while i < 10:
+                fenetre.blit(afficheHighscore(tableau, i), (130, 250 + (i * 40)))
+                i += 1
+
             updateimage(fenetre, arrayUpdate)
             # fenetre.blit(perso, position_perso)
             # Rafraichissement
@@ -255,7 +255,7 @@ while partie:
 
     elif current_page == "fin_de_partie":
         # Chargement et collage du fond
-        fond = pygame.image.load("sprites/Background/Background_Accueil.png").convert()
+        fond = pygame.image.load("sprites/Background/Niveau m.png").convert()
         fenetre.blit(fond, (0, 0))
         titre = pygame.transform.scale(pygame.image.load("sprites/Title/Logo.png"), (610, 130))
         fenetre.blit(fond, (0, 0))
@@ -289,16 +289,14 @@ while partie:
         font = pygame.font.Font("Font/JELLYBELLY.TTF", 60)
         texte0 = font.render("Rang   Score    Pseudo", 1, (255, 255, 255))
         font = pygame.font.Font("Font/JELLYBELLY.TTF", 30)
-        texte1 = afficheHighscore(tableau, 0)
-        texte2 = afficheHighscore(tableau, 1)
-        texte3 = afficheHighscore(tableau, 2)
-        texte4 = afficheHighscore(tableau, 3)
-        texte5 = afficheHighscore(tableau, 4)
-        texte6 = afficheHighscore(tableau, 5)
-        texte7 = afficheHighscore(tableau, 6)
-        texte8 = afficheHighscore(tableau, 7)
-        texte9 = afficheHighscore(tableau, 8)
-        texte10 = afficheHighscore(tableau, 9)
+
+        score = 50
+        position = posiScore(tableau, score)
+
+        # déclaration pour l'ecriture du nom
+        text = "   ... "
+        first = True
+        done = 0
 
         while continuer:
             for event in pygame.event.get():  # Attente des événements
@@ -314,20 +312,47 @@ while partie:
                                 current_page = bt.action()
                                 continuer = 0
 
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_RETURN:
+                        # ecrire dans un fichier
+                        fichier = open("Score.txt", "a")
+                        fichier.write(str(score) + "|" + str(text) + "|" + "\n")
+                        fichier.close()
+
+                    elif event.key == pygame.K_BACKSPACE:
+                        if done > 0:
+                            text = text[:-1]
+                            done -= 1
+                    else:
+                        if done < 12 and first == False:
+                            text += event.unicode
+                            done += 1
+                        elif first == True:
+                            text = ''
+                            first = False
+
             # Re-collage
             fenetre.blit(fond, (0, 0))
             fenetre.blit(titre, (70, 50))
             fenetre.blit(texte0, (100, 170))
-            fenetre.blit(texte1, (130, 250))
-            fenetre.blit(texte2, (130, 290))
-            fenetre.blit(texte3, (130, 330))
-            fenetre.blit(texte4, (130, 370))
-            fenetre.blit(texte5, (130, 410))
-            fenetre.blit(texte6, (130, 450))
-            fenetre.blit(texte7, (130, 490))
-            fenetre.blit(texte8, (130, 530))
-            fenetre.blit(texte9, (130, 570))
-            fenetre.blit(texte10, (130, 610))
+            i = 0
+            if position > 9:
+                while i < 9:
+                    fenetre.blit(afficheHighscore(tableau, i), (130, 250+(i*40)))
+                    i += 1
+                fenetre.blit(ecrireScore(position, score, text), (130, 250 + (i * 40)))
+
+
+            else:
+                while i < position:
+                    fenetre.blit(afficheHighscore(tableau, i), (130, 250 + (i * 40)))
+                    i += 1
+                fenetre.blit(ecrireScore(position, score, text), (130, 250 + (i * 40)))
+                i = position + 1
+                while i < 10:
+                    fenetre.blit(afficheHighscore(tableau, i), (130, 250 + (i * 40)))
+                    i += 1
+
             updateimage(fenetre, arrayUpdate)
             # fenetre.blit(perso, position_perso)
             # Rafraichissement
