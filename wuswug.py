@@ -109,7 +109,7 @@ while continuer:
                     sy =w[0].get_rect().bottom
                     dx = w[1][0]
                     dy = w[1][1]
-                    print(pretiprint(dx)+" "+pretiprint(dy)+" "+pretiprint(sx)+" "+pretiprint(sy)+" 128")
+                    print(pretiprint(dx)+" "+pretiprint(dy)+" "+pretiprint(sx)+" "+pretiprint(sy))
                 print("Coins:")
                 for w in listPiece:
                     sx = w[0].get_rect().right

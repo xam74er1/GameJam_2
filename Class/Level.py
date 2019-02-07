@@ -19,7 +19,7 @@ class Level:
         try:
             self.background = pygame.image.load("sprites/Background/Niveau "+str(self.numlevel)+".png").convert_alpha()
         except:
-            self.background = pygame.image.load("sprites/Background/Niveau 1.png").convert_alpha()
+            self.background = pygame.image.load("sprites/Background/Niveau m.png").convert_alpha()
 
     def generate(self):
         with open("levels/"+str(self.numlevel)+".lvl", "r") as lvlfile:

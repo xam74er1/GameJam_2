@@ -18,13 +18,11 @@ class World:
         self.levels = []
         self.timeMax = 180
         self.timer = self.timeMax
-        self.debutTime =  time.time()
-
+        self.debutTime = 0
         #load des sound
-
         self.sonCoin = pygame.mixer.Sound("Sounds/Coin.wav")
-
         self.sonNextLeve = pygame.mixer.Sound("Sounds/Nextlevel.wav")
+
     def addWall(self, wall):
         self.listWall.append(wall)
 
@@ -33,6 +31,8 @@ class World:
         for i in range(0, env.max_levels):
             self.levels.append(Level(i+1))
 
+    def startTimer(self):
+        self.debutTime = time.time()
 
     def nextLevel(self):
         self.level.rezieBacground(self.maxX,self.maxY)
