@@ -90,7 +90,7 @@ class Character:
         self.y = self.rect.y
 
     def canMouve(self,w):
-        nb = 5
+        nb = env.wall_jump
         return self.fly or ((self.rect.left+nb > w.rect.right and self.rect.left < w.rect.right+nb))or (self.rect.right+nb > w.rect.left and self.rect.right < w.rect.left+nb) or ((self.rect.bottom+10 > w.rect.top and self.rect.bottom < w.rect.top+nb)or(self.rect.top +nb > w.rect.bottom and self.rect.top < w.rect.bottom + nb))
 
     def up(self,world):
