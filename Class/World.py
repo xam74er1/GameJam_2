@@ -16,7 +16,7 @@ class World:
         self.toUpdate = []
         self.level = 0
         self.levels = []
-        self.timeMax = 179
+        self.timeMax = 180
         self.timer = self.timeMax
         self.debutTime =  time.time()
 
