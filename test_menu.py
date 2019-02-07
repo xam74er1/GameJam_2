@@ -30,20 +30,17 @@ def quitGame():
 
 
 # Trie les score du plus grand au plus petit
-def nbScore():
-    fichier = open("Score.txt", "r")
+def triScore():
+    fichier = open("test-score.txt", "r")
     NumberOfLine = 0
     for line in fichier:
         NumberOfLine += 1
 
     fichier.close()
-    return NumberOfLine
-
-def triScore(nb):
-    fichier = open("Score.txt", "r")
+    fichier = open("test-score.txt", "r")
     tableau = []
     i = 0
-    while i < nb:
+    while i < NumberOfLine:
         tableau.append(fichier.readline().split('|'))
         i += 1
 
@@ -93,12 +90,12 @@ def triNoms():
         i += 1
     fichier.close()
 
-    tableau.sort()
+    #tableau.sort()
     return tableau
 
 def ecrireNoms(tab, nb):
-        font = pygame.font.Font("Font/JELLYBELLY.TTF", 40)
-        return font.render(tab[nb][0] + "\n" + tab[nb][1], 1, (255, 255, 255))
+        font = pygame.font.SysFont(pygame.font.get_fonts()[7], 20)
+        return font.render(tab[nb][0] + " " + tab[nb][1], 1, (0, 0, 0))
 
 #-----------Main -----------
 
@@ -121,8 +118,8 @@ credit.setImageOver("sprites/Boutons/Credits animé.png")
 quitter = Bouton("sprites/Boutons/Quitter normal.png", 255, 550, 240, 86)
 quitter.setImageOver("sprites/Boutons/Quitter animé.png")
 
-menu = Bouton("sprites/Boutons/Menu normal.png", 255, 650, 240, 86)
-menu.setImageOver("sprites/Boutons/Menu animé.png")
+menu = Bouton("sprites/Boutons/Jouer normal.png", 255, 650, 240, 86)
+menu.setImageOver("sprites/Boutons/Jouer animé.png")
 
 partie = 1
 fond = Level('m')
@@ -199,7 +196,7 @@ while partie:
         selection(fenetre)
         perso = play(fenetre)
         score = perso.coins
-        print("score = "+str(score))
+       # print("score = "+str(score))
         del perso
         current_page = "menu"
 
@@ -237,7 +234,7 @@ while partie:
         arrayClick.append(menu)
 
         # appel le trie et l'affichage des meilleurs scores
-        tableau = triScore(nbScore())
+        tableau = triScore()
 
         font = pygame.font.Font("Font/JELLYBELLY.TTF", 60)
         texte0 = font.render("Rang   Score    Pseudo", 1, (255, 255, 255))
@@ -263,16 +260,9 @@ while partie:
             fenetre.blit(titre, (70, 50))
             fenetre.blit(texte0, (100, 170))
             i = 0
-            nb = nbScore()
-
-            if nb > 10:
-                while i < 10:
-                    fenetre.blit(afficheHighscore(tableau, i), (130, 250 + (i * 40)))
-                    i += 1
-            else:
-                while i < nb - 1:
-                    fenetre.blit(afficheHighscore(tableau, i), (130, 250 + (i * 40)))
-                    i += 1
+            while i < 10:
+                fenetre.blit(afficheHighscore(tableau, i), (130, 250 + (i * 40)))
+                i += 1
 
             updateimage(fenetre, arrayUpdate)
             # fenetre.blit(perso, position_perso)
@@ -288,7 +278,7 @@ while partie:
         # Chargement et collage du fond
         fond.background = pygame.image.load("sprites/Background/Niveau m.png").convert()
         fenetre.blit(fond.background, (0, 0))
-        titre = pygame.transform.scale(pygame.image.load("sprites/Boutons/Credits logo.png"), (650, 105))
+        titre = pygame.transform.scale(pygame.image.load("sprites/Boutons/Credits logo.png"), (610, 130))
         fenetre.blit(fond.background, (0, 0))
 
         # liste de tout les trucs a update
@@ -317,13 +307,15 @@ while partie:
         # appel le trie et l'affichage des meilleurs scores
         tableau = triNoms()
 
-        font = pygame.font.Font("Font/JELLYBELLY.TTF", 30)
-        texte1 = ecrireNoms(tableau, 0)
-        texte2 = ecrireNoms(tableau, 1)
-        texte3 = ecrireNoms(tableau, 2)
-        texte4 = ecrireNoms(tableau, 3)
-        texte5 = ecrireNoms(tableau, 4)
+        font =pygame.font.SysFont(pygame.font.get_fonts()[7], 30)
+        listCredis = []
 
+        for i in range(0,len(tableau)):
+            listCredis.append(ecrireNoms(tableau, i))
+
+
+        dx = 100
+        dy = 170
         while continuer:
             for event in pygame.event.get():  # Attente des événements
                 if event.type == QUIT:
@@ -340,12 +332,12 @@ while partie:
 
             # Re-collage
             fenetre.blit(fond.background, (0, 0))
-            fenetre.blit(titre, (50, 50))
-            fenetre.blit(texte1, (100, 250))
-            fenetre.blit(texte2, (100, 290))
-            fenetre.blit(texte3, (100, 330))
-            fenetre.blit(texte4, (100, 370))
-            fenetre.blit(texte5, (100, 410))
+            fenetre.blit(titre, (70, 50))
+
+            for i in range(0,len(listCredis)):
+                fenetre.blit(listCredis[i], (100, dy+i*50))
+
+
             updateimage(fenetre, arrayUpdate)
             # fenetre.blit(perso, position_perso)
             # Rafraichissement
@@ -386,7 +378,7 @@ while partie:
         arrayClick.append(menu)
 
         # appel le trie et l'affichage des meilleurs scores
-        tableau = triScore(nbScore())
+        tableau = triScore()
 
         font = pygame.font.Font("Font/JELLYBELLY.TTF", 60)
         texte0 = font.render("Rang   Score    Pseudo", 1, (255, 255, 255))
@@ -394,7 +386,6 @@ while partie:
 
         score = 50
         position = posiScore(tableau, score)
-        nb = nbScore()
 
         # déclaration pour l'ecriture du nom
         text = "   ... "
@@ -439,13 +430,12 @@ while partie:
             fenetre.blit(titre, (70, 50))
             fenetre.blit(texte0, (100, 170))
             i = 0
-
-
             if position > 9:
                 while i < 9:
-                    fenetre.blit(afficheHighscore(tableau, i), (130, 250+(i * 40)))
+                    fenetre.blit(afficheHighscore(tableau, i), (130, 250+(i*40)))
                     i += 1
                 fenetre.blit(ecrireScore(position, score, text), (130, 250 + (i * 40)))
+
 
             else:
                 while i < position:
