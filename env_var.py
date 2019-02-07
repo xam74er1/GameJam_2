@@ -10,6 +10,9 @@ with_score = 1
 #arg 1 Sens de la gravite : down right up left
 #arg 2 0 = normal , 1 = aplatie
 lib_perso = []
+with_animation = 1
+with_rotation = 1
+
 
 
 
