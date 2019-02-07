@@ -35,6 +35,8 @@ class Character:
         self.anmationCount = 0
         self.generateAnimtation()
 
+        self.ecrase = False
+
     def generateAnimtation(self):
         self.listAnimation.append(self.image)
         for i in range(1,4):
@@ -48,12 +50,33 @@ class Character:
             img = pygame.transform.scale(img, (self.sizex, self.sizey))
             self.listAnimation.append(img)
 
-    def animation(self):
+    def animation(self,impact):
 
-            self.image = self.listAnimation[self.anmationCount]
-            self.anmationCount+=1
-            if self.anmationCount>3:
-                self.anmationCount=0
+
+            gx = self.world.gravity[0]
+            gy = self.world.gravity[1]
+            if not self.ecrase and (abs(self.ax)>5 or abs(self.ay)>5):
+                if impact =="down" and gy >0 :
+                    self.ecrase = True
+                elif impact =="up" and gy <0 :
+                    self.ecrase = True
+                elif impact == "left" and gx > 0:
+                    self.ecrase = True
+                elif impact == "right" and gx < 0:
+                    self.ecrase = True
+
+            if self.ecrase :
+                if self.anmationCount==0:
+                 print("animation")
+                self.anmationCount += 1
+                if self.anmationCount > 50:
+                    self.anmationCount = 0
+                    self.ecrase = False
+
+
+           # self.image = self.listAnimation[self.anmationCount]
+
+
 
     def addCoin(self):
         self.coins+=1
@@ -119,7 +142,7 @@ class Character:
         maxX = self.world.maxX
         maxY = self.world.maxY
 
-
+        impact = "none"
         #le Max (sol )
         if(self.x+self.sizex>maxX):
             #print("Max x = " + str(maxX) + " x =" +  str(self.x) + " x ziez = " +  str(self.sizex) + " rect = " +  str(self.rect.x))
@@ -183,14 +206,18 @@ class Character:
                         self.ay*=-1
                         if mcY>scY:
                             self.setPostion(self.x,maxY)
+                            impact = "up"
                         else:
                             self.setPostion(self.x,minY-self.sizey)
+                            impact = "down"
                     if mcY>minY and mcY<maxY:
                         self.ax*=-1
                         if mcX>scX:
                             self.setPostion(maxX, self.y)
+                            impact = "left"
                         else:
                             self.setPostion(minX - self.sizex, self.y)
+                            impact = "right"
 
                     #break
         except:
@@ -213,6 +240,8 @@ class Character:
                 self.world.level.coins.remove(cToRemove)
         except:
             0
+
+        self.animation(impact)
        # print("Fin ax " + str(self.ax) + " ay " + str(self.ay))
         #print("------------------------------------------")
         return self.rect
