@@ -62,7 +62,7 @@ def selection(fenetre):
         if current_page == "selection":
             # Chargement et collage du fond
             fenetre.blit(fond.background,(0,0))
-            fond.printLvl(fenetre)
+            fond.printLvl(fenetre,0)
             #fenetre.blit(fond, (0, 0))
             titre = pygame.transform.scale(pygame.image.load("sprites/Title/Logo.png"), (610, 130))
 

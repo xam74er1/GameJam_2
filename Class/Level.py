@@ -16,6 +16,11 @@ class Level:
 
         self.generate()
 
+        #piece qui tourne
+        self.countPrintPiece = 0
+        self.etaPrintPiece = 0
+        self.UniqueCoin = True
+
         try:
             self.background = pygame.image.load("sprites/Background/Niveau "+str(self.numlevel)+".png").convert_alpha()
         except:
@@ -71,10 +76,20 @@ class Level:
     def rezieBacground(self,x,y):
         self.background = pygame.transform.scale(self.background,(x,y))
 
-    def printLvl(self, window):
+    def printLvl(self, window,wold):
         for wall in self.walls:
             window.blit(wall.surface, wall.pos)
 
         for coin in self.coins:
             window.blit(coin.image, (coin.x, coin.y))
-
+        if wold  :
+            self.countPrintPiece += 1
+            if self.countPrintPiece >5:
+                self.countPrintPiece = 0
+                #print("A "+str(self.etaPrintPiece))
+                for coin in self.coins:
+                    coin.image = wold.listCoinImage[self.etaPrintPiece]
+                self.etaPrintPiece += 1
+                if self.etaPrintPiece > 4:
+                    self.etaPrintPiece = 0
+                    #print("reste piece ")

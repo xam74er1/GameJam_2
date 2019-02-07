@@ -55,7 +55,7 @@ def play(fenetre):
     world.initLevels()
     world.level = world.levels[env.lvl_start]
     world.level.rezieBacground(MAX_X,MAX_Y)
-    world.level.printLvl(fenetre)
+    world.level.printLvl(fenetre,world)
     world.gravity = world.level.gravity
 
     pygame.key.set_repeat(40, 100)
@@ -63,7 +63,7 @@ def play(fenetre):
     world.startTimer()
     if env.with_music:
         pygame.mixer.music.play()
-    world.level.printLvl(fenetre)
+    world.level.printLvl(fenetre,world)
     fenetre.blit(world.level.background, (0, 0))
 
     while continuer:
@@ -135,7 +135,7 @@ def play(fenetre):
 
         fenetre.blit(perso.image, perso.rect)
 
-        world.level.printLvl(fenetre)
+        world.level.printLvl(fenetre,world)
 
         #fenetre.blit(perso, position_perso)
         # Rafraichissement
