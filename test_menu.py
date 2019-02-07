@@ -79,6 +79,7 @@ def triNoms():
 
 def ecrireNoms(tab, nb):
         font = pygame.font.Font("Font/JELLYBELLY.TTF", 40)
+
         return font.render(tab[nb][0] + "\n" + tab[nb][1], 1, (255, 255, 255))
 
 #-----------Main -----------
@@ -107,6 +108,7 @@ menu.setImageOver("sprites/Boutons/Jouer animé.png")
 
 partie = 1
 fond = Level('m')
+
 while partie:
     if current_page == "menu":
         # Chargement et collage du fond
@@ -188,10 +190,10 @@ while partie:
 
     elif current_page == "highscore":
         # Chargement et collage du fond
-        fond = pygame.image.load("sprites/Background/Niveau m.png").convert()
-        fenetre.blit(fond, (0, 0))
+        fond.background = pygame.image.load("sprites/Background/Niveau m.png").convert()
+        fenetre.blit(fond.background, (0, 0))
         titre = pygame.transform.scale(pygame.image.load("sprites/Boutons/Highscore logo.png"), (610, 130))
-        fenetre.blit(fond, (0, 0))
+        fenetre.blit(fond.background, (0, 0))
 
         # liste de tout les trucs a update
         arrayUpdate = []
@@ -249,7 +251,7 @@ while partie:
                                 continuer = 0
 
             # Re-collage
-            fenetre.blit(fond, (0, 0))
+            fenetre.blit(fond.background, (0, 0))
             fenetre.blit(titre, (70, 50))
             fenetre.blit(texte0, (100, 170))
             fenetre.blit(texte1, (130, 250))
@@ -273,11 +275,12 @@ while partie:
 
 
     elif current_page == "credit":
+
         # Chargement et collage du fond
-        fond = pygame.image.load("sprites/Background/Niveau m.png").convert()
-        fenetre.blit(fond, (0, 0))
+        fond.background = pygame.image.load("sprites/Background/Niveau m.png").convert()
+        fenetre.blit(fond.background, (0, 0))
         titre = pygame.transform.scale(pygame.image.load("sprites/Boutons/Credits logo.png"), (610, 130))
-        fenetre.blit(fond, (0, 0))
+        fenetre.blit(fond.background, (0, 0))
 
         # liste de tout les trucs a update
         arrayUpdate = []
@@ -306,12 +309,17 @@ while partie:
         tableau = triNoms()
 
         font = pygame.font.Font("Font/JELLYBELLY.TTF", 30)
-        texte1 = ecrireNoms(tableau, 0)
-        texte2 = ecrireNoms(tableau, 1)
-        texte3 = ecrireNoms(tableau, 2)
-        texte4 = ecrireNoms(tableau, 3)
-        texte5 = ecrireNoms(tableau, 4)
+        listCredit = []
+        for i in range(0,5):
+            listCredit.append(ecrireNoms(tableau, i))
 
+
+
+        countCredit = 0
+        xd = 100
+        yd = 250
+        mouveX = 1
+        mouveY = 1
         while continuer:
             for event in pygame.event.get():  # Attente des événements
                 if event.type == QUIT:
@@ -327,14 +335,25 @@ while partie:
                                 continuer = 0
 
             # Re-collage
-            fenetre.blit(fond, (0, 0))
+            fenetre.blit(fond.background, (0, 0))
             fenetre.blit(titre, (70, 50))
-            fenetre.blit(texte1, (100, 250))
-            fenetre.blit(texte2, (100, 290))
-            fenetre.blit(texte3, (100, 330))
-            fenetre.blit(texte4, (100, 370))
-            fenetre.blit(texte5, (100, 410))
-            updateimage(fenetre, arrayUpdate)
+
+            countCredit += 1
+
+            if (countCredit > 30):
+                yd += 5 *mouveY
+                if yd >450 or yd < 250:
+                    mouveY *= -1
+                countCredit = 0
+
+
+            for i in range(0,len(listCredit)):
+                t = listCredit[i]
+                fenetre.blit(t,(xd,yd+(50*i)))
+
+
+            fenetre.blit(menu.image, menu.rect)
+            #updateimage(fenetre, arrayUpdate)
             # fenetre.blit(perso, position_perso)
             # Rafraichissement
             pygame.display.flip()
@@ -343,12 +362,14 @@ while partie:
 
 
 
+
+
     elif current_page == "fin_de_partie":
         # Chargement et collage du fond
-        fond = pygame.image.load("sprites/Background/Background_Accueil.png").convert()
-        fenetre.blit(fond, (0, 0))
+        fond.background = pygame.image.load("sprites/Background/Background_Accueil.png").convert()
+        fenetre.blit(fond.background, (0, 0))
         titre = pygame.transform.scale(pygame.image.load("sprites/Title/Logo.png"), (610, 130))
-        fenetre.blit(fond, (0, 0))
+        fenetre.blit(titre, (0, 0))
 
         # liste de tout les trucs a update
         arrayUpdate = []
@@ -405,7 +426,7 @@ while partie:
                                 continuer = 0
 
             # Re-collage
-            fenetre.blit(fond, (0, 0))
+            fenetre.blit(fond.background, (0, 0))
             fenetre.blit(titre, (70, 50))
             fenetre.blit(texte0, (100, 170))
             fenetre.blit(texte1, (130, 250))
