@@ -4,7 +4,11 @@ from pygame.locals import *
 from JeuxEnCour import *
 from pygame import font
 
+
 # Changement page
+def loadMenu():
+    return "menu"
+
 def loadPerso1():
     return "perso1"
 
@@ -31,14 +35,11 @@ def selection(fenetre):
 
     # Ouverture de la fenêtre Pygame
 
-
     perso1 = Bouton("sprites/Blob/Blopchon.png", 100, 150, 150, 150)
     perso1.setImageOver("sprites/Blob/Blopchon3.png")
 
-
     perso2 = Bouton("sprites/Blob/Blobette.png", 100, 300, 150, 150)
     perso2.setImageOver("sprites/Blob/Blobette animé.png")
-
 
     perso3 = Bouton("sprites/Blob/Ramblob.png",100, 450,150, 150)
     perso3.setImageOver("sprites/Blob/Ramblob animé.png")
@@ -49,7 +50,8 @@ def selection(fenetre):
 
     nom3 = Bouton("sprites/Title/Ramblob.png", 300, 500, 407, 87)
 
-
+    menu = Bouton("sprites/Boutons/Menu normal.png", 255, 650, 240, 86)
+    menu.setImageOver("sprites/Boutons/Menu animé.png")
 
     #quitter = Bouton("sprites/Boutons/Jouer normal.png", 255, 640, 240, 86)
     #quitter.setImageOver("sprites/Boutons/Jouer animé.png")
@@ -79,14 +81,14 @@ def selection(fenetre):
             fenetre.blit(nom1.image, nom1.rect)
             fenetre.blit(nom2.image, nom2.rect)
             fenetre.blit(nom3.image, nom3.rect)
+            fenetre.blit(menu.image, menu.rect)
             #fenetre.blit(quitter.image,quitter.rect)
 
             # Affection de la fonction as mettre lorsque l'on fait l'action
             perso1.setButtonAction(loadPerso1)
-
             perso2.setButtonAction(loadPerso2)
-
             perso3.setButtonAction(loadPerso3)
+            menu.setButtonAction(loadMenu)
 
             #quitter.setButtonAction(quitGame)
 
@@ -102,12 +104,14 @@ def selection(fenetre):
             arrayUpdate.append(nom1)
             arrayUpdate.append(nom2)
             arrayUpdate.append(nom3)
+            arrayUpdate.append((menu))
             #arrayUpdate.append(quitter)
 
             # Ajout de tout les trucs qui attendent un event
             arrayClick.append(perso1)
             arrayClick.append(perso2)
             arrayClick.append(perso3)
+            arrayClick.append(menu)
             #arrayClick.append(quitter)
 
             while continuer:
@@ -121,8 +125,10 @@ def selection(fenetre):
                                 val = bt.isInZone(event.pos[0],event.pos[1])
                                 if bt.isInZone(event.pos[0],event.pos[1]) :
                                     res = bt.action()
-                                    if res =="quit":
+                                    if res == "quit":
                                         partie = False
+                                    elif res == "menu":
+                                        current_page = "menu"
                                     else:
                                         newPerso = res
                                         partie = False
@@ -144,3 +150,5 @@ def selection(fenetre):
         env.perso ="sprites/Blob/Blobette.png"
     elif newPerso=="perso3":
         env.perso ="sprites/Blob/Ramblob.png"
+
+    return  current_page == "menu"

@@ -31,13 +31,13 @@ def quitGame():
 
 # Trie les score du plus grand au plus petit
 def triScore():
-    fichier = open("test-score.txt", "r")
+    fichier = open("Score.txt", "r")
     NumberOfLine = 0
     for line in fichier:
         NumberOfLine += 1
 
     fichier.close()
-    fichier = open("test-score.txt", "r")
+    fichier = open("Score.txt", "r")
     tableau = []
     i = 0
     while i < NumberOfLine:
@@ -61,7 +61,7 @@ def posiScore(tab, val):
     i = 0
     while i < len(tab):
         if val >= int(tab[i][0]):
-            return i
+            return int(i)
         i += 1
 
 
@@ -195,11 +195,14 @@ while partie:
 
 
     elif current_page == "jouer":
-        selection(fenetre)
-        perso = play(fenetre)
-        score = perso.coins
-        del perso
-        current_page = "fin_de_partie"
+        res = selection(fenetre)
+        if res == True:
+            current_page = "menu"
+        else:
+            perso = play(fenetre)
+            score = perso.coins
+            del perso
+            current_page = "fin_de_partie"
 
 
 
@@ -241,7 +244,6 @@ while partie:
         texte0 = font.render("Rang   Score    Pseudo", 1, (93, 103, 119))
         font = pygame.font.Font("Font/JELLYBELLY.TTF", 30)
 
-
         while continuer:
             for event in pygame.event.get():  # Attente des événements
                 if event.type == QUIT:
@@ -280,8 +282,6 @@ while partie:
         fondCredit = pygame.image.load("sprites/Background/Credits.png").convert()
         fond.background = pygame.image.load("sprites/Background/Niveau m.png").convert()
 
-
-
         # liste de tout les trucs a update
         arrayUpdate = []
 
@@ -314,7 +314,6 @@ while partie:
         #for i in range(0,len(tableau)):
             #listCredis.append(ecrireNoms(tableau, i))
 
-
         dx = 100
         dy = 170
         while continuer:
@@ -333,11 +332,9 @@ while partie:
 
             # Re-collage
             fenetre.blit(fondCredit, (0, 0))
-            
 
            # for i in range(0,len(listCredis)):
-               # fenetre.blit(listCredis[i], (100, dy+i*50))
-
+            # fenetre.blit(listCredis[i], (100, dy+i*50))
 
             updateimage(fenetre, arrayUpdate)
             # fenetre.blit(perso, position_perso)
@@ -433,6 +430,8 @@ while partie:
             fenetre.blit(titre, (70, 50))
             fenetre.blit(texte0, (100, 170))
             i = 0
+            print("score " + str(score))
+            print("tableau " + str(tableau))
             if position > 9:
                 while i < 9:
                     fenetre.blit(afficheHighscore(tableau, i), (130, 250+(i*40)))
