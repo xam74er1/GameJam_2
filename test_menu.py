@@ -30,17 +30,20 @@ def quitGame():
 
 
 # Trie les score du plus grand au plus petit
-def triScore():
-    fichier = open("test-score.txt", "r")
+def nbScore():
+    fichier = open("Score.txt", "r")
     NumberOfLine = 0
     for line in fichier:
         NumberOfLine += 1
 
     fichier.close()
-    fichier = open("test-score.txt", "r")
+    return NumberOfLine
+
+def triScore(nb):
+    fichier = open("Score.txt", "r")
     tableau = []
     i = 0
-    while i < NumberOfLine:
+    while i < nb:
         tableau.append(fichier.readline().split('|'))
         i += 1
 
@@ -118,8 +121,8 @@ credit.setImageOver("sprites/Boutons/Credits animé.png")
 quitter = Bouton("sprites/Boutons/Quitter normal.png", 255, 550, 240, 86)
 quitter.setImageOver("sprites/Boutons/Quitter animé.png")
 
-menu = Bouton("sprites/Boutons/Jouer normal.png", 255, 650, 240, 86)
-menu.setImageOver("sprites/Boutons/Jouer animé.png")
+menu = Bouton("sprites/Boutons/Menu normal.png", 255, 650, 240, 86)
+menu.setImageOver("sprites/Boutons/Menu animé.png")
 
 partie = 1
 fond = Level('m')
@@ -234,7 +237,7 @@ while partie:
         arrayClick.append(menu)
 
         # appel le trie et l'affichage des meilleurs scores
-        tableau = triScore()
+        tableau = triScore(nbScore())
 
         font = pygame.font.Font("Font/JELLYBELLY.TTF", 60)
         texte0 = font.render("Rang   Score    Pseudo", 1, (255, 255, 255))
@@ -260,9 +263,16 @@ while partie:
             fenetre.blit(titre, (70, 50))
             fenetre.blit(texte0, (100, 170))
             i = 0
-            while i < 10:
-                fenetre.blit(afficheHighscore(tableau, i), (130, 250 + (i * 40)))
-                i += 1
+            nb = nbScore()
+
+            if nb > 10:
+                while i < 10:
+                    fenetre.blit(afficheHighscore(tableau, i), (130, 250 + (i * 40)))
+                    i += 1
+            else:
+                while i < nb - 1:
+                    fenetre.blit(afficheHighscore(tableau, i), (130, 250 + (i * 40)))
+                    i += 1
 
             updateimage(fenetre, arrayUpdate)
             # fenetre.blit(perso, position_perso)
@@ -376,7 +386,7 @@ while partie:
         arrayClick.append(menu)
 
         # appel le trie et l'affichage des meilleurs scores
-        tableau = triScore()
+        tableau = triScore(nbScore())
 
         font = pygame.font.Font("Font/JELLYBELLY.TTF", 60)
         texte0 = font.render("Rang   Score    Pseudo", 1, (255, 255, 255))
@@ -384,6 +394,7 @@ while partie:
 
         score = 50
         position = posiScore(tableau, score)
+        nb = nbScore()
 
         # déclaration pour l'ecriture du nom
         text = "   ... "
@@ -428,12 +439,13 @@ while partie:
             fenetre.blit(titre, (70, 50))
             fenetre.blit(texte0, (100, 170))
             i = 0
+
+
             if position > 9:
                 while i < 9:
-                    fenetre.blit(afficheHighscore(tableau, i), (130, 250+(i*40)))
+                    fenetre.blit(afficheHighscore(tableau, i), (130, 250+(i * 40)))
                     i += 1
                 fenetre.blit(ecrireScore(position, score, text), (130, 250 + (i * 40)))
-
 
             else:
                 while i < position:
