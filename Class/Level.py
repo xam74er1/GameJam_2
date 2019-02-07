@@ -75,13 +75,3 @@ class Level:
         for coin in self.coins:
             window.blit(coin.image, (coin.x, coin.y))
 
-    def resetLvl(self, window):
-        if self.struct:
-            for line in self.struct:
-                for sprite in line:
-                    sprite='0'
-            self.printLvl(self, window)
-            return 0
-        else:
-            return 'No level structure'
-
