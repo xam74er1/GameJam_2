@@ -24,10 +24,7 @@ def addWall(pos,size):
     list.append((surface, pos))
 
 def loadLvl(path):
-    addWall((0, 0), (20, 750))
-    addWall((20, 0), (730, 20))
-    addWall((730, 20), (20, 730))
-    addWall((20, 730), (710, 20))
+
     with open(path, "r") as lvlfile:
         for line in lvlfile:
             if line != '\n' and line != '' and line[0] != '#':
