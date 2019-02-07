@@ -31,13 +31,13 @@ def quitGame():
 
 # Trie les score du plus grand au plus petit
 def triScore():
-    fichier = open("test-score.txt", "r")
+    fichier = open("Score.txt", "r")
     NumberOfLine = 0
     for line in fichier:
         NumberOfLine += 1
 
     fichier.close()
-    fichier = open("test-score.txt", "r")
+    fichier = open("Score.txt", "r")
     tableau = []
     i = 0
     while i < NumberOfLine:
