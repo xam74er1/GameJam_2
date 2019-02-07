@@ -118,8 +118,8 @@ credit.setImageOver("sprites/Boutons/Credits animé.png")
 quitter = Bouton("sprites/Boutons/Quitter normal.png", 255, 550, 240, 86)
 quitter.setImageOver("sprites/Boutons/Quitter animé.png")
 
-menu = Bouton("sprites/Boutons/Jouer normal.png", 255, 650, 240, 86)
-menu.setImageOver("sprites/Boutons/Jouer animé.png")
+menu = Bouton("sprites/Boutons/Menu normal.png", 255, 650, 240, 86)
+menu.setImageOver("sprites/Boutons/Menu animé.png")
 
 partie = 1
 fond = Level('m')
