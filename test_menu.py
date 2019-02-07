@@ -2,7 +2,7 @@ import pygame
 from Class.button import *
 from pygame.locals import *
 from JeuxEnCour import *
-from test_selection import *
+from Selection import *
 from pygame import font
 
 
@@ -31,13 +31,13 @@ def quitGame():
 
 # Trie les score du plus grand au plus petit
 def triScore():
-    fichier = open("test-score.txt", "r")
+    fichier = open("Score.txt", "r")
     NumberOfLine = 0
     for line in fichier:
         NumberOfLine += 1
 
     fichier.close()
-    fichier = open("test-score.txt", "r")
+    fichier = open("Score.txt", "r")
     tableau = []
     i = 0
     while i < NumberOfLine:
@@ -63,7 +63,7 @@ def posiScore(tab, val):
         if val >= int(tab[i][0]):
             return i
         i += 1
-
+    return len(tab)
 
 # permet d'ecrire son pseudo en face du score qu'on vien de faire
 def ecrireScore(place, score, nom):
@@ -386,6 +386,7 @@ while partie:
         font = pygame.font.Font("Font/JELLYBELLY.TTF", 30)
 
         position = posiScore(tableau, score)
+        print(" pos "+str(position))
 
         # déclaration pour l'ecriture du nom
         text = "  ... "

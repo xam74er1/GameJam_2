@@ -5,17 +5,25 @@ import env_var as env
 class Character:
     def __init__(self,world, x=0, y=0, sizex=100, sizey=100):
         # charge limage
+
+
+
         self.image = pygame.image.load(env.perso).convert_alpha()
         # la redimentione
-        self.image = pygame.transform.scale(self.image,(sizex,sizey))
+
+        self.image = pygame.transform.scale(self.image, (sizex, sizey))
+
+        self.gravitySens = 0
+
         self.imageNormal = self.image
 
-        self.imageAnime = pygame.image.load(env.perso_animer).convert_alpha()
-        self.imageAnime = pygame.transform.scale(self.imageAnime, (sizex, sizey))
+
 
         self.rect = self.image.get_rect()
         # on le place
         self.rect = self.rect.move(x, y)
+
+        self.image = env.lib_perso[0][0]
 
         self.x = x
         self.y = y
@@ -36,11 +44,11 @@ class Character:
 
         self.listAnimation = []
         self.anmationCount = 0
-        self.generateAnimtation()
+
 
         self.ecrase = False
 
-    def generateAnimtation(self):
+    def generateAnimtation2(self):
         self.listAnimation.append(self.image)
         for i in range(1,4):
 
@@ -58,25 +66,25 @@ class Character:
 
             gx = self.world.gravity[0]
             gy = self.world.gravity[1]
-            if not self.ecrase and (abs(self.ax)>5 or abs(self.ay)>5):
-                if impact =="down" and gy >0 :
+            if not self.ecrase  :
+                if impact =="down" and gy >0 and abs(self.ay)>5:
                     self.ecrase = True
-                elif impact =="up" and gy <0 :
+                elif impact =="up" and gy <0 and abs(self.ay)>5:
                     self.ecrase = True
-                elif impact == "left" and gx > 0:
+                elif impact == "left" and gx > 0 and abs(self.ax)>5:
                     self.ecrase = True
-                elif impact == "right" and gx < 0:
+                elif impact == "right" and gx < 0 and abs(self.ax)>5:
                     self.ecrase = True
 
             if self.ecrase :
                 if self.anmationCount==0:
-                 self.image = self.imageAnime
+                 self.image = env.lib_perso[self.gravitySens][1]
 
                 self.anmationCount += 1
                 if self.anmationCount > 5:
                     self.anmationCount = 0
                     self.ecrase = False
-                    self.image = self.imageNormal
+                    self.image = env.lib_perso[self.gravitySens][0]
 
 
            # self.image = self.listAnimation[self.anmationCount]
