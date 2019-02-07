@@ -51,8 +51,8 @@ def selection(fenetre):
 
 
 
-    #quitter = Bouton("sprites/Boutons/Jouer normal.png", 255, 640, 240, 86)
-    #quitter.setImageOver("sprites/Boutons/Jouer animé.png")
+    quitter = Bouton("sprites/Boutons/Menu normal.png", 255, 640, 240, 86)
+    quitter.setImageOver("sprites/Boutons/Menu animé.png")
 
     partie = 1
     fond = Level('m')
