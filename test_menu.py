@@ -277,10 +277,10 @@ while partie:
 
     elif current_page == "credit":
         # Chargement et collage du fond
+        fondCredit = pygame.image.load("sprites/Background/Credits.png").convert()
         fond.background = pygame.image.load("sprites/Background/Niveau m.png").convert()
-        fenetre.blit(fond.background, (0, 0))
-        titre = pygame.transform.scale(pygame.image.load("sprites/Boutons/Credits logo.png"), (610, 130))
-        fenetre.blit(fond.background, (0, 0))
+
+
 
         # liste de tout les trucs a update
         arrayUpdate = []
@@ -311,8 +311,8 @@ while partie:
         font =pygame.font.SysFont(pygame.font.get_fonts()[7], 30)
         listCredis = []
 
-        for i in range(0,len(tableau)):
-            listCredis.append(ecrireNoms(tableau, i))
+        #for i in range(0,len(tableau)):
+            #listCredis.append(ecrireNoms(tableau, i))
 
 
         dx = 100
@@ -332,11 +332,11 @@ while partie:
                                 continuer = 0
 
             # Re-collage
-            fenetre.blit(fond.background, (0, 0))
-            fenetre.blit(titre, (70, 50))
+            fenetre.blit(fondCredit, (0, 0))
+            
 
-            for i in range(0,len(listCredis)):
-                fenetre.blit(listCredis[i], (100, dy+i*50))
+           # for i in range(0,len(listCredis)):
+               # fenetre.blit(listCredis[i], (100, dy+i*50))
 
 
             updateimage(fenetre, arrayUpdate)
