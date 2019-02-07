@@ -125,18 +125,12 @@ def play(fenetre):
         textpos.centerx = fenetre.get_rect().centerx
         textpos.centery = fenetre.get_rect().centery
         fenetre.blit(title_text, textpos)
-
-        title_text = bigText.render(str(perso.coins), True, textColor)
-        textpos = title_text.get_rect()
-        textpos.x = 0
-        textpos.y = 0
-        fenetre.blit(title_text, textpos)
-
-
-
-
-
-
+        if env.with_score:
+            title_text = bigText.render(str(perso.coins), True, textColor)
+            textpos = title_text.get_rect()
+            textpos.x = 20
+            textpos.y = 0
+            fenetre.blit(title_text, textpos)
 
         fenetre.blit(perso.image, perso.rect)
 
@@ -164,7 +158,8 @@ def play(fenetre):
         pygame.time.Clock().tick(FPS)
 
 #---------------------------------------------------------
-    # if env.with_music:
-    pygame.mixer.music.stop()
+    #ces deux lignes doivent être commentées ou décommentées en même temps
+    #if env.with_music:
+    #   pygame.mixer.music.stop()
 
     return perso

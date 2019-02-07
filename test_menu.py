@@ -2,6 +2,7 @@ import pygame
 from Class.button import *
 from pygame.locals import *
 from JeuxEnCour import *
+from test_selection import *
 from pygame import font
 
 
@@ -192,6 +193,7 @@ while partie:
 
 
     elif current_page == "jouer":
+        selection(fenetre)
         perso = play(fenetre)
         score = perso.coins
         print("score = "+str(score))
