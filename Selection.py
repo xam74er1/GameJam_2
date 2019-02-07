@@ -30,12 +30,12 @@ def updateimage(frame,array):
 def createLibPerso():
     perso = env.perso
 
-    img = pygame.image.load(env.perso).convert_alpha()
+    img = pygame.image.load(perso).convert_alpha()
     img = pygame.transform.scale(img,(env.sprite_size,env.sprite_size))
     img2 = pygame.transform.rotate(img, 90)
     img3 = pygame.transform.rotate(img, 180)
     img4 = pygame.transform.rotate(img, 270)
-    img_flat = pygame.image.load(env.perso[:-4]+' animé.png').convert_alpha()
+    img_flat = pygame.image.load(perso[:-4]+' animé.png').convert_alpha()
     img_flat= pygame.transform.scale(img_flat, (env.sprite_size, env.sprite_size))
     img_flat2 = pygame.transform.rotate(img_flat, 90)
     img_flat3 = pygame.transform.rotate(img_flat, 180)

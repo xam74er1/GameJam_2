@@ -384,7 +384,6 @@ while partie:
         font = pygame.font.Font("Font/JELLYBELLY.TTF", 30)
 
         position = posiScore(tableau, score)
-        print(" pos "+str(position))
 
         # déclaration pour l'ecriture du nom
         text = "  ... "
