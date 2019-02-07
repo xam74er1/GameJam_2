@@ -18,7 +18,7 @@ def loadJouer():
     return "jouer"
 
 def loadHighscore():
-    return "highscore"
+    return "fin_de_partie"
 
 def loadCredit():
     return "credit"
@@ -54,7 +54,7 @@ def triScore(nb):
 # affiche les 10 meilleurs socres
 def afficheHighscore(tab, val):
     font = pygame.font.Font("Font/JELLYBELLY.TTF", 40)
-    return font.render(str(val + 1) + "         " + tab[val][0] + "        " + tab[val][1], 1, (255, 255, 255))
+    return font.render(str(val + 1) + "         " + tab[val][0] + "        " + tab[val][1], 1, (93, 103, 119))
 
 
 
@@ -70,7 +70,7 @@ def posiScore(tab, val):
 # permet d'ecrire son pseudo en face du score qu'on vien de faire
 def ecrireScore(place, score, nom):
     font = pygame.font.Font("Font/JELLYBELLY.TTF", 40)
-    return font.render(str(place + 1) + "         " + str(score) + "        " + str(nom), 1, (100, 255, 255))
+    return font.render(str(place + 1) + "         " + str(score) + "        " + str(nom), 1, (0, 0, 0))
 
 
 
@@ -238,7 +238,7 @@ while partie:
         tableau = triScore(nbScore())
 
         font = pygame.font.Font("Font/JELLYBELLY.TTF", 60)
-        texte0 = font.render("Rang   Score    Pseudo", 1, (255, 255, 255))
+        texte0 = font.render("Rang   Score    Pseudo", 1, (93, 103, 119))
         font = pygame.font.Font("Font/JELLYBELLY.TTF", 30)
 
 
@@ -387,7 +387,7 @@ while partie:
         tableau = triScore(nbScore())
 
         font = pygame.font.Font("Font/JELLYBELLY.TTF", 60)
-        texte0 = font.render("Rang   Score    Pseudo", 1, (255, 255, 255))
+        texte0 = font.render("Rang   Score    Pseudo", 1, (93, 103, 119))
         font = pygame.font.Font("Font/JELLYBELLY.TTF", 30)
 
         score = 50
@@ -395,7 +395,7 @@ while partie:
         nb = nbScore()
 
         # déclaration pour l'ecriture du nom
-        text = "   ... "
+        text = "  ... "
         first = True
         done = 0
 
@@ -411,6 +411,9 @@ while partie:
                             val = bt.isInZone(event.pos[0], event.pos[1])
                             if bt.isInZone(event.pos[0], event.pos[1]):
                                 current_page = bt.action()
+                                fichier = open("Score.txt", "a")
+                                fichier.write(str(score) + "|" + str(text) + "|" + "\n")
+                                fichier.close()
                                 continuer = 0
 
                 if event.type == pygame.KEYDOWN:
