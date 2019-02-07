@@ -36,8 +36,8 @@ def createLibPerso():
     img_flat2 = pygame.transform.rotate(img_flat, 90)
     img_flat3 = pygame.transform.rotate(img_flat, 180)
     img_flat4 = pygame.transform.rotate(img_flat, 270)
-    bottom=[img, img_flat]
-    left=[img2, img_flat2]
+    bottom = [img, img_flat]
+    left = [img2, img_flat2]
     top = [img3, img_flat3]
     right = [img4, img_flat4]
 
