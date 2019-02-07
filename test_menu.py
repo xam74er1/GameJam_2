@@ -18,7 +18,7 @@ def loadJouer():
     return "jouer"
 
 def loadHighscore():
-    return "fin_de_partie"
+    return "highscore"
 
 def loadCredit():
     return "credit"
