@@ -21,7 +21,7 @@ def loadHighscore():
     return "highscore"
 
 def loadCredit():
-    return "fin_de_partie"
+    return "credit"
 
 def quitGame():
     pygame.display.quit()
@@ -70,6 +70,31 @@ def ecrireScore(place, score, nom):
     return font.render(str(place + 1) + "         " + str(score) + "        " + str(nom), 1, (100, 255, 255))
 
 
+
+def triNoms():
+    fichier = open("noms.txt", "r")
+
+    NumberOfLine = 0
+    for line in fichier:
+        NumberOfLine += 1
+
+    fichier.close()
+
+    fichier = open("noms.txt", "r")
+    tableau = []
+
+    i = 0
+    while i < NumberOfLine:
+        tableau.append(fichier.readline().split("|"))
+        i += 1
+    fichier.close()
+
+    tableau.sort()
+    return tableau
+
+def ecrireNoms(tab, nb):
+        font = pygame.font.Font("Font/JELLYBELLY.TTF", 40)
+        return font.render(tab[nb][0] + "\n" + tab[nb][1], 1, (255, 255, 255))
 
 #-----------Main -----------
 
@@ -155,7 +180,7 @@ while partie:
                                 continuer = 0
 
             # Re-collage
-            fond.printLvl(fenetre)
+            fenetre.blit(fond.background, (0, 0))
             fenetre.blit(titre, (70, 50))
             updateimage(fenetre,arrayUpdate)
             #fenetre.blit(perso, position_perso)
@@ -248,7 +273,72 @@ while partie:
 
 
     elif current_page == "credit":
+        # Chargement et collage du fond
+        fond = pygame.image.load("sprites/Background/Niveau m.png").convert()
+        fenetre.blit(fond, (0, 0))
+        titre = pygame.transform.scale(pygame.image.load("sprites/Boutons/Credits logo.png"), (610, 130))
+        fenetre.blit(fond, (0, 0))
+
+        # liste de tout les trucs a update
+        arrayUpdate = []
+
+        # liste de tout les trucs qui attendent un clique , equivalent as a event listner pour les boutons
+        arrayClick = []
+
+        # Creation du bouton
+        fenetre.blit(menu.image, menu.rect)
+
+        # Affection de la fonction a mettre lorsque l'on fait l'action
+        menu.setButtonAction(loadMenu)
+
+        # Rafraîchissement de l'écran
         pygame.display.flip()
+        # BOUCLE INFINIE
+        continuer = 1
+
+        # Ajout de tout les trucs a update
+        arrayUpdate.append((menu))
+
+        # Ajout de tout les truc qui attendent un event
+        arrayClick.append(menu)
+
+        # appel le trie et l'affichage des meilleurs scores
+        tableau = triNoms()
+
+        font = pygame.font.Font("Font/JELLYBELLY.TTF", 30)
+        texte1 = ecrireNoms(tableau, 0)
+        texte2 = ecrireNoms(tableau, 1)
+        texte3 = ecrireNoms(tableau, 2)
+        texte4 = ecrireNoms(tableau, 3)
+        texte5 = ecrireNoms(tableau, 4)
+
+        while continuer:
+            for event in pygame.event.get():  # Attente des événements
+                if event.type == QUIT:
+                    continuer = 0
+                    quitGame()
+
+                if event.type == MOUSEBUTTONDOWN:
+                    if event.button == 1:  # Si clic gauche
+                        for bt in arrayClick:
+                            val = bt.isInZone(event.pos[0], event.pos[1])
+                            if bt.isInZone(event.pos[0], event.pos[1]):
+                                current_page = bt.action()
+                                continuer = 0
+
+            # Re-collage
+            fenetre.blit(fond, (0, 0))
+            fenetre.blit(titre, (70, 50))
+            fenetre.blit(texte1, (100, 250))
+            fenetre.blit(texte2, (100, 290))
+            fenetre.blit(texte3, (100, 330))
+            fenetre.blit(texte4, (100, 370))
+            fenetre.blit(texte5, (100, 410))
+            updateimage(fenetre, arrayUpdate)
+            # fenetre.blit(perso, position_perso)
+            # Rafraichissement
+            pygame.display.flip()
+            pygame.key.set_repeat(40, 30)
 
 
 

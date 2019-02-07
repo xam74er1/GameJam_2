@@ -49,7 +49,7 @@ class Level:
                     elif filezone == 'p':
                         coinX = int(line[:3])
                         coinY = int(line[4:7])
-
+                       #ajout des coin en double
                         self.coins.append(Coin(coinX, coinY))
                     elif filezone == 'c':
                         self.color = (int(line[:3]),int(line[4:7]),int(line[8:11]))
@@ -74,14 +74,4 @@ class Level:
             window.blit(wall.surface, wall.pos)
         for coin in self.coins:
             window.blit(coin.image, (coin.x, coin.y))
-
-    def resetLvl(self, window):
-        if self.struct:
-            for line in self.struct:
-                for sprite in line:
-                    sprite='0'
-            self.printLvl(self, window)
-            return 0
-        else:
-            return 'No level structure'
 

@@ -30,6 +30,31 @@ class Character:
         self.fly = False
 
         self.tmp = False
+
+        self.listAnimation = []
+        self.anmationCount = 0
+        self.generateAnimtation()
+
+    def generateAnimtation(self):
+        self.listAnimation.append(self.image)
+        for i in range(1,4):
+
+            try:
+                img = pygame.image.load(
+                    "sprites/Blob/Blopchon" + str(i) + ".png").convert_alpha()
+            except:
+                img = pygame.image.load("sprites/Blob/Blopchon.png").convert_alpha()
+
+            img = pygame.transform.scale(img, (self.sizex, self.sizey))
+            self.listAnimation.append(img)
+
+    def animation(self):
+
+            self.image = self.listAnimation[self.anmationCount]
+            self.anmationCount+=1
+            if self.anmationCount>3:
+                self.anmationCount=0
+
     def addCoin(self):
         self.coins+=1
 
@@ -183,6 +208,7 @@ class Character:
                     break
 
             if cToRemove:
+                #print(len(self.world.level.coins))
                 self.addCoin()
                 self.world.level.coins.remove(cToRemove)
         except:

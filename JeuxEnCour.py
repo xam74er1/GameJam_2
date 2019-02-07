@@ -11,12 +11,13 @@ from Class.Walls import *
 
 
 
+
 def play(fenetre):
     #-----------Main -----------
 
     if env.with_music:
-        pygame.mixer.music.load("music/The_Final_Countdown.wav")
-        pygame.mixer.music.play()
+        pygame.mixer.music.load(env.music_path)
+
 
     # Chargement et collage du fond
     #fond = pygame.image.load("images/background.jpg").convert()
@@ -30,7 +31,7 @@ def play(fenetre):
     arrayUpdate = [];
     arrayClick = []
 
-    count = 0
+    count = 0.0
     bigText = pygame.font.SysFont(pygame.font.get_fonts()[7], 80)
     textColor = (255,255,255)
 
@@ -45,16 +46,21 @@ def play(fenetre):
     continuer = 1
 
 
-    perso = Character(world, MAX_X/2, MAX_Y-100, 32, 32)
+    perso = Character(world, 50, 700, 32, 32)
     fenetre.blit(perso.image, perso.rect)
 
     #arrayUpdate.append((fond,(0,0)))
+    pygame.key.set_repeat(40, 100)
 
     world.initLevels()
     world.level = world.levels[env.lvl_start]
     world.level.rezieBacground(MAX_X,MAX_Y)
     world.level.printLvl(fenetre)
     world.gravity = world.level.gravity
+
+    if env.with_music:
+        pygame.mixer.music.play()
+    world.level.printLvl(fenetre)
     fenetre.blit(world.level.background, (0, 0))
 
     pygame.key.set_repeat(40, 100)
@@ -89,7 +95,11 @@ def play(fenetre):
                 if event.key == K_F5:
                     perso.fly = not perso.fly
                 if event.key == K_F6:
-                    world.timer -= 30
+                    world.timeMax -= 30
+                if event.key == K_F7:
+                    world.timeMax += 30
+                if event.key == K_ESCAPE:
+                    continuer = 0
 
         #Gravite
         perso.move()
@@ -108,12 +118,20 @@ def play(fenetre):
         fenetre.blit(world.level.background, (0, 0))
 
 
+        world.aplyTime()
 
         title_text = bigText.render(str(world.getTimeFormated()), True,textColor )
         textpos = title_text.get_rect()
         textpos.centerx = fenetre.get_rect().centerx
         textpos.centery = fenetre.get_rect().centery
         fenetre.blit(title_text, textpos)
+
+        title_text = bigText.render(str(perso.coins), True, textColor)
+        textpos = title_text.get_rect()
+        textpos.x = 0
+        textpos.y = 0
+        fenetre.blit(title_text, textpos)
+
 
 
 
@@ -130,10 +148,15 @@ def play(fenetre):
 
 
     #-----------Gestion du temp---------
-        count += 1
-        if(count>FPS):
-            count = 0
-            world.aplyTime()
+        count += 1.0
+        if(count>env.FPS):
+            count -= env.FPS
+            #world.aplyTime()
+
+
+        #if count%8==0:
+            #perso.animation()
+
 
 
 
@@ -141,7 +164,7 @@ def play(fenetre):
         pygame.time.Clock().tick(FPS)
 
 #---------------------------------------------------------
-    if env.with_music:
-        pygame.mixer.music.stop()
+    # if env.with_music:
+    pygame.mixer.music.stop()
 
     return perso

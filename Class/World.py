@@ -2,6 +2,7 @@ from Class.Walls import *
 import pygame
 import Class.Coin
 import Class.Level
+import time
 from Class.Level import *
 import env_var as env
 
@@ -15,7 +16,9 @@ class World:
         self.toUpdate = []
         self.level = 0
         self.levels = []
-        self.timer = 179
+        self.timeMax = 179
+        self.timer = self.timeMax
+        self.debutTime =  time.time()
 
         #load des sound
 
@@ -42,7 +45,8 @@ class World:
            return False
 
     def aplyTime(self):
-        self.timer -=1
+
+        self.timer =self.timeMax - int(time.time()-self.debutTime)
     def getTimeFormated(self):
         min = int(self.timer/60)
         sec = self.timer%60
