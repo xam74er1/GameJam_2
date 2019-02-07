@@ -10,11 +10,12 @@ class Level:
         self.walls = 0
         self.numlevel = numlevel
         self.coins = []
-        self.generate()
         self.color = 0
         self.gravity = 0
+        self.alpha = 0
+
         self.generate()
-        self.alpha=0
+
         try:
             self.background = pygame.image.load("sprites/Background/Niveau "+str(self.numlevel)+".png").convert_alpha()
         except:
@@ -66,12 +67,14 @@ class Level:
                     w.surface.set_alpha(self.alpha)
             self.walls = lvlstruct
 
+
     def rezieBacground(self,x,y):
         self.background = pygame.transform.scale(self.background,(x,y))
 
     def printLvl(self, window):
         for wall in self.walls:
             window.blit(wall.surface, wall.pos)
+
         for coin in self.coins:
             window.blit(coin.image, (coin.x, coin.y))
 
