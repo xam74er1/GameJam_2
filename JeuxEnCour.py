@@ -110,6 +110,7 @@ def play(fenetre):
 
         if world.level.coins == []:
             continuer = world.nextLevel()
+            perso.changeGravity(world.level.gravity)
 
         if world.timer <=0 :
             continuer =0

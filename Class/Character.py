@@ -61,6 +61,22 @@ class Character:
             img = pygame.transform.scale(img, (self.sizex, self.sizey))
             self.listAnimation.append(img)
 
+    def changeGravity(self,gravity):
+
+        gx = gravity[0]
+        gy = gravity[1]
+
+        if gy>0:
+            self.gravitySens =0
+        elif gy<0:
+            self.gravitySens = 2
+        elif gx > 0:
+            self.gravitySens = 1
+        elif gx<0:
+            self.gravitySens = 3
+
+        self.image = env.lib_perso[self.gravitySens][0]
+
     def animation(self,impact):
 
 
