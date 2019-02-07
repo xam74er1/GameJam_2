@@ -286,7 +286,7 @@ while partie:
         # Chargement et collage du fond
         fond.background = pygame.image.load("sprites/Background/Niveau m.png").convert()
         fenetre.blit(fond.background, (0, 0))
-        titre = pygame.transform.scale(pygame.image.load("sprites/Boutons/Credits logo.png"), (610, 130))
+        titre = pygame.transform.scale(pygame.image.load("sprites/Boutons/Credits logo.png"), (650, 105))
         fenetre.blit(fond.background, (0, 0))
 
         # liste de tout les trucs a update
@@ -338,7 +338,7 @@ while partie:
 
             # Re-collage
             fenetre.blit(fond.background, (0, 0))
-            fenetre.blit(titre, (70, 50))
+            fenetre.blit(titre, (50, 50))
             fenetre.blit(texte1, (100, 250))
             fenetre.blit(texte2, (100, 290))
             fenetre.blit(texte3, (100, 330))
