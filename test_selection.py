@@ -36,17 +36,17 @@ def selection(fenetre):
     perso1.setImageOver("sprites/Blob/Blopchon3.png")
 
 
-    perso2 = Bouton("sprites/Blob/Blopchon.png", 100, 300, 150, 150)
-    perso2.setImageOver("sprites/Blob/Blopchon3.png")
+    perso2 = Bouton("sprites/Blob/Blobette.png", 100, 300, 150, 150)
+    perso2.setImageOver("sprites/Blob/Blobette animé.png")
 
 
-    perso3 = Bouton("sprites/Blob/Blopchon.png",100, 450,150, 150)
-    perso3.setImageOver("sprites/Blob/Blopchon3.png")
+    perso3 = Bouton("sprites/Blob/Ramblob.png",100, 450,150, 150)
+    perso3.setImageOver("sprites/Blob/Ramblob animé.png")
 
 
 
-    quitter = Bouton("sprites/Boutons/Jouer normal.png", 255, 640, 240, 86)
-    quitter.setImageOver("sprites/Boutons/Jouer animé.png")
+    #quitter = Bouton("sprites/Boutons/Jouer normal.png", 255, 640, 240, 86)
+    #quitter.setImageOver("sprites/Boutons/Jouer animé.png")
 
     partie = 1
     fond = Level('m')
@@ -70,7 +70,7 @@ def selection(fenetre):
             fenetre.blit(perso1.getImage(),perso1.rect)
             fenetre.blit(perso2.image,perso2.rect)
             fenetre.blit(perso3.image,perso3.rect)
-            fenetre.blit(quitter.image,quitter.rect)
+            #fenetre.blit(quitter.image,quitter.rect)
 
             # Affection de la fonction as mettre lorsque l'on fait l'action
             perso1.setButtonAction(loadPerso1)
@@ -85,7 +85,7 @@ def selection(fenetre):
             font = pygame.font.Font("Font/JELLYBELLY.TTF", 100)
             texte2 = font.render("A définir", 1, (255, 102, 255))
 
-            quitter.setButtonAction(quitGame)
+            #quitter.setButtonAction(quitGame)
 
             # Rafraîchissement de l'écran
             pygame.display.flip()
@@ -96,13 +96,13 @@ def selection(fenetre):
             arrayUpdate.append(perso1)
             arrayUpdate.append(perso2)
             arrayUpdate.append(perso3)
-            arrayUpdate.append(quitter)
+            #arrayUpdate.append(quitter)
 
             # Ajout de tout les trucs qui attendent un event
             arrayClick.append(perso1)
             arrayClick.append(perso2)
             arrayClick.append(perso3)
-            arrayClick.append(quitter)
+            #arrayClick.append(quitter)
 
             while continuer:
                 for event in pygame.event.get():  # Attente des événements
@@ -119,6 +119,7 @@ def selection(fenetre):
                                         partie = False
                                     else:
                                         newPerso = res
+                                        partie = False
 
                                     continuer = 0
 
@@ -137,6 +138,6 @@ def selection(fenetre):
     if newPerso=="perso1":
         env.perso ="sprites/Blob/Blopchon.png"
     elif newPerso=="perso2":
-        env.perso ="sprites/Blob/Blopchon.png"
+        env.perso ="sprites/Blob/Blobette.png"
     elif newPerso=="perso3":
-        env.perso ="sprites/Blob/Blopchon.png"
+        env.perso ="sprites/Blob/Ramblob.png"
