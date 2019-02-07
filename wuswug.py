@@ -3,8 +3,12 @@ from random import randint
 from pygame.locals import *
 
 def paint():
-    fenetre.blit(black,(0,0))
+    image = pygame.image.load('grille.png').convert_alpha()
+    image = pygame.transform.scale(image, (800, 750))
+    fenetre.blit(image,(-50,-6))
     for o in list:
+        fenetre.blit(o[0], o[1])
+    for o in listPiece:
         fenetre.blit(o[0], o[1])
 
 def pretiprint(nb):
@@ -45,11 +49,19 @@ def loadLvl(path):
                     # rect = pygame.Rect(pos[0], pos[1], size[0], size[1])
                     surface.fill((255, 0, 0))
                     list.append((surface, (x, y)))
+                elif filezone == 'p':
+                    coinX = int(line[:3])
+                    coinY = int(line[4:7])
+                    image = pygame.image.load('sprites/coin.png').convert_alpha()
+                    image = pygame.transform.scale(image, (40, 40))
+                    listPiece.append((image,(coinX, coinY)))
+
 
 
 pygame.init()
 
 fenetre = pygame.display.set_mode((750, 750))
+
 
 """
 #----------TUTO -----
@@ -78,6 +90,7 @@ start = False
 debut = (0,0)
 fin = (0,0)
 list = []
+listPiece = []
 
 black = pygame.Surface((750, 750))
 black.fill((0, 0, 0))
@@ -89,19 +102,32 @@ while continuer:
             continuer = 0
         if event.type == KEYDOWN:
             if event.key == K_p:
-                print("---------------------------")
+                print("#---------------------------")
+                print("Level:")
                 for w in list:
                     sx = w[0].get_rect().right
                     sy =w[0].get_rect().bottom
                     dx = w[1][0]
                     dy = w[1][1]
                     print(pretiprint(dx)+" "+pretiprint(dy)+" "+pretiprint(sx)+" "+pretiprint(sy)+" 128")
+                print("Coins:")
+                for w in listPiece:
+                    sx = w[0].get_rect().right
+                    sy =w[0].get_rect().bottom
+                    dx = w[1][0]
+                    dy = w[1][1]
+                    print(pretiprint(dx)+" "+pretiprint(dy))
+
             if event.key == K_r:
 
                 for w in list:
                     rt = pygame.Rect(w[1][0],w[1][1],w[0].get_rect().right,w[0].get_rect().bottom)
                     if rt.collidepoint(pygame.mouse.get_pos()):
                         list.remove(w)
+                for w in listPiece:
+                    rt = pygame.Rect(w[1][0],w[1][1],w[0].get_rect().right,w[0].get_rect().bottom)
+                    if rt.collidepoint(pygame.mouse.get_pos()):
+                        listPiece.remove(w)
             if event.key == K_l:
                 res = input("Insre le num du level")
                 path ="levels/"+str(res)+".lvl"
@@ -115,9 +141,12 @@ while continuer:
                 addWall((20, 730), (710, 20))
 
             if event.key == K_f:
-                surface = pygame.Surface((40, 40))
-                surface.fill((252, 252, 0))
-                #WIP
+
+
+                image = pygame.image.load('sprites/coin.png').convert_alpha()
+                image = pygame.transform.scale(image, (40, 40))
+
+                listPiece.append((image, pygame.mouse.get_pos()))
 
         if event.type == pygame.MOUSEBUTTONUP:
             try:
