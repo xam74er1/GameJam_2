@@ -1,29 +1,11 @@
-30|blanchon|
-25|mehdi|
-25|fezf|
-25|test|
-25|hhuizhf|
-25|fgzeyigf|
-25|hhuizhf|
-25|fgzeyigf|
-25|hhuizhf|
-25|fgzeyigf|
-25|hhuizhf|
-25|fgzeyigf|
-25|hhuizhf|
-25|fgzeyigf|
-25|hhuizhf|
-25|fgzeyigf|
-50|test 2|
-44|aaa|
-44|Alex|
-43|Nope.|
-35|Alex|
-35|Re !|
-20|max|
-19|max|
-27|max|
-27|max|
-27|max|
-3|aa|
-3|aa|
+99|Chuck Norris|
+98|Blanchon|
+00|Nullprt|
+40|Alex.M|
+37|Alex.M|
+08|Sylvain|
+12|Sylvain|
+21|Mehdi|
+19|Mehdi|
+32|Max|
+27|Max|

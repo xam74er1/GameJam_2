@@ -32,17 +32,10 @@ def quitGame():
 # Trie les score du plus grand au plus petit
 def triScore():
     fichier = open("Score.txt", "r")
-    NumberOfLine = 0
-    for line in fichier:
-        NumberOfLine += 1
-
-    fichier.close()
-    fichier = open("Score.txt", "r")
     tableau = []
     i = 0
-    while i < NumberOfLine:
+    for line in fichier:
         tableau.append(fichier.readline().split('|'))
-        i += 1
 
     fichier.close()
     tableau.sort(reverse=True)
@@ -52,10 +45,7 @@ def triScore():
 # affiche les 10 meilleurs socres
 def afficheHighscore(tab, val):
     font = pygame.font.Font("Font/JELLYBELLY.TTF", 40)
-    if val == 9:
-        return font.render(str(val + 1) + "        " + tab[val][0] + "        " + tab[val][1], 1, (93, 103, 119))
-    else:
-        return font.render(str(val + 1) + "         " + tab[val][0] + "        " + tab[val][1], 1, (93, 103, 119))
+    return font.render(str(val + 1) + "         " + tab[val][0] + "        " + tab[val][1], 1, (93, 103, 119))
 
 
 
@@ -71,10 +61,7 @@ def posiScore(tab, val):
 # permet d'ecrire son pseudo en face du score qu'on vien de faire
 def ecrireScore(place, score, nom):
     font = pygame.font.Font("Font/JELLYBELLY.TTF", 40)
-    if place == 9:
-        return font.render(str(place + 1) + "        " + str(score) + "        " + str(nom), 1, (0, 0, 0))
-    else:
-        return font.render(str(place + 1) + "         " + str(score) + "        " + str(nom), 1, (0, 0, 0))
+    return font.render(str(place + 1) + "         " + str(score) + "        " + str(nom), 1, (0, 0, 0))
 
 
 
@@ -408,7 +395,10 @@ while partie:
                             if bt.isInZone(event.pos[0], event.pos[1]):
                                 current_page = bt.action()
                                 fichier = open("Score.txt", "a")
-                                fichier.write(str(score) + "|" + str(text) + "|" + "\n")
+                                if score < 10:
+                                    fichier.write("0" + str(score) + "|" + str(text) + "|" + "\n")
+                                else:
+                                    fichier.write(str(score) + "|" + str(text) + "|" + "\n")
                                 fichier.close()
                                 continuer = 0
 
@@ -416,7 +406,10 @@ while partie:
                     if event.key == pygame.K_RETURN:
                         # ecrire dans un fichier
                         fichier = open("Score.txt", "a")
-                        fichier.write(str(score) + "|" + str(text) + "|" + "\n")
+                        if score < 10:
+                            fichier.write("0" + str(score) + "|" + str(text) + "|" + "\n")
+                        else:
+                            fichier.write(str(score) + "|" + str(text) + "|" + "\n")
                         fichier.close()
 
                     elif event.key == pygame.K_BACKSPACE:

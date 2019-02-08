@@ -43,7 +43,6 @@ class Bouton:
 
 
     def setImageOver(self,path):
-        print(self.sizey)
         self.imageOver = pygame.image.load(path).convert_alpha()
         self.imageOver =pygame.transform.scale(self.imageOver,(self.sizex,self.sizey+20))
 
