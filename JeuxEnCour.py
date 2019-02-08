@@ -100,6 +100,10 @@ def play(fenetre):
                     world.timeMax -= 30
                 if event.key == K_F7:
                     world.timeMax += 30
+                if event.key == K_F8:
+                    world.gravity = (0, 0)
+                    perso.ax = 0
+                    perso.ay = 0
                 if event.key == K_ESCAPE:
                     continuer = 0
 
@@ -122,13 +126,13 @@ def play(fenetre):
 
 
         world.aplyTime()
-
-        title_text = bigText.render(str(world.getTimeFormated()), True,textColor )
-        textpos = title_text.get_rect()
-        textpos.centerx = fenetre.get_rect().centerx
-        textpos.centery = fenetre.get_rect().centery
-        fenetre.blit(title_text, textpos)
         if env.with_score:
+            title_text = bigText.render(str(world.getTimeFormated()), True,textColor )
+            textpos = title_text.get_rect()
+            textpos.centerx = fenetre.get_rect().centerx
+            textpos.centery = fenetre.get_rect().centery
+            fenetre.blit(title_text, textpos)
+
             title_text = smallText.render("level:"+str(world.level.numlevel)+"-score :"+str(perso.coins), True, textColor)
             textpos = title_text.get_rect()
             textpos.x = 20
