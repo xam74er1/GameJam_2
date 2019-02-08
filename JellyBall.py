@@ -107,11 +107,18 @@ def ecrireNoms(tab, nb):
 
 pygame.init()
 
+# Ouverture de la fenêtre Pygame
+fenetre = pygame.display.set_mode((750, 750))
+pygame.display.set_caption("Jelly Ball")
+
+a = pygame.image.load("sprites/Blob/Blopchon.png").convert_alpha()
+a.set_colorkey((255,255,255))
+pygame.display.set_icon(a)
+
 current_page = "menu"
 score = 0
 
-# Ouverture de la fenêtre Pygame
-fenetre = pygame.display.set_mode((750, 750))
+
 
 jouer = Bouton("sprites/Boutons/Jouer normal.png", 255, 250, 240, 86)
 jouer.setImageOver("sprites/Boutons/Jouer animé.png")
