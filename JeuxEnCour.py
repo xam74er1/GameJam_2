@@ -167,6 +167,6 @@ def play(fenetre):
 #---------------------------------------------------------
     #ces deux lignes doivent être commentées ou décommentées en même temps
     if env.with_music:
-       pygame.mixer.music.stop()
+      pygame.mixer.music.stop()
 
     return perso
