@@ -33,6 +33,7 @@ def play(fenetre):
 
     count = 0.0
     bigText = pygame.font.SysFont(pygame.font.get_fonts()[7], 80)
+    smallText =pygame.font.SysFont(pygame.font.get_fonts()[7], 20)
     textColor = (255,255,255)
 
 
@@ -128,10 +129,10 @@ def play(fenetre):
         textpos.centery = fenetre.get_rect().centery
         fenetre.blit(title_text, textpos)
         if env.with_score:
-            title_text = bigText.render(str(perso.coins), True, textColor)
+            title_text = smallText.render("level:"+str(world.level.numlevel)+"-score :"+str(perso.coins), True, textColor)
             textpos = title_text.get_rect()
             textpos.x = 20
-            textpos.y = 0
+            textpos.y = 20
             fenetre.blit(title_text, textpos)
 
         fenetre.blit(perso.image, perso.rect)

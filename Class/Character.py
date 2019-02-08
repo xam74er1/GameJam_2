@@ -74,7 +74,7 @@ class Character:
                 self.gravitySens = 1
             elif gx<0:
                 self.gravitySens = 3
-    
+
             self.image = env.lib_perso[self.gravitySens][0]
 
     def animation(self,impact):
