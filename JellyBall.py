@@ -241,7 +241,6 @@ while partie:
         texte0 = font.render("Rang   Score    Pseudo", 1, (93, 103, 119))
         font = pygame.font.Font("Font/JELLYBELLY.TTF", 30)
 
-
         while continuer:
             for event in pygame.event.get():  # Attente des événements
                 if event.type == QUIT:
@@ -280,8 +279,6 @@ while partie:
         fondCredit = pygame.image.load("sprites/Background/Credits.png").convert()
         fond.background = pygame.image.load("sprites/Background/Niveau m.png").convert()
 
-
-
         # liste de tout les trucs a update
         arrayUpdate = []
 
@@ -313,7 +310,6 @@ while partie:
 
         #for i in range(0,len(tableau)):
             #listCredis.append(ecrireNoms(tableau, i))
-
 
         dx = 100
         dy = 170
