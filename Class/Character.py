@@ -95,6 +95,7 @@ class Character:
             if self.ecrase :
                 if self.anmationCount==0:
                  self.image = env.lib_perso[self.gravitySens][1]
+                 self.world.sonBouing.play()
 
                 self.anmationCount += 1
                 if self.anmationCount > 5:

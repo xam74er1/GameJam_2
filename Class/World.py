@@ -22,6 +22,8 @@ class World:
         #load des sound
         self.sonCoin = pygame.mixer.Sound("Sounds/Coin.wav")
         self.sonNextLeve = pygame.mixer.Sound("Sounds/Nextlevel.wav")
+        self.sonBouing = pygame.mixer.Sound("Sounds/Boing.wav")
+
 
         self.listCoinImage = [pygame.transform.scale(pygame.image.load('sprites/Coins/Coin.png').convert_alpha(), (40, 40)),
                          pygame.transform.scale(pygame.image.load('sprites/Coins/Coin 1.png').convert_alpha(),

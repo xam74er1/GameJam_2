@@ -1,7 +1,7 @@
 sprite_size = 32
 max_levels = 13
 perso = "sprites/Blob/Blopchon.png"
-lvl_start = 9
+lvl_start = 0
 with_music = 1
 FPS = 22.0
 music_path = "music/Song_JellyBall.ogg"
