@@ -62,24 +62,24 @@ class Character:
             self.listAnimation.append(img)
 
     def changeGravity(self,gravity):
+        if env.with_animation:
+            gx = gravity[0]
+            gy = gravity[1]
 
-        gx = gravity[0]
-        gy = gravity[1]
-
-        if gy>0:
-            self.gravitySens =0
-        elif gy<0:
-            self.gravitySens = 2
-        elif gx > 0:
-            self.gravitySens = 1
-        elif gx<0:
-            self.gravitySens = 3
-
-        self.image = env.lib_perso[self.gravitySens][0]
+            if gy>0:
+                self.gravitySens =0
+            elif gy<0:
+                self.gravitySens = 2
+            elif gx > 0:
+                self.gravitySens = 1
+            elif gx<0:
+                self.gravitySens = 3
+    
+            self.image = env.lib_perso[self.gravitySens][0]
 
     def animation(self,impact):
 
-
+        if env.with_animation:
             gx = self.world.gravity[0]
             gy = self.world.gravity[1]
             if not self.ecrase  :
