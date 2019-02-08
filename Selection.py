@@ -60,7 +60,7 @@ def selection(fenetre):
     # Ouverture de la fenêtre Pygame
 
     perso1 = Bouton("sprites/Blob/Blopchon.png", 100, 150, 150, 150)
-    perso1.setImageOver("sprites/Blob/Blopchon3.png")
+    perso1.setImageOver("sprites/Blob/Blopchon animé.png")
 
     perso2 = Bouton("sprites/Blob/Blobette.png", 100, 300, 150, 150)
     perso2.setImageOver("sprites/Blob/Blobette animé.png")
