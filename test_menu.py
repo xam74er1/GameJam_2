@@ -61,7 +61,7 @@ def posiScore(tab, val):
     i = 0
     while i < len(tab):
         if val >= int(tab[i][0]):
-            return int(i)
+            return i
         i += 1
     return len(tab)
 
@@ -195,14 +195,11 @@ while partie:
 
 
     elif current_page == "jouer":
-        res = selection(fenetre)
-        if res == True:
-            current_page = "menu"
-        else:
-            perso = play(fenetre)
-            score = perso.coins
-            del perso
-            current_page = "fin_de_partie"
+        selection(fenetre)
+        perso = play(fenetre)
+        score = perso.coins
+        del perso
+        current_page = "fin_de_partie"
 
 
 
@@ -335,7 +332,8 @@ while partie:
 
 
            # for i in range(0,len(listCredis)):
-            # fenetre.blit(listCredis[i], (100, dy+i*50))
+               # fenetre.blit(listCredis[i], (100, dy+i*50))
+
 
             updateimage(fenetre, arrayUpdate)
             # fenetre.blit(perso, position_perso)
@@ -384,6 +382,7 @@ while partie:
         font = pygame.font.Font("Font/JELLYBELLY.TTF", 30)
 
         position = posiScore(tableau, score)
+
 
         # déclaration pour l'ecriture du nom
         text = "  ... "
